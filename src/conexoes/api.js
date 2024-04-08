@@ -5,7 +5,7 @@ const config = require('../configuracoes.json')
 const ipC = config.m2.ipC;
 let token
 const apiC = axios.create({
-  baseURL: 'http://' + ipC,
+  baseURL: 'https://' + ipC,
 });
 
 function pegarToken() {

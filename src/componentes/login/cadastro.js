@@ -58,11 +58,11 @@ export default function Cadastro() {
         })
             .then(response => {
                 if (response.status === 200) {
+                    alert('liga e times cadastrados')
                 }
             })
             .catch((error) => {
                 alert(error.response.data)
-    
             });
     }
 
@@ -81,6 +81,7 @@ export default function Cadastro() {
         })
             .then(response => {
                 if (response.status === 200) {
+                    alert('Jogadores cadastrados')
                 }
             })
             .catch((error) => {

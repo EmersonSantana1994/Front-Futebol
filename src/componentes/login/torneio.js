@@ -156,7 +156,6 @@ export default function Torneio() {
         async function autenticar(e) {
             await apiC.post("autenticacao/autenticar")
             .then(response => {
-      console.log("esta autenticado")
             })
             .catch((error) => {
                 if(error.response.data == 'não autenticado'){
@@ -180,9 +179,7 @@ let posicaoPlacar = []
         await apiC.post("torneio/buscarPlacares", {
         })
             .then(response => {
-                console.log("ppppppp", response.data.result )
                 for(let i = 0; i < response.data.result.length; i++){
-                    console.log("response.data.result[i].id", response.data.result[i].id)
                     if (response.data.result[i].id == 1 && response.data.result[i].resultado != '' && response.data.result[i].resultado != null && response.data.result[i].resultado != 'null'){
                         setPlacarSalvo1(response.data.result[i].resultado)
                         setMostrarPlacarSalvo1(true)
@@ -334,7 +331,6 @@ let posicaoPlacar = []
     }
 
     async function anunciarCampeao() {
-        console.log("passou simmmmmmm")
         await apiC.post("torneio/buscar")
             .then(response => {
                 if (response.status === 200) {
@@ -411,6 +407,7 @@ let posicaoPlacar = []
             })
                 .then(response => {
                     if (response.status === 200) {
+                        alert('deletado com sucesso!')
                         AtualizaTabela()
                     }
                 })
@@ -584,8 +581,6 @@ let posicaoPlacar = []
     // FUNÇÃO ABAIXO TEM O DEVER DE SALVAR OS DADOS TRAZIDOS DO BANCO PARA SEREM APRESENTADOS NA TABELA
 
     async function atualizaTime(dados, pontos, saldo) {
-        console.log("novos pontos", pontos )
-        console.log("pontos anteriores", dados[0].pontos )
         setCarregando(true)
         await apiC.put("torneio/atualizaTime", {
             "id": dados[0].id,
@@ -595,6 +590,7 @@ let posicaoPlacar = []
         }).then(response => {
             if (response.status === 200) {
                 AtualizaTabela()
+                alert('feito!')
             }
             setCarregando(false)
         })
@@ -614,6 +610,7 @@ let posicaoPlacar = []
         }).then(response => {
             if (response.status === 200) {
                 AtualizaTabela()
+                alert('feito!')
             }
             setCarregando(false)
         })
@@ -625,7 +622,6 @@ let posicaoPlacar = []
 
 
     async function VerificaParaAtualizaTime(nome, pontos, saldo, timeperdedor) {
-        console.log("quantas vezes?")
         await apiC.post("torneio/bucarNome", {
             "nome": nome
         })
@@ -692,7 +688,6 @@ console.log("........ 11")
             setPlacar2('')
         }
         if (placar1 == "3" && placar3 == "2" && rod == "2") {
-            console.log("22222222")
             placarTime1 = placarTime1 + 1
             VerificaParaAtualizaTime(timesSorteadosArray1, 1, 1, timesSorteadosArray3)
             setPlacar1('') 
