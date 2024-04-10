@@ -90,7 +90,7 @@ export default function TelaLogin() {
                 <>
                     <div>
                         <div className="email">
-                            <label>E-maill</label>
+                            <label>E-mail</label>
                             <Form.Control
 
                                 type="email"
