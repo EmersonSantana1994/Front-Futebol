@@ -109,15 +109,12 @@ export default function Artilheiro() {
 
     async function inserirNovoJogador() {
         let quantidadeGolNum =  parseInt(quantidadeGol, 10)
-        const verificar = verificaString()
-        if(verificar){
+        // const verificar = verificaString()
+        // if(verificar){
             setMensagem('Inserindo novo nome..')
             await apiC.post("artilheiro/inserir", {
                 "nome": nomeJogador,
                 "gols": quantidadeGolNum,
-                headers: {
-                    'x-access-token': token,
-                }
             }).then(response => {
                 if (response.status === 200) {
                     setMensagem('Novo nome inserido!')
@@ -129,12 +126,12 @@ export default function Artilheiro() {
             })
                 .catch((error) => {
                     setMensagem('erro ao inserir novo nome')
-                    alert('erro ao inserir novo nome')
+                    alert(error.response.data)
                     setCarregando(false)
                 });
-        }else{
-            alert('Nome não cadastrado, por favor verifique')
-        }
+        // }else{
+        //     alert('Nome não cadastrado, por favor verifique')
+        // }
     }
 
     async function handleDeletar(){
@@ -168,9 +165,6 @@ for(let i = 0; i < dadosSelecionados.length; i++){
         setMensagem('salvando..')
         await apiC.post("artilheiro/nome", {
             "nome": nomeJogador,
-            headers: {
-                'x-access-token': token,
-            }
         })
             .then(response => {
                 if (response.status === 200) {
@@ -184,15 +178,14 @@ for(let i = 0; i < dadosSelecionados.length; i++){
             })
             .catch((error) => {
                 setMensagem('erro ao salvar')
-                alert('erro ao salvar')
                 setCarregando(false)
             });
 
     }
 
-    const verificaString = () => {
-        return ['Cris', 'Axe', 'Super Homem', 'Hulk', 'Filipe', 'Wilham', 'Taylor', 'Maçaneta', 'Sundown', 'Theo', 'Buzz', 'Dony', 'Monstro', 'Controle da tv', 'Rivelino', 'Renan', 'Pente Cinza', 'Perna Longa', 'Raul', 'Sensodyni', 'Sabrina', 'Jhonsons', 'Cindy', 'Loriel', 'Ufe', 'Sr Incrivel', 'Lucas', 'Hammer', 'Livia', 'Rafael', 'Tiago', 'Rodrigo', 'Pente Laranja', 'Rildo', 'Pente Rosa', 'Net', 'Cristian', 'Pepe', 'Homem de Ferro', 'Vinicius', 'Lacan', 'Condicionador', 'Telefone', 'Rozinha', 'Coringa', 'Michel', 'Mostarda', 'Thanos', 'Pantene', 'Leonardo', 'Pente Preto', 'Tati', 'Pente Azul', 'Mathias', 'Azeite', 'Varicel', 'Titan', 'Eva', 'Hugo', 'Azuzinho', 'Rita', 'David', 'Azulão', 'Shampo', 'Orlof', 'Branquinho', 'Kevin', 'Crystal', 'Izakson', 'Sky', 'Gradiente', 'Escuro', 'Edson', 'Katchup', 'Luiza'].includes(nomeJogador)
-    }
+    // const verificaString = () => {
+    //     return ['Cris', 'Axe', 'Super Homem', 'Hulk', 'Filipe', 'Wilham', 'Taylor', 'Maçaneta', 'Sundown', 'Theo', 'Buzz', 'Dony', 'Monstro', 'Controle da tv', 'Rivelino', 'Renan', 'Pente Cinza', 'Perna Longa', 'Raul', 'Sensodyni', 'Sabrina', 'Jhonsons', 'Cindy', 'Loriel', 'Ufe', 'Sr Incrivel', 'Lucas', 'Hammer', 'Livia', 'Rafael', 'Tiago', 'Rodrigo', 'Pente Laranja', 'Rildo', 'Pente Rosa', 'Net', 'Cristian', 'Pepe', 'Homem de Ferro', 'Vinicius', 'Lacan', 'Condicionador', 'Telefone', 'Rozinha', 'Coringa', 'Michel', 'Mostarda', 'Thanos', 'Pantene', 'Leonardo', 'Pente Preto', 'Tati', 'Pente Azul', 'Mathias', 'Azeite', 'Varicel', 'Titan', 'Eva', 'Hugo', 'Azuzinho', 'Rita', 'David', 'Azulão', 'Shampo', 'Orlof', 'Branquinho', 'Kevin', 'Crystal', 'Izakson', 'Sky', 'Gradiente', 'Escuro', 'Edson', 'Katchup', 'Luiza'].includes(nomeJogador)
+    // }
 
     const colunas = [
         {
@@ -201,6 +194,15 @@ for(let i = 0; i < dadosSelecionados.length; i++){
             sort: true,
             text: <p>
                 Jogador
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            headerClasses: 'nao-selecionavel',
+            text: <p>
+               -           -
             </p>,
             formatter: (cell, row) => {
                 return <p>{cell === null ? '-' : cell}</p>;

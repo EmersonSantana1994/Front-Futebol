@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';/*eslint-disable*/
+import React, {useEffect } from 'react';/*eslint-disable*/
 import '../../css/torneio/torneio.css';
 import { Button, Image, Form, InputGroup, FormControl, Col, Carousel, Alert } from 'react-bootstrap';
 import { apiC } from "../../conexoes/api";
@@ -6,17 +6,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
-    const [time1, setTime1] = useState('');
-    const [time2, setTime2] = useState('');
-    const [time3, setTime3] = useState('');
-    const [time4, setTime4] = useState('');
-    const [liga, setLiga] = useState('');
-
-    const [jogador1, setJogador1] = useState('');
-    const [jogador2, setJogador2] = useState('');
-    const [jogador3, setJogador3] = useState('');
-    const [jogador4, setJogador4] = useState('');
-    const [time, setTime] = useState('');
     const navigate = useNavigate();
 
 
@@ -133,6 +122,11 @@ console.log("tabelas criadas")
 
                 <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/pontosTorneio')}>
                         <div>Cadastrar Pontos do Torneio</div>
+                    </Button>
+                    <h1>Tabela geral</h1>
+
+                <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/tabelaGeral')}>
+                        <div>Tabela geral</div>
                     </Button>
         </>
         

@@ -61,6 +61,7 @@ useEffect(() => {
                         liga: response.data[1].nome,
                     })
         .then(response => {
+            inserirData(response.data, "2")
         })
         .catch((error) => {
         });
@@ -69,6 +70,7 @@ useEffect(() => {
                         liga: response.data[2].nome,
                     })
         .then(response => {
+            inserirData(response.data, "3")
         })
         .catch((error) => {
         });

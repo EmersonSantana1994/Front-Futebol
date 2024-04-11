@@ -19,6 +19,7 @@ import Home from './componentes/login/home';
 import Upload from './componentes/login/upload';
 import TelaCadastro from './componentes/login/cadastrarUsuario';
 import PontosTorneio from './componentes/login/pontosTorneio';
+import TabelaGeral from './componentes/login/tabelaGeral';
 
 
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/upload' element={<Upload />} />
         <Route path='/cadstrousuario' element={<TelaCadastro />} />
         <Route path='/pontosTorneio' element={<PontosTorneio />} />
+        <Route path='/tabelaGeral' element={<TabelaGeral />} />
       </Routes>
       </BrowserRouter>
     </div>
