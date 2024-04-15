@@ -64,6 +64,11 @@
     width: 100% !important;
 }
 
+.placar {
+    position: absolute;
+    padding-left: 4px;
+}
+
 
 .ladoC {
     position: absolute;

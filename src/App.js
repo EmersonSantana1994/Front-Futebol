@@ -20,6 +20,8 @@ import Upload from './componentes/login/upload';
 import TelaCadastro from './componentes/login/cadastrarUsuario';
 import PontosTorneio from './componentes/login/pontosTorneio';
 import TabelaGeral from './componentes/login/tabelaGeral';
+import Copa from './componentes/login/copa';
+import CadastrarFoto from './componentes/login/cadastrarFoto';
 
 
 
@@ -48,6 +50,8 @@ function App() {
         <Route path='/cadstrousuario' element={<TelaCadastro />} />
         <Route path='/pontosTorneio' element={<PontosTorneio />} />
         <Route path='/tabelaGeral' element={<TabelaGeral />} />
+        <Route path='/copa' element={<Copa />} />
+        <Route path='/cadastrarFoto' element={<CadastrarFoto />} />
       </Routes>
       </BrowserRouter>
     </div>

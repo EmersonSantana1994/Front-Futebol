@@ -18,6 +18,12 @@
 
 }
 
+.foto{
+    width: 2.5em !important;
+    height: 2.5em !important;
+    border-radius: 100% !important;
+}
+
 .lab-quant-home {
     position: absolute;
     margin-left: -96px;

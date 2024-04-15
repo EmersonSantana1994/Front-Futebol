@@ -128,6 +128,10 @@ console.log("tabelas criadas")
                 <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/tabelaGeral')}>
                         <div>Tabela geral</div>
                     </Button>
+                    <h1>Cadastrar foto</h1>
+                    <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/cadastrarFoto')}>
+                        <div>Cadastrar foto</div>
+                    </Button>
         </>
         
         

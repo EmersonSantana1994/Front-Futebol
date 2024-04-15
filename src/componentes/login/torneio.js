@@ -148,7 +148,6 @@ export default function Torneio() {
 
 
     useEffect(() => {
-        console.log("ggggg")
         verificaPlacares()
     }, [])
 
@@ -173,7 +172,6 @@ export default function Torneio() {
     }
 
     async function verificaPlacares() {
-        console.log("mas e aqui foi???")
         let posicaoPlacar = []
 
         await apiC.post("torneio/buscarPlacares", {
@@ -258,7 +256,6 @@ export default function Torneio() {
                         const formData = new Date(response.data.result[i].data)
                         let dt = formData.toLocaleString('pt-BR')
                         setDataPlacar9(dt)
-                        console.log("mmmmggggmm", response.data.result[i].data)
                     } else if (i == 17 && response.data.result[i].resultado != '' && response.data.result[i].resultado != null && response.data.result[i].resultado != 'null') {
                         setPlacarSalvo18(response.data.result[i].resultado)
                         setMostrarPlacarSalvo18(true)
@@ -281,7 +278,6 @@ export default function Torneio() {
                         setPlacarSalvo22(response.data.result[i].resultado)
                         setMostrarPlacarSalvo22(true)
                     } else if (i == 22 && response.data.result[i].resultado != '' && response.data.result[i].resultado != null && response.data.result[i].resultado != 'null') {
-                        console.log("passou aquii???")
                         setPlacarSalvo23(response.data.result[i].resultado)
                         setMostrarPlacarSalvo23(true)
                         const formData = new Date(response.data.result[i].data)
@@ -665,11 +661,9 @@ export default function Torneio() {
     async function limparPlacar(p1, p2) {
         if (p1 == 1) {
             setPlacar1('')
-            console.log("........ 11")
         }
         if (p2 == 2) {
             setPlacar2('')
-            console.log("........ 2222")
         }
     }
 
@@ -704,7 +698,6 @@ export default function Torneio() {
             setPlacar3('')
         }
         if (placar1 == "3" && placar4 == "2" && rod == "3") {
-            console.log("333333333")
             placarTime1 = placarTime1 + 1
             VerificaParaAtualizaTime(timesSorteadosArray1, 1, 1, timesSorteadosArray4)
             setPlacar1('')
@@ -723,10 +716,8 @@ export default function Torneio() {
         if (placar2 == "3" && placar1 == "2" && rod == "1") {
             setPlacar1('')
             setPlacar2('')
-            console.log("entrou aqui simmmmmmmmmmm", placar1)
             placarTime2 = placarTime2 + 1
             await limparPlacar(1, 2)
-            console.log("entrou aqui simmmmmmmmmmm 222", placar1)
             VerificaParaAtualizaTime(timesSorteadosArray2, 1, 1, timesSorteadosArray1)
         } else if (placar2 == "3" && placar1 == "1" && rod == "1") {
             placarTime2 = placarTime2 + 2
