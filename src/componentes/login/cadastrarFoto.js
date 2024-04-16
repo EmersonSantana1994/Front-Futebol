@@ -185,15 +185,19 @@ export default function CadastrarFoto() {
     ]
 
     function handleLerArquivo(files){
-        console.log("rrrrrrr", files)
         let reader = new FileReader();
-        if (files.size <= 9073732 && files.type.split('/')[0] === "image" && files.type.split('/')[0] !== "gif" && files.type.split('/')[0] !== "psd"){
+        if (files.size <= 1048576 && files.type.split('/')[0] === "image" && files.type.split('/')[0] !== "gif" && files.type.split('/')[0] !== "psd"){
             reader.readAsDataURL(files);
             reader.onloadend = () => {
                 handleAlterar(reader.result)
             }
         }else{
-            alert('Erro ao importar foto')
+            if(files.size > 1048576 ){
+                alert('Erro tamanho de foto muito grande')
+            }else{
+                alert('Erro ao importar foto')
+            }
+            
         }
     };
 
@@ -204,12 +208,11 @@ export default function CadastrarFoto() {
         })
         .then(function (response) {
             setMostrarImagem(novaImagem)
-            console.log("novaImagem", novaImagem)
             alert('foto registrada com sucesso')
         })
         .catch(function (error) {
+            alert(error.response.data)
             console.log("erooooo",error )
-            alert('deu errado')
         });
     }
 
@@ -253,7 +256,6 @@ export default function CadastrarFoto() {
             <Button className="btn-filtro-arquivo" onClick={(e) => buscarImagem()}>
                 <div>Buscar</div>
             </Button>
-            {console.log("imagemBuscada", imagemBuscada)}
             {imagemBuscada != '' ?
                                 <img className="icone-perfil" src={imagemBuscada} />
                             :
