@@ -34,6 +34,8 @@ export default function CadastrarFoto() {
     const [imagemBuscada, setImagemBuscada] = useState('');
     const [nome, setNome] = useState('');
     let token = JSON.parse(localStorage.getItem("keyToken"))
+    const [getName, setGetName] = useState('');
+    
 
     useEffect(() => {
         async function autenticar(e) {
@@ -186,10 +188,12 @@ export default function CadastrarFoto() {
 
     function handleLerArquivo(files){
         let reader = new FileReader();
+        let format = files.name.replace(".jpg", "")
+        setGetName(format)
         if (files.size <= 1048576 && files.type.split('/')[0] === "image" && files.type.split('/')[0] !== "gif" && files.type.split('/')[0] !== "psd"){
             reader.readAsDataURL(files);
             reader.onloadend = () => {
-                handleAlterar(reader.result)
+                handleAlterar(reader.result, format)
             }
         }else{
             if(files.size > 1048576 ){
@@ -201,10 +205,10 @@ export default function CadastrarFoto() {
         }
     };
 
-    async function handleAlterar(novaImagem){
+    async function handleAlterar(novaImagem, nome){
         await apiC.post('/inserir/imagem', {
             "imagem": novaImagem,
-            "nome": jogador,
+            "nome": nome,
         })
         .then(function (response) {
             setMostrarImagem(novaImagem)
@@ -225,8 +229,8 @@ export default function CadastrarFoto() {
             </Button>
             <h3>Escreva o nome do jogado abaixo</h3>
             <Form.Control
-                onChange={e => { setJogador(e.target.value) }}
-                value={jogador}
+                onChange={e => { setJogador(getName) }}
+                value={getName}
             />
 
             <Dropzone onDrop={acceptedFiles => handleLerArquivo(acceptedFiles[0])}>
