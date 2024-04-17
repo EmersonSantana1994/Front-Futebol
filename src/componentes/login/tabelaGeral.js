@@ -201,24 +201,24 @@ export default function TabelaGeral() {
             },
         },
 
-        {
-            dataField: 'foto',
-            headerClasses: 'nao-selecionavel',
-            text: <p>
-                Foto
-            </p>,
-            formatter: (cell, row) => {
-                // return <img className="foto" src={cell} />;
+        // {
+        //     dataField: 'foto',
+        //     headerClasses: 'nao-selecionavel',
+        //     text: <p>
+        //         Foto
+        //     </p>,
+        //     formatter: (cell, row) => {
+        //         // return <img className="foto" src={cell} />;
 
-                if (cell != null) {
-                    const imagePath = Buffer.from(cell).toString();
-                    return <img className="foto" src={imagePath} />
-                } else {
-                    return <img className="foto" src="https://jazzaero.com.br/wp-content/uploads/2017/05/default-placeholder-profile-icon-avatar-gray-woman-90197997.jpg" alt="perfil" />
-                }
+        //         if (cell != null) {
+        //             const imagePath = Buffer.from(cell).toString();
+        //             return <img className="foto" src={imagePath} />
+        //         } else {
+        //             return <img className="foto" src="https://jazzaero.com.br/wp-content/uploads/2017/05/default-placeholder-profile-icon-avatar-gray-woman-90197997.jpg" alt="perfil" />
+        //         }
 
-            },
-        }
+        //     },
+        // }
     ]
 
 
