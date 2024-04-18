@@ -126,6 +126,7 @@ export default function Torneio() {
     const [timesSorteadosArray4, setTimesSorteadosArray4] = useState('');
     const [campeao, setCampeao] = useState('');
     const [mostrarCampeao, setMostrarCampeao] = useState(false);
+    const [mostrarVencedores, setMostrarVencedores] = useState(false);
 
     let totalItens = 0
     let contador = 0
@@ -883,12 +884,12 @@ export default function Torneio() {
                     } if (i == p4) {
                         idPlacar.push(response.data[i].id)
                     }
-        
+
                 }
             })
             .catch((error) => {
             });
-            console.log("yyyyyyyyy", idPlacar)
+        console.log("yyyyyyyyy", idPlacar)
 
 
         await apiC.post("torneio/deletarPlacar", {
@@ -1438,17 +1439,17 @@ export default function Torneio() {
                             setMostrarPlacarSalvo23(true)
                         })
                         .catch((error) => {
-                            alert('erro ao trazer o placar ', time177)
+                            alert('erro ao trazer o placar ', time23)
                         });
                 })
                 .catch((error) => {
-                    alert('erro ao salvar o placar ', time177)
+                    alert('erro ao salvar o placar ', time23)
                 });
         }
         if (time24 != '') {
             await apiC.post("torneio/salvarPlacar", {
                 "id": id24,
-                "resultado": time23
+                "resultado": time24
             })
                 .then(response => {
                     apiC.post("torneio/buscarPlacar", {
@@ -1459,11 +1460,11 @@ export default function Torneio() {
                             setMostrarPlacarSalvo24(true)
                         })
                         .catch((error) => {
-                            alert('erro ao trazer o placar ', time188)
+                            alert('erro ao trazer o placar ', time24)
                         });
                 })
                 .catch((error) => {
-                    alert('erro ao salvar o placar ', time188)
+                    alert('erro ao salvar o placar ', time24)
                 });
         }
         verificaPlacares()
@@ -1646,9 +1647,52 @@ export default function Torneio() {
             <Button className="deletar-jogadorr" onClick={(e) => handleDeletar()}>
                 <div>Deletar todos os times das tabelas</div>
             </Button>
-            {mostrarCampeao &&
-                <div><h1 className="campeao"> O campeoao do torneio é o(a) {campeao} </h1></div>
+            {mostrarVencedores &&
+                <div><h1 className="campeao"> Panasonic é Campeão do campeonato Coziano de 2024 </h1></div>
             }
+            {mostrarVencedores &&
+                <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>        
+            }
+             {mostrarVencedores &&
+                <h5 className="campeao2"> Rodrigo </h5>       
+            }
+             {mostrarVencedores &&
+                <h5 className="campeao3"> Super Homem </h5>       
+            }
+            {mostrarVencedores &&
+                <h5 className="campeao4"> Michel </h5>       
+            }
+            {mostrarVencedores &&
+                <h5 className="campeao5"> Theo </h5>       
+            }
+             {mostrarVencedores &&
+                <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>        
+            }
+             {mostrarVencedores &&
+                <div><h5 className="campeao7"> Pente Rosa </h5></div>        
+            }
+             {mostrarVencedores &&
+                <div><h5 className="campeao8"> Hammer </h5></div>        
+            }
+             {mostrarVencedores &&
+                <div><h5 className="campeao9"> Ufe </h5></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao10"> Roberto </h5></div>        
+            }
+             {mostrarVencedores &&
+                <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao12"> 1º Super Homem </h5></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao13"> 2º Rodrigo </h5></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao14"> 3º Hammer </h5></div>        
+            }
+           
             <>
                 <div>
                     <h1> Primeiro turno</h1>

@@ -14,8 +14,90 @@
 
 .campeao{
     position: absolute;
-    margin-left: 345px;
-    margin-top: -100px;
+    margin-left: 564px;
+    margin-top: -202px;
+}
+
+.campeao1{
+    position: absolute;
+    margin-left: 564px;
+    margin-top: -125px;
+}
+
+.campeao2{
+    position: absolute;
+    margin-left: 569px;
+    margin-top: -102px;
+}
+
+.campeao3{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: -54px;
+}
+
+.campeao4{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: -86px;
+}
+
+.campeao5{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: -70px;
+}
+
+.campeao6{
+    position: absolute;
+    margin-left: 569px;
+    margin-top: -32px;
+}
+.campeao7{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: -11px;
+}
+.campeao8{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: 5px;
+}
+.campeao9{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: 19px;
+}
+.campeao10{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: 34px;
+}
+.campeao11{
+    position: absolute;
+    margin-left: 134px;
+    margin-top: -84px;
+}
+.campeao12{
+    position: absolute;
+    margin-left: 136px;
+    margin-top: -61px;
+}
+.campeao13{
+    position: absolute;
+    margin-left: 137px;
+    margin-top: -42px;
+}
+.campeao14{
+    position: absolute;
+    margin-left: 136px;
+    margin-top: -24px;
+}
+
+.campeao15{
+    position: absolute;
+    margin-left: 570px;
+    margin-top: 34px;
 }
 
 .botao-importar-foto{
