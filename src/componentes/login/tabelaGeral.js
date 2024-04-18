@@ -18,6 +18,7 @@ export default function TabelaGeral() {
     let contador = 0
     let itensVar = []
     let token = JSON.parse(localStorage.getItem("keyToken"))
+    let dadosSelecionados = []
 
 
 
@@ -201,25 +202,83 @@ export default function TabelaGeral() {
             },
         },
 
-        {
-            dataField: 'foto',
-            headerClasses: 'nao-selecionavel',
-            text: <p>
-                Foto
-            </p>,
-            formatter: (cell, row) => {
-                // return <img className="foto" src={cell} />;
+        // {
+        //     dataField: 'foto',
+        //     headerClasses: 'nao-selecionavel',
+        //     text: <p>
+        //         Foto
+        //     </p>,
+        //     formatter: (cell, row) => {
+        //         // return <img className="foto" src={cell} />;
 
-                if (cell != null) {
-                    const imagePath = Buffer.from(cell).toString();
-                    return <img className="foto" src={imagePath} />
-                } else {
-                    return <img className="foto" src="https://jazzaero.com.br/wp-content/uploads/2017/05/default-placeholder-profile-icon-avatar-gray-woman-90197997.jpg" alt="perfil" />
-                }
+        //         if (cell != null) {
+        //             const imagePath = Buffer.from(cell).toString();
+        //             return <img className="foto" src={imagePath} />
+        //         } else {
+        //             return <img className="foto" src="https://jazzaero.com.br/wp-content/uploads/2017/05/default-placeholder-profile-icon-avatar-gray-woman-90197997.jpg" alt="perfil" />
+        //         }
 
-            },
-        }
+        //     },
+        // }
     ]
+
+    const selecaoLinhas = {
+        mode: 'radio' ,
+        onSelect: (row, isSelect, rowIndex, e) => {
+            console.log("eeeeee", row )
+            if(isSelect){
+                handleSelecionar(row.id)
+            }else{
+                handleDesselecionar(row.id)
+            }
+        },
+        onSelectAll: (isSelect, rows, e) => {
+            if(isSelect){
+                handleSelecionarTodos()
+            }else{
+                handleDesselecionarTodos()
+            }
+        },
+        selectionRenderer: ({ mode, ...rest }) => {
+            return (
+                <>
+                    <input type={mode} class="input-checkbox-simcard" { ...rest }/>
+                    <label class="label-checkbox-simcard"></label>
+                </>
+            )
+        },
+        selectionHeaderRenderer: ({ mode, ...rest }) => {
+            return (
+                <>
+                    <input type={mode} class="input-checkbox-header-simcard" { ...rest }/>
+                    <label class="label-checkbox-header-simcard"></label>
+                </>
+            )
+        },
+        bgColor: 'row-index-bigger-than-2101'
+    };
+
+    function handleSelecionar(simcard){
+        for (let i = 0; i < itens.length; i++) {
+            if (itens[i].id == simcard){
+                dadosSelecionados.push(itens[i].id);
+                break;
+            }
+    }
+    }
+
+    function handleDesselecionar(simcard){
+        for (let i = 0; i < dadosSelecionados.length; i++) {
+            if (dadosSelecionados[i] == simcard){
+                dadosSelecionados.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+
+    function handleDesselecionarTodos(){
+    }
 
 
     return (
@@ -249,6 +308,7 @@ export default function TabelaGeral() {
                             data={itens}
                             columns={colunas}
                             bootstrap4={true}
+                            selectRow={ selecaoLinhas }
                             bordered={false}
                         />
                     </div>

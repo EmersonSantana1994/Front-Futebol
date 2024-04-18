@@ -22,6 +22,7 @@ import PontosTorneio from './componentes/login/pontosTorneio';
 import TabelaGeral from './componentes/login/tabelaGeral';
 import Copa from './componentes/login/copa';
 import CadastrarFoto from './componentes/login/cadastrarFoto';
+import ArtilheiroTorneio from './componentes/login/artilheiro_torneio';
 
 
 
@@ -52,6 +53,7 @@ function App() {
         <Route path='/tabelaGeral' element={<TabelaGeral />} />
         <Route path='/copa' element={<Copa />} />
         <Route path='/cadastrarFoto' element={<CadastrarFoto />} />
+        <Route path='/artilheiroTorneio' element={<ArtilheiroTorneio />} />
       </Routes>
       </BrowserRouter>
     </div>

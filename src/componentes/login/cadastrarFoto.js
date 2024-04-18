@@ -227,7 +227,7 @@ export default function CadastrarFoto() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
-            <h3>Escreva o nome do jogado abaixo</h3>
+            <h3>Envie uma foto do jogador</h3>
             <Form.Control
                 onChange={e => { setJogador(getName) }}
                 value={getName}
