@@ -320,7 +320,7 @@ for(let i = 0; i < dadosSelecionados.length; i++){
                 <label>Quantidade de gols</label>
                 <Form.Control className="label-artilheiro"
                     onChange={e => { setQuantidadeGol(e.target.value) }}
-                    value={quantidadeGol}
+                    value={quantidadeGol == 0 ? '' : quantidadeGol}
                 />
                  <label className="label-quatidade">Quantidade total de gols marcados</label>
                 <Form.Control className="label-quantgol"

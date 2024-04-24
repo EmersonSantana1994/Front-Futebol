@@ -165,6 +165,9 @@ export default function Cadastro() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/torneio')}>
+                        <div>Torneio</div>
+                    </Button>
             <h1>Cadastre a liga e os times desta liga</h1>
             <h3>Liga</h3>
             <Form.Control

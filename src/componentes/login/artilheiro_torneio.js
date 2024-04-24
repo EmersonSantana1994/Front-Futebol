@@ -291,6 +291,9 @@ for(let i = 0; i < dadosSelecionados.length; i++){
         <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                         <div>Home</div>
                     </Button>
+                    <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/torneio')}>
+                        <div>Torneio</div>
+                    </Button>
             {carregando &&
                 <h1>carregando..</h1>
             }
@@ -316,7 +319,7 @@ for(let i = 0; i < dadosSelecionados.length; i++){
                 <label>Quantidade de gols</label>
                 <Form.Control className="label-artilheiro"
                     onChange={e => { setQuantidadeGol(e.target.value) }}
-                    value={quantidadeGol}
+                    value={quantidadeGol == 0 ? '' : quantidadeGol  }
                 />
                  <label className="label-quatidade">Quantidade total de gols marcados</label>
                 <Form.Control className="label-quantgol"

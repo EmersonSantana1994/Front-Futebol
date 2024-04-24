@@ -1484,10 +1484,28 @@ export default function Torneio() {
             },
         },
         {
+            headerClasses: 'nao-selecionavel',
+            text: <p>
+                -    -
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
             dataField: 'pontos',
             headerClasses: 'nao-selecionavel',
             text: <p>
                 Pontos
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            headerClasses: 'nao-selecionavel',
+            text: <p>
+                -    -
             </p>,
             formatter: (cell, row) => {
                 return <p>{cell === null ? '-' : cell}</p>;
@@ -1581,6 +1599,12 @@ export default function Torneio() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/artilheiroTorneio')}>
+                <div>Artilheiro</div>
+            </Button>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/cadastro')}>
+                <div>Cadastro</div>
+            </Button>
             {carregando &&
                 <h1>carregando..</h1>
             }
@@ -1648,49 +1672,49 @@ export default function Torneio() {
                 <div>Deletar todos os times das tabelas</div>
             </Button>
             {mostrarVencedores &&
-                <div><h1 className="campeao"> Panasonic é Campeão do campeonato Coziano de 2024 </h1></div>
+                <div><h1 className="campeao"> Raiden é Campeão do campeonato Noriano de 2024 </h1></div>
             }
             {mostrarVencedores &&
                 <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>        
             }
              {mostrarVencedores &&
-                <h5 className="campeao2"> Rodrigo </h5>       
+                <h5 className="campeao2"> Raul </h5>       
             }
              {mostrarVencedores &&
-                <h5 className="campeao3"> Super Homem </h5>       
+                <h5 className="campeao3"> Wilham </h5>       
             }
             {mostrarVencedores &&
-                <h5 className="campeao4"> Michel </h5>       
+                <h5 className="campeao4"> Mathias </h5>       
             }
             {mostrarVencedores &&
-                <h5 className="campeao5"> Theo </h5>       
+                <h5 className="campeao5"> Mostarda </h5>       
             }
              {mostrarVencedores &&
                 <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>        
             }
              {mostrarVencedores &&
-                <div><h5 className="campeao7"> Pente Rosa </h5></div>        
+                <div><h5 className="campeao7"> Crystal </h5></div>        
             }
              {mostrarVencedores &&
-                <div><h5 className="campeao8"> Hammer </h5></div>        
+                <div><h5 className="campeao8"> Thanos </h5></div>        
             }
              {mostrarVencedores &&
-                <div><h5 className="campeao9"> Ufe </h5></div>        
+                <div><h5 className="campeao9"> Pente Laranja </h5></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao10"> Roberto </h5></div>        
+                <div><h5 className="campeao10"> Buzz </h5></div>        
             }
              {mostrarVencedores &&
                 <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao12"> 1º Super Homem </h5></div>        
+                <div><h5 className="campeao12"> 1º Wilham </h5></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao13"> 2º Rodrigo </h5></div>        
+                <div><h5 className="campeao13"> 2º Raul </h5></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao14"> 3º Hammer </h5></div>        
+                <div><h5 className="campeao14"> 3º Pente Cinza </h5></div>        
             }
            
             <>
