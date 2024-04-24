@@ -291,6 +291,9 @@ for(let i = 0; i < dadosSelecionados.length; i++){
         <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                         <div>Home</div>
                     </Button>
+                    <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/torneio')}>
+                        <div>Torneio</div>
+                    </Button>
             {carregando &&
                 <h1>carregando..</h1>
             }
