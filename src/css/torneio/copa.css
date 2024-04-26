@@ -48,6 +48,37 @@
     border-bottom-color: #c61c69;
 }
 
+.fase{
+    margin-left: 242px;
+}
+
+.semifinal{
+    margin-left: 272px;
+}
+
+.final{
+    margin-left: 296px;
+}
+
+.limpar-copa{
+    margin-left: 949px;
+}
+
+.formato-data{
+    padding: 0.3em !important;
+    width: 13em !important;
+    height: 2.10em !important;
+    line-height: 2em !important;
+    font-size: 0.875em !important;
+    font-family: RobotoRegular !important;
+    /* border: 0em !important; */
+    vertical-align: middle !important;
+    border-radius: 3.125em 3em 3em 3.125em !important;
+    box-shadow: none !important;
+    margin-left: 239px;
+    border-bottom-color: #c61c69;
+}
+
 .btn-filtro-arqui{
     margin-left: 61px;
 }

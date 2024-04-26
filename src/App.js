@@ -20,6 +20,7 @@ import Upload from './componentes/login/upload';
 import TelaCadastro from './componentes/login/cadastrarUsuario';
 import PontosTorneio from './componentes/login/pontosTorneio';
 import TabelaGeral from './componentes/login/tabelaGeral';
+import SuperCopa from './componentes/login/superCopa';
 import Copa from './componentes/login/copa';
 import CadastrarFoto from './componentes/login/cadastrarFoto';
 import ArtilheiroTorneio from './componentes/login/artilheiro_torneio';
@@ -51,6 +52,7 @@ function App() {
         <Route path='/cadstrousuario' element={<TelaCadastro />} />
         <Route path='/pontosTorneio' element={<PontosTorneio />} />
         <Route path='/tabelaGeral' element={<TabelaGeral />} />
+        <Route path='/superCopa' element={<SuperCopa />} />
         <Route path='/copa' element={<Copa />} />
         <Route path='/cadastrarFoto' element={<CadastrarFoto />} />
         <Route path='/artilheiroTorneio' element={<ArtilheiroTorneio />} />

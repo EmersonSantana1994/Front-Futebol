@@ -73,6 +73,14 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/artilheiroTorneio')}>
                 <div>Artilheiro do campeonato em disputa</div>
             </Button>
+            <h1>Copa</h1>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/copa')}>
+                <div>Copa</div>
+            </Button>
+            <h1>Super Copa</h1>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/superCopa')}>
+                <div>Super Copa</div>
+            </Button>
             <h1>Tabela geral</h1>
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/tabelaGeral')}>
                 <div>Tabela geral</div>

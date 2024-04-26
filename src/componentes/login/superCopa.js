@@ -355,29 +355,37 @@ export default function SuperCopa() {
             .then(response => {
                 if (response.status === 200) {
                     if (response.data.length > 0) {
-                        if (response.data[0].nome != null) {
-                            setTime1s(response.data[0].nome)
+                        setTime1q(response.data[0].nome)
+                        setTime2q(response.data[1].nome)
+                        setTime3q(response.data[2].nome)
+                        setTime4q(response.data[3].nome)
+                        setTime5q(response.data[4].nome)
+                        setTime6q(response.data[5].nome)
+                        setTime7q(response.data[6].nome)
+                        setTime8q(response.data[7].nome)
+                        if (response.data[8].nome != null) {
+                            setTime1s(response.data[8].nome)
                         }
-                        if (response.data[1].nome != null) {
-                            setTime2s(response.data[1].nome)
+                        if (response.data[9].nome != null) {
+                            setTime2s(response.data[9].nome)
                         }
-                        if (response.data[2].nome != null) {
-                            setTime3s(response.data[2].nome)
+                        if (response.data[10].nome != null) {
+                            setTime3s(response.data[10].nome)
                         }
-                        if (response.data[3].nome != null) {
-                            setTime4s(response.data[3].nome)
+                        if (response.data[11].nome != null) {
+                            setTime4s(response.data[11].nome)
                         }
-                        if (response.data[4].nome != null) {
-                            setTime1f(response.data[4].nome)
+                        if (response.data[12].nome != null) {
+                            setTime1f(response.data[12].nome)
                         }
-                        if (response.data[5].nome != null) {
-                            setTime2f(response.data[5].nome)
+                        if (response.data[13].nome != null) {
+                            setTime2f(response.data[13].nome)
                         }
                     }
 
                     else {
                         alert('nenhum time cadatrado, por favor faça o cadastro dos times')
-                        setSemifinais(true)
+                        setCadastrarTime(true)
                     }
                 }
             })
@@ -944,6 +952,7 @@ export default function SuperCopa() {
                 });
         }
         else if (rodada == "21") {
+
             await apiC.post("copa/cadastrar_placar", {
                 "placar1": resultado41,
                 "id1": posicao41,
@@ -1028,7 +1037,7 @@ export default function SuperCopa() {
         }).then(response => {
             alert("Times cadastrados com sucesso")
             verificaSeTemTimeCadastrado()
-            setSemifinais(false)
+            setCadastrarTime(false)
         })
             .catch((error) => {
                 alert('Erro ao cadastrar times')
@@ -1069,8 +1078,11 @@ export default function SuperCopa() {
             <Button className="limpar-copa" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
+            {cadastrarTime &&
+                <h1>Cadastre os times abaixo</h1>
+            }
             {semifinais &&
-                <h1>Informe os times abaixo em ordem de disputa</h1>
+                <h1>Informe os times que avançaram para as semifinais em ordem de disputa</h1>
             }
             {finais &&
                 <h1>Informe os times que avançaram para as finais em ordem de disputa</h1>
@@ -1122,6 +1134,59 @@ export default function SuperCopa() {
                     <div>Enviar times digitados</div>
                 </Button>
             }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime1(e.target.value) }}
+                    value={novoTime1}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime2(e.target.value) }}
+                    value={novoTime2}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime3(e.target.value) }}
+                    value={novoTime3}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime4(e.target.value) }}
+                    value={novoTime4}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime5(e.target.value) }}
+                    value={novoTime5}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime6(e.target.value) }}
+                    value={novoTime6}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime7(e.target.value) }}
+                    value={novoTime7}
+                />
+            }
+            {cadastrarTime &&
+                <Form.Control
+                    onChange={e => { setNovoTime8(e.target.value) }}
+                    value={novoTime8}
+                />
+            }
+            {cadastrarTime &&
+                <Button className="btn-filtro-arquivo" onClick={(e) => cadastrarNovoTime()}>
+                    <div>Enviar times digitados</div>
+                </Button>
+            }
 
             <Dropzone onDrop={acceptedFiles => handleLerArquivo(acceptedFiles[0])}>
                 {({ getRootProps, getInputProps }) => (
@@ -1134,7 +1199,773 @@ export default function SuperCopa() {
                     </section>
                 )}
             </Dropzone>
-           
+            <h3 className='fase'>Quartas de final</h3>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar1}
+                                placeholder="Placar"
+                            // onChange={e => setPlacar1(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar2}
+                                placeholder="Placar"
+                                onChange={e => setPlacar2(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("1")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </Form.Group>
+
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar3}
+                                placeholder="Placar"
+                                onChange={e => setPlacar3(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar4}
+                                placeholder="Placar"
+                                onChange={e => setPlacar4(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("2")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao(!prorrogacao)}>
+                                <div>Fazer Prorrogação</div>
+                            </Button>
+
+                            <Form.Control
+                                //data do jogo
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data2}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+                        {prorrogacao &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao29}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao29(e.target.value)}
+                            />
+                        }
+                        {prorrogacao &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao30}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao30(e.target.value)}
+                            />
+                        }
+                        {prorrogacao &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao &&
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("15")}>
+                                <div>Enviar</div>
+                            </Button>
+                        }
+                        {prorrogacao &&
+                        <Form.Control
+                        //data
+                        name="VALOR_MIN"
+                        className="formato-data campo-texto-cor-3"
+                        type="text"
+                        maxLength="4"
+                        value={data15}
+                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                        placeholder="Time"
+                    />
+
+                        }
+                        
+
+                    </div>
+
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar5}
+                                placeholder="Placar"
+                                onChange={e => setPlacar5(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time3q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar6}
+                                onChange={e => setPlacar6(e.target.value)}
+                                placeholder="Placar"
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time4q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("3")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data3}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+
+                    </div>
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar7}
+                                placeholder="Placar"
+                                onChange={e => setPlacar7(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time4q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar8}
+                                onChange={e => setPlacar8(e.target.value)}
+                                placeholder="Placar"
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time3q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("4")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao2(!prorrogacao2)}>
+                                <div>Fazer Prorrogação</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data4}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+                        {prorrogacao2 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao31}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao31(e.target.value)}
+                            />
+                        }
+                        {prorrogacao2 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time3q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao2 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao32}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao32(e.target.value)}
+                            />
+                        }
+                        {prorrogacao2 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time4q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao2 &&
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("16")}>
+                                <div>Enviar</div>
+                            </Button>
+                        }
+                         {prorrogacao2 &&
+                        <Form.Control
+                        //data
+                        name="VALOR_MIN"
+                        className="formato-data campo-texto-cor-3"
+                        type="text"
+                        maxLength="4"
+                        value={data16}
+                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                        placeholder="Time"
+                    />
+
+                        }
+                    </div>
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar9}
+                                placeholder="Placar"
+                                onChange={e => setPlacar9(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time5q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar10}
+                                placeholder="Placar"
+                                onChange={e => setPlacar10(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time6q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("5")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data5}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+
+                    </div>
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar11}
+                                placeholder="Placar"
+                                onChange={e => setPlacar11(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time6q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar12}
+                                placeholder="Placar"
+                                onChange={e => setPlacar12(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time5q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("6")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao3(!prorrogacao3)}>
+                                <div>Fazer Prorrogação</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data6}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+                        {prorrogacao3 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao33}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao33(e.target.value)}
+                            />
+                        }
+                        {prorrogacao3 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time5q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao3 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao34}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao34(e.target.value)}
+                            />
+                        }
+                        {prorrogacao3 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time6q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao3 &&
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("17")}>
+                                <div>Enviar</div>
+                            </Button>
+                        }
+                         {prorrogacao3 &&
+                        <Form.Control
+                        //data
+                        name="VALOR_MIN"
+                        className="formato-data campo-texto-cor-3"
+                        type="text"
+                        maxLength="4"
+                        value={data17}
+                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                        placeholder="Time"
+                    />
+
+                        }
+                    </div>
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar13}
+                                placeholder="Placar"
+                                onChange={e => setPlacar13(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time7q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar14}
+                                placeholder="Placar"
+                                onChange={e => setPlacar14(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time8q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("7")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data7}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+
+                    </div>
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar15}
+                                placeholder="Placar"
+                                onChange={e => setPlacar15(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time8q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar16}
+                                placeholder="Placar"
+                                onChange={e => setPlacar16(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time7q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => { cadastrarTimes("8"); mostrarSemifinalistas() }}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao4(!prorrogacao4)}>
+                                <div>Fazer Prorrogação</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data8}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+                        {prorrogacao4 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao35}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao35(e.target.value)}
+                            />
+                        }
+                        {prorrogacao4 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time7q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao4 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao36}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao36(e.target.value)}
+                            />
+                        }
+                        {prorrogacao4 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time8q}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao4 &&
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("18")}>
+                                <div>Enviar</div>
+                            </Button>
+                        }
+                         {prorrogacao4 &&
+                        <Form.Control
+                        //data
+                        name="VALOR_MIN"
+                        className="formato-data campo-texto-cor-3"
+                        type="text"
+                        maxLength="4"
+                        value={data18}
+                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                        placeholder="Time"
+                    />
+
+                        }
+                    </div>
+                </div>
+
+            </Form.Group>
             <h3 className='semifinal'>Semifinal</h3>
 
             <Form.Group>
@@ -1170,6 +2001,7 @@ export default function SuperCopa() {
                                 placeholder="Placar"
                                 onChange={e => setPlacar18(e.target.value)}
                             />
+
                             <Form.Control
                                 name="VALOR_MIN"
                                 className="filtros-iccid-valor-min campo-texto-cor-3"
