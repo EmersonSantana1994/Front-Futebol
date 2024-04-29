@@ -11,6 +11,7 @@ export default function ArtilheiroTorneio() {
     const [quantidadeGol, setQuantidadeGol] = useState(0);
     const [nomeJogadorAnterior, setNomeJogadorAnterior] = useState('');
     const [quantidadeGolAnterior, setQuantidadeGolAnterior] = useState(0);
+    const [pesquisarTime, setPesquisarTime] = useState('');
     const [carregando, setCarregando] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [placar1, setPlacar1] = useState(0);
@@ -19,12 +20,16 @@ export default function ArtilheiroTorneio() {
     const [time2, setTime2] = useState('');
     const [mensagemTabela, setMensagemTabela] = useState('');
     const [itens, setItens] = useState([]);
+    const [itens2, setItens2] = useState([]);
     const [somaGols, setSomaGols] = useState([]);
     const navigate = useNavigate();
     let token = JSON.parse(localStorage.getItem("keyToken"))
+    const [resultado, setResultado] = useState(false);
+    const [mostrarTime, setMostrarTime] = useState(false);
     let totalItens = 0
     let contador = 0
     let itensVar = []
+    let itensVar2 = []
     let dadosSelecionados = []
 
     useEffect(() => {
@@ -64,8 +69,21 @@ export default function ArtilheiroTorneio() {
             });
     }, [])
 
-
-
+    function inserirData2(data) {
+        itensVar = []
+        setItens2([])
+        for (let i = 0; i < data.length; i++) {
+            if (contador == i) {
+                let k = i
+                for (let j = 0; j < data.length; j++) {
+                    itensVar[k] = data[j]
+                    k++
+                }
+            }
+            console.log("uuuuuuu", itensVar)
+            setItens2(JSON.parse(JSON.stringify(itensVar)))
+        }
+    }
 
 
     async function inserirData() {
@@ -192,6 +210,34 @@ export default function ArtilheiroTorneio() {
 
     }
 
+    async function pesquisaTime() {
+
+        await apiC.post("cadastrar/pesquisar", {
+            "time": pesquisarTime,
+            headers: {
+                'x-access-token': token,
+            }
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    inserirData2(response.data.result)
+                    if (response.data.result.length == 0) {
+                        setResultado(true)
+                        setMostrarTime(false)
+                    } else {
+                        setResultado(false)
+                        setMostrarTime(true)
+                    }
+
+                }
+            })
+            .catch((error) => {
+
+                    alert(error.response.data)
+
+            });
+    }
+
     async function handleSalvar() {
         setCarregando(true)
         setMensagem('salvando..')
@@ -214,6 +260,21 @@ export default function ArtilheiroTorneio() {
             });
 
     }
+
+    const colunasTimes = [
+        {
+            dataField: 'nome',
+            headerClasses: 'nao-selecionavel',
+            sort: true,
+            text: <p>
+                Jogadores
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+    ]
+
 
     async function salvarPlacar() {
         setCarregando(true)
@@ -421,12 +482,42 @@ export default function ArtilheiroTorneio() {
             <Form.Control className="label-placar2"
                 value={placar2}
             />
-            <Button className="butao-placar2" onClick={(e) => handleSalvar()}>
-                <div>Enviar Arquivo</div>
-            </Button>
+        
             <Button className="limpar-placar" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
+            
+            <h1 className='pesquisa'>Pesquise aqui o time</h1>
+                <Form.Control
+                    onChange={e => { setPesquisarTime(e.target.value) }}
+                    value={pesquisarTime}
+                    className='pesquisa'
+                />
+                <Button className="pesquisa" onClick={(e) => pesquisaTime()}>
+                    <div>Pesquisar</div>
+                </Button>
+                {resultado &&
+                    <div className='pesquisa'>
+                        <h3>Nenhum resultado encontrado</h3>
+                    </div>
+
+                }
+{console.log("rrrrr", itens2)}
+                {mostrarTime &&
+                    <div className='pesquisa'>
+                        <BootstrapTable
+                            hover={true}
+                            classes="tabela"
+                            condensed={true}
+                            keyField='id_time'
+                            data={itens2}
+                            columns={colunasTimes}
+                            bootstrap4={true}
+                            bordered={false}
+                        />
+                    </div>
+
+                }
         </>
     )
 }

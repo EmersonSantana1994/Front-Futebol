@@ -107,6 +107,7 @@ export default function SuperCopa() {
     const [data19, setData19] = useState('');
     const [data20, setData20] = useState('');
     const [data21, setData21] = useState('');
+    const [mostrarVencedores, setMostrarVencedores] = useState(false);
 
     let contador = 0
     let itensVar = []
@@ -1069,6 +1070,7 @@ export default function SuperCopa() {
             <Button className="limpar-copa" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
+           
             {semifinais &&
                 <h1>Informe os times abaixo em ordem de disputa</h1>
             }
@@ -1134,6 +1136,51 @@ export default function SuperCopa() {
                     </section>
                 )}
             </Dropzone>
+            {mostrarVencedores &&
+                <div><h3 className="copa"> Raiden é Campeão do campeonato Noriano de 2024 </h3></div>
+            }
+                             {mostrarVencedores &&
+                <div><h3 className="copa1"> Abaixo os jogadores campeões </h3></div>        
+            }
+             {mostrarVencedores &&
+                <h5 className="copa2"> Raul </h5>       
+            }
+             {mostrarVencedores &&
+                <h5 className="copa3"> Wilham </h5>       
+            }
+            {mostrarVencedores &&
+                <h5 className="copa4"> Mathias </h5>       
+            }
+            {mostrarVencedores &&
+                <h5 className="copa5"> Mostarda </h5>       
+            }
+            {mostrarVencedores &&
+                <div><h3 className="copa6"> Abaixo os jogadores vices campeões </h3></div>        
+            }
+             {mostrarVencedores &&
+                <div><h5 className="copa7"> Crystal </h5></div>        
+            }
+             {mostrarVencedores &&
+                <div><h5 className="copa8"> Thanos </h5></div>        
+            }
+             {mostrarVencedores &&
+                <div><h5 className="copa9"> Pente Laranja </h5></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa10"> Buzz </h5></div>        
+            }
+             {mostrarVencedores &&
+                <div><h3 className="copa11"> Abaixo os melhores jogadores do campeonato </h3></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa12"> 1º Wilham </h5></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa13"> 2º Raul </h5></div>        
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa14"> 3º Pente Cinza </h5></div>        
+            }
            
             <h3 className='semifinal'>Semifinal</h3>
 
