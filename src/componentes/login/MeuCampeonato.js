@@ -445,7 +445,7 @@ export default function MeuCampeonato() {
     const verificaString = (tipoSolicitacao) => {
         return ["Brastemp", "Halor", "Panasonic", "Raiden", "Penharol",
             "Sacred", "Brécia", "Galaxy", "Ases", "Castelão",
-            "Democration", "Juventude", "LG", "Once Caldas", "Lanus", "LDU"].includes(tipoSolicitacao)
+            "Democration", "Juventude", "LG", "Once Caldas", "Lanus", "LDU", "Lacta", "Element"].includes(tipoSolicitacao)
     }
 
     const handleClickOutroBotao = (e) => {
