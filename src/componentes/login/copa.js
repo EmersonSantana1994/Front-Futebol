@@ -37,6 +37,10 @@ export default function SuperCopa() {
     const [placar26, setPlacar26] = useState('');
     const [placar27, setPlacar27] = useState('');
     const [placar28, setPlacar28] = useState('');
+    const [placar29, setPlacar29] = useState('');
+    const [placar30, setPlacar30] = useState('');
+    const [placar31, setPlacar31] = useState('');
+    const [placar32, setPlacar32] = useState('');
     const [placarProrrogacao29, setPlacarProrrogacao29] = useState('');
     const [placarProrrogacao30, setPlacarProrrogacao30] = useState('');
     const [placarProrrogacao31, setPlacarProrrogacao31] = useState('');
@@ -51,6 +55,8 @@ export default function SuperCopa() {
     const [placarProrrogacao40, setPlacarProrrogacao40] = useState('');
     const [placarProrrogacao41, setPlacarProrrogacao41] = useState('');
     const [placarProrrogacao42, setPlacarProrrogacao42] = useState('');
+    const [placarProrrogacao43, setPlacarProrrogacao43] = useState('');
+    const [placarProrrogacao44, setPlacarProrrogacao44] = useState('');
     const [time1q, setTime1q] = useState('');
     const [time2q, setTime2q] = useState('');
     const [time3q, setTime3q] = useState('');
@@ -65,6 +71,8 @@ export default function SuperCopa() {
     const [time4s, setTime4s] = useState('');
     const [time1f, setTime1f] = useState('');
     const [time2f, setTime2f] = useState('');
+    const [time1t, setTime1t] = useState('');
+    const [time2t, setTime2t] = useState('');
     const [liga, setLiga] = useState('');
     const navigate = useNavigate();
 
@@ -78,6 +86,7 @@ export default function SuperCopa() {
     const [novoTime8, setNovoTime8] = useState('');
     const [cadastrarTime, setCadastrarTime] = useState(false);
     const [semifinais, setSemifinais] = useState(false);
+    const [terceiro, setTerceiro] = useState(false);
     const [finais, setFinais] = useState(false);
     const [prorrogacao, setProrrogacao] = useState(false);
     const [prorrogacao2, setProrrogacao2] = useState(false);
@@ -86,6 +95,7 @@ export default function SuperCopa() {
     const [prorrogacao5, setProrrogacao5] = useState(false);
     const [prorrogacao6, setProrrogacao6] = useState(false);
     const [prorrogacao7, setProrrogacao7] = useState(false);
+    const [prorrogacao8, setProrrogacao8] = useState(false);
     const [data, setData] = useState('');
     const [data2, setData2] = useState('');
     const [data3, setData3] = useState('');
@@ -107,6 +117,9 @@ export default function SuperCopa() {
     const [data19, setData19] = useState('');
     const [data20, setData20] = useState('');
     const [data21, setData21] = useState('');
+    const [data22, setData22] = useState('');
+    const [data23, setData23] = useState('');
+    const [data24, setData24] = useState('');
     const [mostrarVencedores, setMostrarVencedores] = useState(false);
 
     let contador = 0
@@ -150,8 +163,8 @@ export default function SuperCopa() {
                     }
                     if (response.data[1].placar != null) {
                         setPlacar2(response.data[1].placar)
-                        
-                        
+
+
                     }
                     if (response.data[2].placar != null) {
                         setPlacar3(response.data[2].placar)
@@ -188,7 +201,7 @@ export default function SuperCopa() {
                     }
                     if (response.data[9].placar != null) {
                         setPlacar10(response.data[9].placar)
-                        
+
                     }
                     if (response.data[10].placar != null) {
                         setPlacar11(response.data[10].placar)
@@ -271,6 +284,26 @@ export default function SuperCopa() {
                     if (response.data[27].placar != null) {
                         setPlacar28(response.data[27].placar)
                     }
+                    if (response.data[42].placar != null) {
+                        setPlacar29(response.data[42].placar)
+                        const formData = new Date(response.data[42].data)
+                        let dt = formData.toLocaleString('pt-BR')
+                        setData22(dt)
+                    }
+                    if (response.data[43].placar != null) {
+                        setPlacar30(response.data[43].placar)
+                    }
+                    if (response.data[44].placar != null) {
+                        setPlacar31(response.data[44].placar)
+                        const formData = new Date(response.data[44].data)
+                        let dt = formData.toLocaleString('pt-BR')
+                        setData23(dt)
+                    }
+                    if (response.data[45].placar != null) {
+                        setPlacar32(response.data[45].placar)
+                    }
+
+
                     //prorrogação
                     if (response.data[28].placar != null) {
                         setPlacarProrrogacao29(response.data[28].placar)
@@ -342,6 +375,16 @@ export default function SuperCopa() {
                     if (response.data[41].placar != null) {
                         setPlacarProrrogacao42(response.data[41].placar)
                     }
+                    if (response.data[46].placar != null) {
+                        setPlacarProrrogacao43(response.data[46].placar)
+                        setProrrogacao8(true)
+                        const formData = new Date(response.data[46].data)
+                        let dt = formData.toLocaleString('pt-BR')
+                        setData24(dt)
+                    }
+                    if (response.data[47].placar != null) {
+                        setPlacarProrrogacao44(response.data[47].placar)
+                    }
                 })
                 .catch((error) => {
                 });
@@ -373,6 +416,12 @@ export default function SuperCopa() {
                         }
                         if (response.data[5].nome != null) {
                             setTime2f(response.data[5].nome)
+                        }
+                        if (response.data[6].nome != null) {
+                            setTime1t(response.data[6].nome)
+                        }
+                        if (response.data[7].nome != null) {
+                            setTime2t(response.data[7].nome)
                         }
                     }
 
@@ -418,6 +467,10 @@ export default function SuperCopa() {
         let resultado26
         let resultado27
         let resultado28
+        let resultado43
+        let resultado44
+        let resultado45
+        let resultado46
 
         //prorrogação
         let resultado29
@@ -434,6 +487,8 @@ export default function SuperCopa() {
         let resultado40
         let resultado41
         let resultado42
+        let resultado47
+        let resultado48
 
         if (rodada == "1") {
             resultado1 = parseInt(placar1, 10)
@@ -519,6 +574,18 @@ export default function SuperCopa() {
             resultado41 = parseInt(placarProrrogacao41, 10)
             resultado42 = parseInt(placarProrrogacao42, 10)
         }
+        else if (rodada == "22") {
+            resultado43 = parseInt(placar29, 10)
+            resultado44 = parseInt(placar30, 10)
+        }
+        else if (rodada == "23") {
+            resultado45 = parseInt(placar31, 10)
+            resultado46 = parseInt(placar32, 10)
+        }
+        else if (rodada == "24") {
+            resultado47 = parseInt(placarProrrogacao43, 10)
+            resultado48 = parseInt(placarProrrogacao44, 10)
+        }
 
 
         let posicao1
@@ -563,6 +630,12 @@ export default function SuperCopa() {
         let posicao40
         let posicao41
         let posicao42
+        let posicao43
+        let posicao44
+        let posicao45
+        let posicao46
+        let posicao47
+        let posicao48
 
 
         await apiC.post("copa/bucartodos_placar")
@@ -609,6 +682,12 @@ export default function SuperCopa() {
                 posicao40 = response.data[39].id
                 posicao41 = response.data[40].id
                 posicao42 = response.data[41].id
+                posicao43 = response.data[42].id
+                posicao44 = response.data[43].id
+                posicao45 = response.data[44].id
+                posicao46 = response.data[45].id
+                posicao47 = response.data[46].id
+                posicao48 = response.data[47].id
                 if (response.status === 200) {
                 }
             })
@@ -961,6 +1040,57 @@ export default function SuperCopa() {
                     alert(error.response.data)
                 });
         }
+        else if (rodada == "22") {
+            await apiC.post("copa/cadastrar_placar", {
+                "placar1": resultado43,
+                "id1": posicao43,
+                "placar2": resultado44,
+                "id2": posicao44
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Salvo com sucesso')
+                        location.reload()
+                    }
+                })
+                .catch((error) => {
+                    alert(error.response.data)
+                });
+        }
+        else if (rodada == "23") {
+            await apiC.post("copa/cadastrar_placar", {
+                "placar1": resultado45,
+                "id1": posicao45,
+                "placar2": resultado46,
+                "id2": posicao46
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Salvo com sucesso')
+                        location.reload()
+                    }
+                })
+                .catch((error) => {
+                    alert(error.response.data)
+                });
+        }
+        else if (rodada == "24") {
+            await apiC.post("copa/cadastrar_placar", {
+                "placar1": resultado47,
+                "id1": posicao47,
+                "placar2": resultado48,
+                "id2": posicao48
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Salvo com sucesso')
+                        location.reload()
+                    }
+                })
+                .catch((error) => {
+                    alert(error.response.data)
+                });
+        }
     }
 
 
@@ -979,6 +1109,7 @@ export default function SuperCopa() {
             setItens(JSON.parse(JSON.stringify(itensVar)))
         }
     }
+    
 
     async function cadastraTimeSemifinais() {
         let enviarBanco = []
@@ -995,6 +1126,26 @@ export default function SuperCopa() {
         })
             .catch((error) => {
                 alert('Erro ao cadastrar times')
+            });
+
+
+    }
+
+    async function cadastraTimeTerceiroLugar() {
+
+        let enviarBanco = []
+        enviarBanco.push(time1t, time2t)
+
+        await apiC.post("copa/cadastrarTime", {
+            "nome": enviarBanco,
+            "tamanho": enviarBanco.length
+        }).then(response => {
+            alert("Times do terceiro lugar cadastrados com sucesso")
+            verificaSeTemTimeCadastrado()
+            setTerceiro(false)
+        })
+            .catch((error) => {
+                alert('Erro ao cadastrar times do terceiro lugar')
             });
 
 
@@ -1048,13 +1199,17 @@ export default function SuperCopa() {
         setFinais(true)
     }
 
+    async function mostrarTerceiro() {
+        setTerceiro(true)
+    }
+
 
     async function limpar() {
         await apiC.post("copa/limpar")
-        .then(response => {
-            alert("Dados deletados com sucesso")
-            location.reload()
-        })
+            .then(response => {
+                alert("Dados deletados com sucesso")
+                location.reload()
+            })
             .catch((error) => {
                 alert('Erro ao deletar dados')
             });
@@ -1070,7 +1225,7 @@ export default function SuperCopa() {
             <Button className="limpar-copa" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
-           
+
             {semifinais &&
                 <h1>Informe os times abaixo em ordem de disputa</h1>
             }
@@ -1091,6 +1246,29 @@ export default function SuperCopa() {
             }
             {finais &&
                 <Button className="btn-filtro-arquivo" onClick={(e) => cadastraTimeFinais()}>
+                    <div>Enviar times digitados</div>
+                </Button>
+            }
+
+
+
+{terceiro &&
+                <h1>Informe os times que disputaam o terceiro lugar em ordem de disputa</h1>
+            }
+            {terceiro &&
+                <Form.Control
+                    onChange={e => { setTime1t(e.target.value) }}
+                    value={time1t}
+                />
+            }
+            {terceiro &&
+                <Form.Control
+                    onChange={e => { setTime2t(e.target.value) }}
+                    value={time2t}
+                />
+            }
+            {terceiro &&
+                <Button className="btn-filtro-arquivo" onClick={(e) => cadastraTimeTerceiroLugar()}>
                     <div>Enviar times digitados</div>
                 </Button>
             }
@@ -1139,49 +1317,49 @@ export default function SuperCopa() {
             {mostrarVencedores &&
                 <div><h3 className="copa"> Raiden é Campeão do campeonato Noriano de 2024 </h3></div>
             }
-                             {mostrarVencedores &&
-                <div><h3 className="copa1"> Abaixo os jogadores campeões </h3></div>        
-            }
-             {mostrarVencedores &&
-                <h5 className="copa2"> Raul </h5>       
-            }
-             {mostrarVencedores &&
-                <h5 className="copa3"> Wilham </h5>       
+            {mostrarVencedores &&
+                <div><h3 className="copa1"> Abaixo os jogadores campeões </h3></div>
             }
             {mostrarVencedores &&
-                <h5 className="copa4"> Mathias </h5>       
+                <h5 className="copa2"> Raul </h5>
             }
             {mostrarVencedores &&
-                <h5 className="copa5"> Mostarda </h5>       
+                <h5 className="copa3"> Wilham </h5>
             }
             {mostrarVencedores &&
-                <div><h3 className="copa6"> Abaixo os jogadores vices campeões </h3></div>        
-            }
-             {mostrarVencedores &&
-                <div><h5 className="copa7"> Crystal </h5></div>        
-            }
-             {mostrarVencedores &&
-                <div><h5 className="copa8"> Thanos </h5></div>        
-            }
-             {mostrarVencedores &&
-                <div><h5 className="copa9"> Pente Laranja </h5></div>        
+                <h5 className="copa4"> Mathias </h5>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa10"> Buzz </h5></div>        
-            }
-             {mostrarVencedores &&
-                <div><h3 className="copa11"> Abaixo os melhores jogadores do campeonato </h3></div>        
+                <h5 className="copa5"> Mostarda </h5>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa12"> 1º Wilham </h5></div>        
+                <div><h3 className="copa6"> Abaixo os jogadores vices campeões </h3></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa13"> 2º Raul </h5></div>        
+                <div><h5 className="copa7"> Crystal </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa14"> 3º Pente Cinza </h5></div>        
+                <div><h5 className="copa8"> Thanos </h5></div>
             }
-           
+            {mostrarVencedores &&
+                <div><h5 className="copa9"> Pente Laranja </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa10"> Buzz </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h3 className="copa11"> Abaixo os melhores jogadores do campeonato </h3></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa12"> 1º Wilham </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa13"> 2º Raul </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="copa14"> 3º Pente Cinza </h5></div>
+            }
+
             <h3 className='semifinal'>Semifinal</h3>
 
             <Form.Group>
@@ -1357,17 +1535,17 @@ export default function SuperCopa() {
                                 <div>Enviar</div>
                             </Button>
                         }
-                         {prorrogacao5 &&
-                        <Form.Control
-                        //data
-                        name="VALOR_MIN"
-                        className="formato-data campo-texto-cor-3"
-                        type="text"
-                        maxLength="4"
-                        value={data19}
-                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
-                        placeholder="Time"
-                    />
+                        {prorrogacao5 &&
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data19}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
 
                         }
                     </div>
@@ -1479,7 +1657,7 @@ export default function SuperCopa() {
                                 placeholder="Time"
                             />
                             <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
-                            <Button className="btn-filtro-arqui" onClick={(e) => { cadastrarTimes("12"); mostrarFinalistas() }}>
+                            <Button className="btn-filtro-arqui" onClick={(e) => { cadastrarTimes("12"); mostrarFinalistas();  mostrarTerceiro()}}>
                                 <div>Enviar</div>
                             </Button>
                             <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao6(!prorrogacao6)}>
@@ -1547,20 +1725,213 @@ export default function SuperCopa() {
                                 <div>Enviar</div>
                             </Button>
                         }
-                         {prorrogacao6 &&
-                        <Form.Control
-                        //data
-                        name="VALOR_MIN"
-                        className="formato-data campo-texto-cor-3"
-                        type="text"
-                        maxLength="4"
-                        value={data20}
-                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
-                        placeholder="Time"
-                    />
+                        {prorrogacao6 &&
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data20}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
 
                         }
                     </div>
+                </div>
+
+            </Form.Group>
+            <h3 className='final'>3º Lugar</h3>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar29}
+                                placeholder="Placar"
+                                onChange={e => setPlacar29(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1t}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar30}
+                                placeholder="Placar"
+                                onChange={e => setPlacar30(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2t}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("22")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data22}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        </div>
+
+                    </div>
+                </div>
+
+            </Form.Group>
+            <Form.Group>
+                <div className="filtros-texto-linha-margin">
+                    <div className="col-sm">
+                        <div className="d-flex">
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar31}
+                                placeholder="Placar"
+                                onChange={e => setPlacar31(e.target.value)}
+                            />
+                            {/* <div className="x">X</div> */}
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2t}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+
+                            <Form.Control
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placar32}
+                                placeholder="Placar"
+                                onChange={e => setPlacar32(e.target.value)}
+                            />
+                            <Form.Control
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1t}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                            <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("23")}>
+                                <div>Enviar</div>
+                            </Button>
+                            <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao8(!prorrogacao8)}>
+                                <div>Fazer Prorrogação</div>
+                            </Button>
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data23}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                        </div>
+                        {prorrogacao8 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao43}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao43(e.target.value)}
+                            />
+                        }
+                        {prorrogacao8 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1t}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao8 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao44}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao44(e.target.value)}
+                            />
+                        }
+                        {prorrogacao8 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2t}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao8 &&
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("24")}>
+                                <div>Enviar</div>
+                            </Button>
+                        }
+                        {prorrogacao8 &&
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data24}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+
+                        }
+                    </div>
+
                 </div>
 
             </Form.Group>
@@ -1686,70 +2057,70 @@ export default function SuperCopa() {
                                 // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
                                 placeholder="Time"
                             />
-                          
+
                         </div>
                         {prorrogacao7 &&
-                                <Form.Control
-                                    //prorrogação placar
-                                    name="CIFRAO_VALOR_MIN"
-                                    className="filtros-cifrao campo-texto-cor-3"
-                                    type="text"
-                                    value={placarProrrogacao41}
-                                    placeholder="Placar"
-                                    onChange={e => setPlacarProrrogacao41(e.target.value)}
-                                />
-                            }
-                            {prorrogacao7 &&
-                                <Form.Control
-                                    //prorrogação time
-                                    name="VALOR_MIN"
-                                    className="filtros-iccid-valor-min campo-texto-cor-3"
-                                    type="text"
-                                    maxLength="4"
-                                    value={time1f}
-                                    // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
-                                    placeholder="Time"
-                                />
-                            }
-                            {prorrogacao7 &&
-                                <Form.Control
-                                    //prorrogação placar
-                                    name="CIFRAO_VALOR_MIN"
-                                    className="filtros-cifrao campo-texto-cor-3"
-                                    type="text"
-                                    value={placarProrrogacao42}
-                                    placeholder="Placar"
-                                    onChange={e => setPlacarProrrogacao42(e.target.value)}
-                                />
-                            }
-                            {prorrogacao7 &&
-                                <Form.Control
-                                    //prorrogação time
-                                    name="VALOR_MIN"
-                                    className="filtros-iccid-valor-min campo-texto-cor-3"
-                                    type="text"
-                                    maxLength="4"
-                                    value={time2f}
-                                    // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
-                                    placeholder="Time"
-                                />
-                            }
-                            {prorrogacao7 &&
-                                <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("21")}>
-                                    <div>Enviar</div>
-                                </Button>
-                            }
-                             {prorrogacao7 &&
-                        <Form.Control
-                        //data
-                        name="VALOR_MIN"
-                        className="formato-data campo-texto-cor-3"
-                        type="text"
-                        maxLength="4"
-                        value={data21}
-                        // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
-                        placeholder="Time"
-                    />
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao41}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao41(e.target.value)}
+                            />
+                        }
+                        {prorrogacao7 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time1f}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao7 &&
+                            <Form.Control
+                                //prorrogação placar
+                                name="CIFRAO_VALOR_MIN"
+                                className="filtros-cifrao campo-texto-cor-3"
+                                type="text"
+                                value={placarProrrogacao42}
+                                placeholder="Placar"
+                                onChange={e => setPlacarProrrogacao42(e.target.value)}
+                            />
+                        }
+                        {prorrogacao7 &&
+                            <Form.Control
+                                //prorrogação time
+                                name="VALOR_MIN"
+                                className="filtros-iccid-valor-min campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={time2f}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
+                        }
+                        {prorrogacao7 &&
+                            <Button className="btn-filtro-arqui" onClick={(e) => cadastrarTimes("21")}>
+                                <div>Enviar</div>
+                            </Button>
+                        }
+                        {prorrogacao7 &&
+                            <Form.Control
+                                //data
+                                name="VALOR_MIN"
+                                className="formato-data campo-texto-cor-3"
+                                type="text"
+                                maxLength="4"
+                                value={data21}
+                                // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
+                                placeholder="Time"
+                            />
 
                         }
                     </div>
