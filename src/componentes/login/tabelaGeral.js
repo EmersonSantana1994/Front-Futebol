@@ -15,6 +15,13 @@ export default function TabelaGeral() {
     const navigate = useNavigate();
     const [aviso, setAviso] = useState(false);
     const [tabela, setTabela] = useState(false);
+    const [pesquisar, setPesquisar] = useState('');
+    const [buscarPorJogador, setBuscarPorJogador] = useState(false);
+    const [buscarPorTime, setBuscarPorTime] = useState(false);
+    const [buscarPorLiga, setBuscarPorLiga] = useState(false);
+    const [buscarPorGols, setBuscarPorGols] = useState(false);
+    const [buscarPorPosicao, setBuscarPorPosicao] = useState(false);
+    const [buscarPorNacionalidade, setBuscarNacionalidade] = useState(false);
     let contador = 0
     let itensVar = []
     let token = JSON.parse(localStorage.getItem("keyToken"))
@@ -81,6 +88,11 @@ export default function TabelaGeral() {
 
         }
 
+    }
+
+    async function limpar() {
+        itensVar = []
+        setItens([])
     }
 
     // ABAIXO SÃO AS COLUNAS DE ACORDO COM O ARQUIVO ENVIADO (A TAMBÉM OS ID DE CADA DADO)
@@ -180,6 +192,16 @@ export default function TabelaGeral() {
         },
 
         {
+            sort: true,
+            text: <p>
+                -     -
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+
+        {
             dataField: 'pais',
             headerClasses: 'nao-selecionavel',
             sort: true,
@@ -223,25 +245,25 @@ export default function TabelaGeral() {
     ]
 
     const selecaoLinhas = {
-        mode: 'radio' ,
+        mode: 'radio',
         onSelect: (row, isSelect, rowIndex, e) => {
-            if(isSelect){
+            if (isSelect) {
                 handleSelecionar(row.id)
-            }else{
+            } else {
                 handleDesselecionar(row.id)
             }
         },
         onSelectAll: (isSelect, rows, e) => {
-            if(isSelect){
+            if (isSelect) {
                 handleSelecionarTodos()
-            }else{
+            } else {
                 handleDesselecionarTodos()
             }
         },
         selectionRenderer: ({ mode, ...rest }) => {
             return (
                 <>
-                    <input type={mode} class="input-checkbox-simcard" { ...rest }/>
+                    <input type={mode} class="input-checkbox-simcard" {...rest} />
                     <label class="label-checkbox-simcard"></label>
                 </>
             )
@@ -249,7 +271,7 @@ export default function TabelaGeral() {
         selectionHeaderRenderer: ({ mode, ...rest }) => {
             return (
                 <>
-                    <input type={mode} class="input-checkbox-header-simcard" { ...rest }/>
+                    <input type={mode} class="input-checkbox-header-simcard" {...rest} />
                     <label class="label-checkbox-header-simcard"></label>
                 </>
             )
@@ -257,18 +279,18 @@ export default function TabelaGeral() {
         bgColor: 'row-index-bigger-than-2101'
     };
 
-    function handleSelecionar(simcard){
+    function handleSelecionar(simcard) {
         for (let i = 0; i < itens.length; i++) {
-            if (itens[i].id == simcard){
+            if (itens[i].id == simcard) {
                 dadosSelecionados.push(itens[i].id);
                 break;
             }
-    }
+        }
     }
 
-    function handleDesselecionar(simcard){
+    function handleDesselecionar(simcard) {
         for (let i = 0; i < dadosSelecionados.length; i++) {
-            if (dadosSelecionados[i] == simcard){
+            if (dadosSelecionados[i] == simcard) {
                 dadosSelecionados.splice(i, 1);
                 break;
             }
@@ -276,9 +298,103 @@ export default function TabelaGeral() {
     }
 
 
-    function handleDesselecionarTodos(){
+    function handleDesselecionarTodos() {
+    }
+    //verifica se os radios butons estao ativos
+    function handlerCheck(element, nome) {
+        // filtros.map((item))
+        if (filtros[element] == nome) {
+            return true
+        }
+        else {
+            return false
+        }
     }
 
+    async function pesquisa() {
+
+        if (buscarPorJogador) {
+            await limpar()
+            await apiC.post("tabela/pesquisar", {
+                "pesquisa": pesquisar,
+                "tipo": "jogador",
+            })
+                .then(response => {
+                    inserirData(response.data)
+                })
+                .catch((error) => {
+                    alert("erro ao pesquisar")
+                })
+            setBuscarPorJogador(false)
+        } else if (buscarPorGols) {
+            await limpar()
+            await apiC.post("tabela/pesquisar", {
+                "pesquisa": pesquisar,
+                "tipo": "gols",
+            })
+                .then(response => {
+                    inserirData(response.data)
+                })
+                .catch((error) => {
+                    alert("erro ao pesquisar")
+                })
+            setBuscarPorGols(false)
+        } else if (buscarPorLiga) {
+            await limpar()
+            await apiC.post("tabela/pesquisar", {
+                "pesquisa": pesquisar,
+                "tipo": "liga",
+            })
+                .then(response => {
+                    inserirData(response.data)
+                })
+                .catch((error) => {
+                    alert("erro ao pesquisar")
+                })
+            setBuscarPorLiga(false)
+        } else if (buscarPorNacionalidade) {
+            await limpar()
+            await apiC.post("tabela/pesquisar", {
+                "pesquisa": pesquisar,
+                "tipo": "nacionalidade",
+            })
+                .then(response => {
+                    inserirData(response.data)
+                })
+                .catch((error) => {
+                    alert("erro ao pesquisar")
+                })
+            setBuscarNacionalidade(false)
+        } else if (buscarPorPosicao) {
+            await  limpar()
+            await apiC.post("tabela/pesquisar", {
+                "pesquisa": pesquisar,
+                "tipo": "posicao",
+            })
+                .then(response => {
+                    inserirData(response.data)
+                })
+                .catch((error) => {
+                    alert("erro ao pesquisar")
+                })
+            setBuscarPorPosicao(false)
+        } else if (buscarPorTime) {
+            await  limpar()
+            await apiC.post("tabela/pesquisar", {
+                "pesquisa": pesquisar,
+                "tipo": "time",
+            })
+                .then(response => {
+                    inserirData(response.data)
+                })
+                .catch((error) => {
+                    alert("erro ao pesquisar")
+                })
+            setBuscarPorTime(false)
+        } else {
+            alert('selecione um item para buscar')
+        }
+    }
 
     return (
 
@@ -296,6 +412,40 @@ export default function TabelaGeral() {
             {aviso &&
                 <h1>Carregando tabela...</h1>
             }
+            <Form.Group>
+                <Form.Control
+                    onChange={e => { setPesquisar(e.target.value) }}
+                    value={pesquisar}
+                    className='pesquisa'
+                />
+                <Button className="pesquisa" onClick={(e) => pesquisa()}>
+                    <div>Pesquisar</div>
+                </Button>
+                <label className="label-radio-filtros-plano fonte-cor-16">Jogador
+                    {<input type="radio" id="PLANO_TIPO_COMPARTILHADO" name="PLANO_TIPO" value="Compartilhado" onChange={() => { setBuscarPorJogador(true) }} />}
+                    <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+                <label className="label-radio-filtros-plano-b fonte-cor-16">Time
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorTime(true) }} />}
+                    <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+                <label className="label-radio-filtros-plano-b fonte-cor-16">Liga
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorLiga(true) }} />}
+                    <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+                <label className="label-radio-filtros-plano-b fonte-cor-16">Gols
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorGols(true) }} />}
+                    <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+                <label className="label-radio-filtros-plano-b fonte-cor-16">Posição
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorPosicao(true) }} />}
+                    <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+                <label className="label-radio-filtros-plano-b fonte-cor-16">Nacionalidade
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarNacionalidade(true) }} />}
+                    <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+            </Form.Group>
             {tabela &&
                 <div className="lado">
                     <div>
@@ -307,7 +457,7 @@ export default function TabelaGeral() {
                             data={itens}
                             columns={colunas}
                             bootstrap4={true}
-                            selectRow={ selecaoLinhas }
+                            selectRow={selecaoLinhas}
                             bordered={false}
                         />
                     </div>

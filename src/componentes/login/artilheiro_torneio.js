@@ -377,7 +377,7 @@ export default function ArtilheiroTorneio() {
     }
 
     const selecaoLinhas = {
-        mode: 'checkbox',
+        mode: 'radio',
         onSelect: (row, isSelect, rowIndex, e) => {
             if (isSelect) {
                 handleSelecionar(row.nome)
