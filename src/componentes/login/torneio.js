@@ -732,7 +732,6 @@ export default function Torneio() {
             setPlacar2('')
         }
         if (placar2 == "3" && placar3 == "2" && rod == "3") {
-            console.log("6666666666")
             VerificaParaAtualizaTime(timesSorteadosArray2, 1, 1, timesSorteadosArray3)
             setPlacar3('')
             setPlacar2('')
@@ -746,7 +745,6 @@ export default function Torneio() {
             setPlacar2('')
         }
         if (placar2 == "3" && placar4 == "2" && rod == "2") {
-            console.log("77777777777")
             VerificaParaAtualizaTime(timesSorteadosArray2, 1, 1, timesSorteadosArray4)
             setPlacar4('')
             setPlacar2('')
@@ -760,7 +758,6 @@ export default function Torneio() {
             setPlacar2('')
         }
         if (placar3 == "3" && placar1 == "2" && rod == "2") {
-            console.log("88888888888", placar1)
             VerificaParaAtualizaTime(timesSorteadosArray3, 1, 1, timesSorteadosArray1)
             setPlacar3('')
             setPlacar1('')
@@ -774,7 +771,6 @@ export default function Torneio() {
             setPlacar1('')
         }
         if (placar3 == "3" && placar2 == "2" && rod == "3") {
-            console.log("999999999999")
             placarTime3 = placarTime3 + 1
             VerificaParaAtualizaTime(timesSorteadosArray3, 1, 1, timesSorteadosArray2)
             setPlacar3('')
@@ -791,7 +787,6 @@ export default function Torneio() {
             setPlacar2('')
         }
         if (placar3 == "3" && placar4 == "2" && rod == "1") {
-            console.log("ddddddddddd")
             placarTime3 = placarTime3 + 1
             VerificaParaAtualizaTime(timesSorteadosArray3, 1, 1, timesSorteadosArray4)
             setPlacar3('')
@@ -808,7 +803,6 @@ export default function Torneio() {
             setPlacar4('')
         }
         if (placar4 == "3" && placar1 == "2" && rod == "3") {
-            console.log("çççççççççç")
             placarTime4 = placarTime4 + 1
             VerificaParaAtualizaTime(timesSorteadosArray4, 1, 1, timesSorteadosArray1)
             setPlacar1('')
@@ -825,7 +819,6 @@ export default function Torneio() {
             setPlacar4('')
         }
         if (placar4 == "3" && placar2 == "2" && rod == "2") {
-            console.log("bbbbbbbbbb")
             placarTime4 = placarTime4 + 1
             VerificaParaAtualizaTime(timesSorteadosArray4, 1, 1, timesSorteadosArray2)
             setPlacar2('')
@@ -871,8 +864,6 @@ export default function Torneio() {
         let idPlacar = []
         await apiC.post("torneio/verificar")
             .then(response => {
-                console.log("rrrrrrr", response.data[0].id)
-                console.log("ttttttt", p1)
                 for (let i = 0; i < response.data.length; i++) {
                     if (i == p1) {
                         idPlacar.push(response.data[i].id)
@@ -889,7 +880,7 @@ export default function Torneio() {
             })
             .catch((error) => {
             });
-        console.log("yyyyyyyyy", idPlacar)
+
 
 
         await apiC.post("torneio/deletarPlacar", {

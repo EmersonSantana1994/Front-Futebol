@@ -621,7 +621,7 @@ export default function SuperCopa() {
                 }
             })
             .catch((error) => {
-                alert(console.log("eroororooro", error))
+                console.log("eroororooro", error)
             });
         if (rodada == "1") {
             await apiC.post("copa/cadastrar_placar", {

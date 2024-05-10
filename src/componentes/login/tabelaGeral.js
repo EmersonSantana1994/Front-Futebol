@@ -225,7 +225,6 @@ export default function TabelaGeral() {
     const selecaoLinhas = {
         mode: 'radio' ,
         onSelect: (row, isSelect, rowIndex, e) => {
-            console.log("eeeeee", row )
             if(isSelect){
                 handleSelecionar(row.id)
             }else{

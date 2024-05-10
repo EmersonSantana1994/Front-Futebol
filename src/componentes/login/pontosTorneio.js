@@ -176,7 +176,6 @@ export default function PontosTorneio() {
                     console.log("erro ", error)
                 });
         } else if (novoNome == '' && novoPontos != '') {
-            console.log("mmmmmmmmm", novoPontos)
             await apiC.post("pontos_torneio/alterar_pontos", {
                 "id": idParaAlterar,
                 "pontos": novoPontos,

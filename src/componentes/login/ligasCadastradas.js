@@ -87,7 +87,6 @@ useEffect(() => {
                             k++
                         }
                     }
-                    console.log("eu sou otariaaaaaaa", itensVar )
                     setItens(JSON.parse(JSON.stringify(itensVar)))
                 }
                 
@@ -245,7 +244,6 @@ useEffect(() => {
            
                     <div>
                     <h3>Ligas</h3>
-                    {console.log("llllllv ", itens )}
                         <BootstrapTable
                             hover={true}
                             classes="tabela"

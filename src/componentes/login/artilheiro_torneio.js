@@ -26,6 +26,7 @@ export default function ArtilheiroTorneio() {
     let token = JSON.parse(localStorage.getItem("keyToken"))
     const [resultado, setResultado] = useState(false);
     const [mostrarTime, setMostrarTime] = useState(false);
+    const [buscando, setBuscando] = useState(false);
     let totalItens = 0
     let contador = 0
     let itensVar = []
@@ -80,7 +81,6 @@ export default function ArtilheiroTorneio() {
                     k++
                 }
             }
-            console.log("uuuuuuu", itensVar)
             setItens2(JSON.parse(JSON.stringify(itensVar)))
         }
     }
@@ -178,48 +178,52 @@ export default function ArtilheiroTorneio() {
     async function handleDeletar() {
         setMensagem('Deletando..')
 
-            await apiC.post("artilheiro/delete/torneio")
-                .then(response => {
-                    if (response.status === 200) {
-                        location.reload()
-                    }
-                })
-                .catch((error) => {
-                    setMensagem('erro ao deletar jogadores')
-                    alert('erro ao deletar jogadores')
-                    setCarregando(false)
-                });
-        
+        await apiC.post("artilheiro/delete/torneio")
+            .then(response => {
+                if (response.status === 200) {
+                    location.reload()
+                }
+            })
+            .catch((error) => {
+                setMensagem('erro ao deletar jogadores')
+                alert('erro ao deletar jogadores')
+                setCarregando(false)
+            });
+
 
 
     }
 
     async function limpar() {
-            await apiC.post("placar/limpar")
-                .then(response => {
-                    if (response.status === 200) {
-                        setMensagem('Placar limpado')
-                        location.reload()
-                    }
-                })
-                .catch((error) => {
-                    setMensagem('erro ao limpar placar')
-                    alert('erro ao limpar placar')
-                });
-        
+        await apiC.post("placar/limpar")
+            .then(response => {
+                if (response.status === 200) {
+                    setMensagem('Placar limpado')
+                    location.reload()
+                }
+            })
+            .catch((error) => {
+                setMensagem('erro ao limpar placar')
+                alert('erro ao limpar placar')
+            });
+
 
     }
 
-    async function pesquisaTime() {
+    async function limpandoNomes() {
+        itensVar = []
+        setItens2([])
+        setBuscando(true)
+    }
 
+    async function pesquisaTime() {
+        limpandoNomes()
         await apiC.post("cadastrar/pesquisar", {
             "time": pesquisarTime,
-            headers: {
-                'x-access-token': token,
-            }
         })
             .then(response => {
                 if (response.status === 200) {
+                    setBuscando(false)
                     inserirData2(response.data.result)
                     if (response.data.result.length == 0) {
                         setResultado(true)
@@ -232,8 +236,8 @@ export default function ArtilheiroTorneio() {
                 }
             })
             .catch((error) => {
-
-                    alert(error.response.data)
+                setBuscando(false)
+                alert(error.response.data)
 
             });
     }
@@ -351,7 +355,6 @@ export default function ArtilheiroTorneio() {
 
 
     function handleSelecionar(nome) {
-        console.log("rrrrrrrrrrrr", nome)
         setNomeJogador(nome);
     }
 
@@ -482,42 +485,47 @@ export default function ArtilheiroTorneio() {
             <Form.Control className="label-placar2"
                 value={placar2}
             />
-        
+
             <Button className="limpar-placar" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
-            
+
             <h1 className='pesquisa'>Pesquise aqui o time</h1>
-                <Form.Control
-                    onChange={e => { setPesquisarTime(e.target.value) }}
-                    value={pesquisarTime}
-                    className='pesquisa'
-                />
-                <Button className="pesquisa" onClick={(e) => pesquisaTime()}>
-                    <div>Pesquisar</div>
-                </Button>
-                {resultado &&
-                    <div className='pesquisa'>
-                        <h3>Nenhum resultado encontrado</h3>
-                    </div>
+            <Form.Control
+                onChange={e => { setPesquisarTime(e.target.value) }}
+                value={pesquisarTime}
+                className='pesquisa'
+            />
+            <Button className="pesquisa" onClick={(e) => pesquisaTime()}>
+                <div>Pesquisar</div>
+            </Button>
+            {resultado &&
+                <div className='pesquisa'>
+                    <h3>Nenhum resultado encontrado</h3>
+                </div>
+            }
 
-                }
-{console.log("rrrrr", itens2)}
-                {mostrarTime &&
-                    <div className='pesquisa'>
-                        <BootstrapTable
-                            hover={true}
-                            classes="tabela"
-                            condensed={true}
-                            keyField='id_time'
-                            data={itens2}
-                            columns={colunasTimes}
-                            bootstrap4={true}
-                            bordered={false}
-                        />
-                    </div>
+            {buscando &&
+                <div className='pesquisa'>
+                    <h3>Buscando, aguarde..</h3>
+                </div>
+            }
 
-                }
+            {mostrarTime &&
+                <div className='pesquisa'>
+                    <BootstrapTable
+                        hover={true}
+                        classes="tabela"
+                        condensed={true}
+                        keyField='id_time'
+                        data={itens2}
+                        columns={colunasTimes}
+                        bootstrap4={true}
+                        bordered={false}
+                    />
+                </div>
+
+            }
         </>
     )
 }

@@ -59,7 +59,6 @@ export default function TimesCadastrados() {
             }
         },
         onSelectAll: (isSelect, rows, e) => {
-            console.log("oooooo")
             if (isSelect) {
                 // handleSelecionarTodos()
             } else {
@@ -158,7 +157,6 @@ export default function TimesCadastrados() {
 
             await apiC.post("torneio/buscar")
                 .then(response => {
-                    console.log("eeeeeeeeeeeeeeee", response)
                     if (response.status === 200) {
                         if (response.data.length > 0) {
                             inserirDatat(response.data, "1")

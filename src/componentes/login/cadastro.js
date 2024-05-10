@@ -242,7 +242,6 @@ export default function Cadastro() {
                 <Button className="btn-filtro-arquivo" onClick={(e) => pesquisaTime()}>
                     <div>Pesquisar</div>
                 </Button>
-                {console.log("aaaaaaaaaaaa", itens)}
 
                 {resultado &&
                     <div>

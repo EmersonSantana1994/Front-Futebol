@@ -138,7 +138,6 @@ export default function TimesCadastrados() {
                 }
             })
                 .then(response => {
-                    console.log("ffffffffffff", response.data)
                     setTime1(response.data[0].nome)
                     setTime2(response.data[1].nome)
                     setTime3(response.data[2].nome)
@@ -156,7 +155,6 @@ export default function TimesCadastrados() {
                     setTime15(response.data[14].nome)
                     setTime16(response.data[15].nome)
                     if (response.status === 200) {
-                        console.log("nnnnnnn")
                         async function times() {
                             await apiC.post("listar/jogadores", {
                                 time: response.data[0].nome,
@@ -166,7 +164,6 @@ export default function TimesCadastrados() {
                             })
                                 .then(response => {
                                     if (response.status === 200) {
-                                        console.log("alexxxxxxxxxx")
                                         inserirData(response.data, "1")
                                     }
                                 })
@@ -339,7 +336,6 @@ export default function TimesCadastrados() {
 
     // FUNÇÃO ABAIXO TEM O DEVER DE SALVAR OS DADOS TRAZIDOS DO BANCO PARA SEREM APRESENTADOS NA TABELA
     function inserirData(data, time) {
-        console.log("nnnnn", data)
         for (let i = 0; i < data.length; i++) {
          
                 if (time == "1") {
@@ -359,7 +355,6 @@ export default function TimesCadastrados() {
                             k++
                         }
                     }
-                   console.log("uuuuuuu", itensVar)
                     setItens2(JSON.parse(JSON.stringify(itensVar2)))
                 } 
                 else if (time == "3") {
