@@ -95,6 +95,33 @@ export default function TabelaGeral() {
         setItens([])
     }
 
+    async function limparDados() {
+        await limpar()
+        setBuscarNacionalidade(false)
+        setBuscarPorGols(false)
+        setBuscarPorJogador(false)
+        setBuscarPorLiga(false)
+        setBuscarPorTime(false)
+        setAviso(true)
+        await apiC.post("listar/todos", {
+            headers: {
+                'x-access-token': token,
+            }
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    setAviso(false)
+                    inserirData(response.data)
+                    setTabela(true)
+                }
+            })
+            .catch((error) => {
+                alert(error.response.data)
+
+            });
+    }
+    
+
     // ABAIXO SÃO AS COLUNAS DE ACORDO COM O ARQUIVO ENVIADO (A TAMBÉM OS ID DE CADA DADO)
 
     const colunas = [
@@ -421,26 +448,35 @@ export default function TabelaGeral() {
                 <Button className="pesquisa" onClick={(e) => pesquisa()}>
                     <div>Pesquisar</div>
                 </Button>
+                <Button className="pesquisa" onClick={(e) => limparDados()}>
+                    <div>Limpar</div>
+                </Button>
+                ---
                 <label className="label-radio-filtros-plano fonte-cor-16">Jogador
                     {<input type="radio" id="PLANO_TIPO_COMPARTILHADO" name="PLANO_TIPO" value="Compartilhado" onChange={() => { setBuscarPorJogador(true) }} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
+                ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Time
                     {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorTime(true) }} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
+                ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Liga
                     {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorLiga(true) }} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
+                ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Gols
                     {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorGols(true) }} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
+                ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Posição
                     {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorPosicao(true) }} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
+                ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Nacionalidade
                     {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarNacionalidade(true) }} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
