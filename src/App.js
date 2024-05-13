@@ -24,6 +24,7 @@ import SuperCopa from './componentes/login/superCopa';
 import Copa from './componentes/login/copa';
 import CadastrarFoto from './componentes/login/cadastrarFoto';
 import ArtilheiroTorneio from './componentes/login/artilheiro_torneio';
+import Dono from './componentes/login/dono';
 
 
 
@@ -56,6 +57,7 @@ function App() {
         <Route path='/copa' element={<Copa />} />
         <Route path='/cadastrarFoto' element={<CadastrarFoto />} />
         <Route path='/artilheiroTorneio' element={<ArtilheiroTorneio />} />
+        <Route path='/dono' element={<Dono/>} />
       </Routes>
       </BrowserRouter>
     </div>

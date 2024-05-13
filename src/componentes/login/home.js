@@ -145,10 +145,13 @@ export default function Home() {
                 <div>Cadastrar Pontos do Torneio</div>
             </Button>
 
-
             <h1>Cadastrar foto</h1>
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/cadastrarFoto')}>
                 <div>Cadastrar foto</div>
+            </Button>
+            <h1>Alterar dono do time</h1>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/dono')}>
+                <div>Alterar dono do time</div>
             </Button>
         </>
 
