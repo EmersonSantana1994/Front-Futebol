@@ -1590,11 +1590,9 @@ export default function Torneio() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
+            -----
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/artilheiroTorneio')}>
                 <div>Artilheiro</div>
-            </Button>
-            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/cadastro')}>
-                <div>Cadastro</div>
             </Button>
             {carregando &&
                 <h1>carregando..</h1>

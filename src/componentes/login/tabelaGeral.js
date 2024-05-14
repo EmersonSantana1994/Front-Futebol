@@ -22,6 +22,9 @@ export default function TabelaGeral() {
     const [buscarPorGols, setBuscarPorGols] = useState(false);
     const [buscarPorPosicao, setBuscarPorPosicao] = useState(false);
     const [buscarPorNacionalidade, setBuscarNacionalidade] = useState(false);
+    const [voltarCheck, setvoltarCheck] = useState(false);
+
+
     let contador = 0
     let itensVar = []
     let token = JSON.parse(localStorage.getItem("keyToken"))
@@ -102,7 +105,10 @@ export default function TabelaGeral() {
         setBuscarPorJogador(false)
         setBuscarPorLiga(false)
         setBuscarPorTime(false)
+        setBuscarPorPosicao(false)
+        setvoltarCheck(true)
         setAviso(true)
+        setPesquisar('')
         await apiC.post("listar/todos", {
             headers: {
                 'x-access-token': token,
@@ -120,7 +126,7 @@ export default function TabelaGeral() {
 
             });
     }
-    
+
 
     // ABAIXO SÃO AS COLUNAS DE ACORDO COM O ARQUIVO ENVIADO (A TAMBÉM OS ID DE CADA DADO)
 
@@ -271,6 +277,40 @@ export default function TabelaGeral() {
         // }
     ]
 
+    const colunasNaci = [
+        {
+            dataField: 'Gols',
+            headerClasses: 'nao-selecionavel',
+            sort: true,
+            text: <p>
+                Gols
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            sort: true,
+            text: <p>
+                -     -
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            dataField: 'Pais',
+            headerClasses: 'selecionavel',
+            sort: true,
+            text: <p>
+                Pais
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+    ]
+
     const selecaoLinhas = {
         mode: 'radio',
         onSelect: (row, isSelect, rowIndex, e) => {
@@ -338,8 +378,68 @@ export default function TabelaGeral() {
         }
     }
 
-    async function pesquisa() {
+    async function PesquisarJogador() {
+        setBuscarPorJogador(true)
+        setBuscarPorTime(false)
+        setBuscarPorLiga(false)
+        setBuscarPorGols(false)
+        setBuscarPorPosicao(false)
+        setBuscarNacionalidade(false)
+        setvoltarCheck(false)
+    }
 
+    async function PesquisarTime() {
+        setBuscarPorJogador(false)
+        setBuscarPorTime(true)
+        setBuscarPorLiga(false)
+        setBuscarPorGols(false)
+        setBuscarPorPosicao(false)
+        setBuscarNacionalidade(false)
+        setvoltarCheck(false)
+
+    }
+
+    async function PesquisarLiga() {
+        setBuscarPorJogador(false)
+        setBuscarPorTime(false)
+        setBuscarPorLiga(true)
+        setBuscarPorGols(false)
+        setBuscarPorPosicao(false)
+        setBuscarNacionalidade(false)
+        setvoltarCheck(false)
+    }
+
+    async function PesquisarGols() {
+        setBuscarPorJogador(false)
+        setBuscarPorTime(false)
+        setBuscarPorLiga(false)
+        setBuscarPorGols(true)
+        setBuscarPorPosicao(false)
+        setBuscarNacionalidade(false)
+        setvoltarCheck(false)
+    }
+
+    async function PesquisarPosicao() {
+        setBuscarPorJogador(false)
+        setBuscarPorTime(false)
+        setBuscarPorLiga(false)
+        setBuscarPorGols(false)
+        setBuscarPorPosicao(true)
+        setBuscarNacionalidade(false)
+        setvoltarCheck(false)
+    }
+
+    async function PesquisarNacionalidade() {
+        setBuscarPorJogador(false)
+        setBuscarPorTime(false)
+        setBuscarPorLiga(false)
+        setBuscarPorGols(false)
+        setBuscarPorPosicao(false)
+        setBuscarNacionalidade(true)
+        setvoltarCheck(false)
+    }
+
+    async function pesquisa() {
         if (buscarPorJogador) {
             await limpar()
             await apiC.post("tabela/pesquisar", {
@@ -352,7 +452,6 @@ export default function TabelaGeral() {
                 .catch((error) => {
                     alert("erro ao pesquisar")
                 })
-            setBuscarPorJogador(false)
         } else if (buscarPorGols) {
             await limpar()
             await apiC.post("tabela/pesquisar", {
@@ -365,7 +464,6 @@ export default function TabelaGeral() {
                 .catch((error) => {
                     alert("erro ao pesquisar")
                 })
-            setBuscarPorGols(false)
         } else if (buscarPorLiga) {
             await limpar()
             await apiC.post("tabela/pesquisar", {
@@ -378,7 +476,6 @@ export default function TabelaGeral() {
                 .catch((error) => {
                     alert("erro ao pesquisar")
                 })
-            setBuscarPorLiga(false)
         } else if (buscarPorNacionalidade) {
             await limpar()
             await apiC.post("tabela/pesquisar", {
@@ -391,9 +488,8 @@ export default function TabelaGeral() {
                 .catch((error) => {
                     alert("erro ao pesquisar")
                 })
-            setBuscarNacionalidade(false)
         } else if (buscarPorPosicao) {
-            await  limpar()
+            await limpar()
             await apiC.post("tabela/pesquisar", {
                 "pesquisa": pesquisar,
                 "tipo": "posicao",
@@ -404,9 +500,8 @@ export default function TabelaGeral() {
                 .catch((error) => {
                     alert("erro ao pesquisar")
                 })
-            setBuscarPorPosicao(false)
         } else if (buscarPorTime) {
-            await  limpar()
+            await limpar()
             await apiC.post("tabela/pesquisar", {
                 "pesquisa": pesquisar,
                 "tipo": "time",
@@ -417,7 +512,6 @@ export default function TabelaGeral() {
                 .catch((error) => {
                     alert("erro ao pesquisar")
                 })
-            setBuscarPorTime(false)
         } else {
             alert('selecione um item para buscar')
         }
@@ -429,8 +523,22 @@ export default function TabelaGeral() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
-
-
+            ----
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/golsPais')}>
+                <div>Ranking gols por seleção</div>
+            </Button>
+            -----
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/golsLiga')}>
+                <div>Ranking gols por ligas</div>
+            </Button>
+            -----
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/golsTime')}>
+                <div>Ranking gols por time</div>
+            </Button>
+            ---
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/golsPosicao')}>
+                <div>Ranking gols por posicao</div>
+            </Button>
             <div className="lado"></div>
 
             {/* {carregando &&
@@ -453,33 +561,38 @@ export default function TabelaGeral() {
                 </Button>
                 ---
                 <label className="label-radio-filtros-plano fonte-cor-16">Jogador
-                    {<input type="radio" id="PLANO_TIPO_COMPARTILHADO" name="PLANO_TIPO" value="Compartilhado" onChange={() => { setBuscarPorJogador(true) }} />}
+                    {<input type="radio" id="PLANO_TIPO_COMPARTILHADO" name="PLANO_TIPO" value="Compartilhado" onChange={() => { setBuscarPorJogador(true) }} onClick={() => PesquisarJogador()} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
                 ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Time
-                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorTime(true) }} />}
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorTime(true) }} onClick={() => PesquisarTime()} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
                 ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Liga
-                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorLiga(true) }} />}
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorLiga(true) }} onClick={() => PesquisarLiga()} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
                 ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Gols
-                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorGols(true) }} />}
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorGols(true) }} onClick={() => PesquisarGols()} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
                 ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Posição
-                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorPosicao(true) }} />}
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarPorPosicao(true) }} onClick={() => PesquisarPosicao()} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
                 </label>
                 ---
                 <label className="label-radio-filtros-plano-b fonte-cor-16">Nacionalidade
-                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarNacionalidade(true) }} />}
+                    {<input type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" onChange={() => { setBuscarNacionalidade(true) }} onClick={() => PesquisarNacionalidade()} />}
                     <span className="checkbox-filtros-b campo-texto-cor-3"></span>
+                </label>
+                <label className="esconder">Todos
+                    {voltarCheck &&
+                        <input className='esconder' type="radio" id="PLANO_TIPO_INDIVIDUAL" name="PLANO_TIPO" value="Individual" checked />}
+                    <span className="esconder"></span>
                 </label>
             </Form.Group>
             {tabela &&

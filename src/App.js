@@ -25,6 +25,10 @@ import Copa from './componentes/login/copa';
 import CadastrarFoto from './componentes/login/cadastrarFoto';
 import ArtilheiroTorneio from './componentes/login/artilheiro_torneio';
 import Dono from './componentes/login/dono';
+import GolsPais from './componentes/login/golsPais';
+import GolsLiga from './componentes/login/golsLigas';
+import GolsTime from './componentes/login/golsTime';
+import GolsPosicao from './componentes/login/golsPosicao';
 
 
 
@@ -58,6 +62,10 @@ function App() {
         <Route path='/cadastrarFoto' element={<CadastrarFoto />} />
         <Route path='/artilheiroTorneio' element={<ArtilheiroTorneio />} />
         <Route path='/dono' element={<Dono/>} />
+        <Route path='/golsPais' element={<GolsPais/>} />
+        <Route path='/golsLiga' element={<GolsLiga/>} />
+        <Route path='/golsTime' element={<GolsTime/>} />
+        <Route path='/golsPosicao' element={<GolsPosicao/>} />
       </Routes>
       </BrowserRouter>
     </div>

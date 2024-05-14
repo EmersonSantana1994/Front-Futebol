@@ -1222,6 +1222,10 @@ export default function SuperCopa() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
+            ---
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/artilheiroTorneio')}>
+                <div>Artilheiro</div>
+            </Button>
             <Button className="limpar-copa" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
