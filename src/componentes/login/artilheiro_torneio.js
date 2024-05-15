@@ -4,6 +4,7 @@ import { Button, Image, Form, InputGroup, FormControl, Col, Carousel, Alert } fr
 import { apiC } from "../../conexoes/api";
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useNavigate } from 'react-router-dom';
+import  Cronometro  from '../login/cronometro';
 
 export default function ArtilheiroTorneio() {
 
@@ -501,7 +502,7 @@ export default function ArtilheiroTorneio() {
                 value={pesquisarTime}
                 className='pesquisa'
             />
-            <Button className="pesquisa" onClick={(e) => pesquisaTime()}>
+            <Button className="" onClick={(e) => pesquisaTime()}>
                 <div>Pesquisar</div>
             </Button>
             {resultado &&
@@ -531,6 +532,7 @@ export default function ArtilheiroTorneio() {
                 </div>
 
             }
+            <Cronometro/>
         </>
     )
 }

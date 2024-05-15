@@ -29,6 +29,7 @@ import GolsPais from './componentes/login/golsPais';
 import GolsLiga from './componentes/login/golsLigas';
 import GolsTime from './componentes/login/golsTime';
 import GolsPosicao from './componentes/login/golsPosicao';
+import Cronometro from './componentes/login/cronometro';
 
 
 
@@ -66,6 +67,7 @@ function App() {
         <Route path='/golsLiga' element={<GolsLiga/>} />
         <Route path='/golsTime' element={<GolsTime/>} />
         <Route path='/golsPosicao' element={<GolsPosicao/>} />
+        <Route path='/cronometro' element={<Cronometro/>} />
       </Routes>
       </BrowserRouter>
     </div>
