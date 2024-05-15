@@ -71,5 +71,130 @@
     display: none;
 }
 
+.campo-select-filtro-5{
+    border-color: black;
+    border-radius: 5em !important;
+    box-shadow: none !important;
+    display: flex !important;
+    font-family: RobotoRegular !important;
+    font-size: .875em !important;
+    height: 2.4em !important;
+    justify-content: space-between !important;
+    line-height: 1em !important;
+    width: 27% !important;
+    margin-left: -2px;
+    margin-top: 10px;
+}
+
+.campo-texto-select-tamanho-2{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin-top: 4% !important;
+    margin-left: 10% !important;
+    font-size: 23px;
+    font-family: monospace;
+}
+
+.campo-select-icone-ativado{
+    margin-top: 0.15em!important;
+    margin-left: 1em!important;
+    -webkit-transition: 0.5s ease!important;
+    -moz-transition: 0.5s ease!important;
+    -o-transition: 0.5s ease!important;
+    transition: 0.5s ease!important;
+}
+
+.nao-selecionavel {/* NAO DEIXA O TEXTO SER SELECIONAVEL COM O MOUSE */
+    -webkit-touch-callout: none!important;
+      -webkit-user-select: none!important;
+       -khtml-user-select: none!important;
+         -moz-user-select: none!important;
+          -ms-user-select: none!important;
+              user-select: none!important;
+}
+
+.campo-select-icone-desativado-filtro-b{/* CLASSE PARA ROTACIONAR O ICONE DE DROPDOWN QUANDO DESATIVADO */
+    -webkit-transition: 0.5s ease!important;
+    -moz-transition: 0.5s ease!important;
+    -o-transition: 0.5s ease!important;
+    transition: 0.5s ease!important;
+    margin-top: 8px;
+}
+
+
+.campo-select-opcao{/* CLASSE PADRAO PARA OS ITEMS DO SELECT */
+    margin-left: -1.5em !important;
+    width: 150% !important;
+    height: 1.875em !important;
+    line-height: 1.75em !important;
+    cursor: pointer !important;
+}
+
+.campo-select-divisor{/* CLASSE PADRAO PARA AS LINHAS DIVISORIAS ENTRE OS ITEMS DO SELECT */
+    height: 0.0625em !important;
+    width: 28% !important;
+    margin-left: -1.2em !important;
+    /* color: #ab3d3d; */
+    background-color: rgb(58 63 61) !important;
+}
+
+.campo-select-opcao-label{/* CLASSE PADRAO PARA ALINHAR AS LABELS DOS ITEMS DO SELECT */
+    width: 80% !important;
+    margin-left: 1.5em!important;
+    white-space: nowrap !important;
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important;
+}
+
+
+
+.campo-select{/* CLASSE PADRAO PARA CAMPOS SELECT */
+    border-color: blue;
+    border-radius: 5em !important;
+    box-shadow: none !important;
+    display: flex !important;
+    font-family: RobotoRegular !important;
+    font-size: .875em !important;
+    height: 2.4em !important;
+    justify-content: space-between !important;
+    line-height: 1em !important;
+    width: 27% !important;
+    margin-left: -2px;
+    margin-top: 10px;
+}
+
+.label-campo-marca{/* TEXTO DOS TITULOS DOS CAMPOS DO SISTEMA */
+    font-family: RobotoRegular!important;
+    font-size: 1em!important;
+    line-height: 1em!important;
+    margin-top: 6px;
+}
+
+.campo-select-triangulo{/* CLASSE PADRAO PARA POSICIONAR O TRIANGULO QUE AJUDA A DAR FORMA AO CORPO DO SELECT */
+    width: 0!important;
+    height: 0!important;
+    border-top: 0.9375em solid transparent!important;
+    border-left: 0.9375em solid transparent!important;
+    border-right: 0.9375em solid transparent!important;
+    margin-left: 3em!important;
+    margin-top: -0.9em!important;
+}
+
+.campo-select-corpo{/* CLASSE PADRAO PARA O CORPO DO SELECT */
+    width: 100%!important;
+    max-height: 10em!important;
+    z-index: 500 !important;
+    border-radius: 0.3125em!important;
+    overflow-x: hidden!important;
+}
+
+.campo-select-lista{/* CLASSE PADRAO PARA LIMPAR BULLETS DA LISTA DE ITEMS DOS SELECTS */
+    list-style-type: none!important;
+}
+
+
 
 

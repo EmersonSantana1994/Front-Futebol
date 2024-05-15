@@ -4,6 +4,7 @@ import { Button, Image, Form, InputGroup, FormControl, Col, Carousel, Alert } fr
 import { apiC } from "../../conexoes/api";
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useNavigate } from 'react-router-dom';
+import SelectGrupo from '../login/selectGrupo'
 
 export default function Dono() {
 
@@ -21,6 +22,10 @@ export default function Dono() {
     const navigate = useNavigate();
     let contador = 0
     let itensVar = []
+    const [filtroGrupo, setFiltroGrupo] = useState('Selecione')
+    const [resetGrupo, setResetGrupo] = useState(false)
+    const [cdGrupo, setCdGrupo] = useState('')
+    const [revelarSelectGrupo, setRevelarSelectGrupo] = useState(false)
 
     const colunas = [
         {
@@ -94,6 +99,32 @@ export default function Dono() {
          <Button className="btn-filtro-arquivo" onClick={(e) => mudarDono()}>
                         <div>Enviar</div>
                     </Button>
+
+
+
+                    <div className="coluna-alterar-ciclo-vida-1-status-grupo">
+                                    <Form.Label className="fonte-cor-1 label-campo-status-grupo status-contrato-filtro">Grupo</Form.Label>
+                                    <div className="break-4"></div>
+                                    {console.log("resetGrupo", filtroGrupo)}
+                                    <Form.Control name="GRUPO" type="text" value={filtroGrupo == 'Selecione' || resetGrupo ? '' : filtroGrupo} className="esconder" onChange={(e)=> setCdGrupo(e.target.value)}/>
+                                    {revelarSelectGrupo === false &&
+                                        <Button disabled={revelarSelectGrupo !== '' && revelarSelectGrupo !== null && revelarSelectGrupo !== undefined ? false : true} className="campo-texto-cor-3 campo-select-filtro-5" onClick={() => setRevelarSelectGrupo(!revelarSelectGrupo)}>
+                                            <div className="fonte-cor-1 label-campo campo-texto-select-tamanho-2">{resetGrupo ? "Selecione": filtroGrupo.split('*')[0]}</div>
+                                            <img className={revelarSelectGrupo ? "campo-select-icone-ativado nao-selecionavel" : "campo-select-icone-desativado-filtro-b nao-selecionavel"}   />
+                                        </Button>
+                                    }
+                                    {revelarSelectGrupo === true &&
+                                        <SelectGrupo
+                                            rota={"filtroSimcard"}
+                                            setRevelarSelectGrupo={setRevelarSelectGrupo}
+                                            setFiltroGrupo={setFiltroGrupo}
+                                            setCdGrupo={setCdGrupo}
+                                            setResetGrupo={setResetGrupo}
+                                            nomeGrupo={filtroGrupo}
+                                        >
+                                        </SelectGrupo>
+                                    }
+                                </div>
                        
         </>
         
