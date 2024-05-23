@@ -86,15 +86,42 @@
     margin-top: 10px;
 }
 
+.campo-select-filtro-6{
+    border-color: black;
+    border-radius: 5em !important;
+    box-shadow: none !important;
+    display: flex !important;
+    font-family: RobotoRegular !important;
+    font-size: .875em !important;
+    height: 2.4em !important;
+    justify-content: space-between !important;
+    line-height: 1em !important;
+    width: 27% !important;
+    margin-left: -2px;
+    margin-top: 10px;
+}
+
 .campo-texto-select-tamanho-2{
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     width: 100% !important;
     text-align: left !important;
-    margin-top: 4% !important;
+    margin-top: 3% !important;
     margin-left: 10% !important;
-    font-size: 23px;
+    font-size: 17px;
+    font-family: cursive;
+}
+
+.campo-texto-select-tamanho-3{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin-top: 1% !important;
+    margin-left: 2% !important;
+    font-size: 14px;
     font-family: monospace;
 }
 

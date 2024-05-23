@@ -109,23 +109,10 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("6")}>
                 <div>Ligas Cadastrados</div>
             </Button>
-
-            <h1>Cadastro</h1>
-
-            <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("2")}>
-                <div>Cadastro</div>
-            </Button>
-
-
-
-
-
             <h1>Artilheiro da temporada</h1>
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("7")}>
                 <div>Artilheiro</div>
             </Button>
-
-
 
             <h1>Ranking Jogadores</h1>
 
@@ -138,6 +125,13 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("9")}>
                 <div>Ranking Clubes</div>
             </Button>
+            <h1>Cadastro</h1>
+
+            <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("2")}>
+                <div>Cadastro</div>
+            </Button>
+
+
 
             <h1>Cadastrar Pontos do Torneio</h1>
 
@@ -153,6 +147,11 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/dono')}>
                 <div>Alterar dono do time</div>
             </Button>
+            <h1>Donos dos times</h1>
+            <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/listarDono')}>
+                <div>Donos dos times</div>
+            </Button>
+            
         </>
 
 

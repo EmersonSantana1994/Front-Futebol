@@ -30,6 +30,9 @@ import GolsLiga from './componentes/login/golsLigas';
 import GolsTime from './componentes/login/golsTime';
 import GolsPosicao from './componentes/login/golsPosicao';
 import Cronometro from './componentes/login/cronometro';
+import Calculator from './componentes/login/calculadora';
+import ListaDono from './componentes/login/listaDono';
+import Questionario from './componentes/login/heal.js/questionario';
 
 
 
@@ -68,6 +71,9 @@ function App() {
         <Route path='/golsTime' element={<GolsTime/>} />
         <Route path='/golsPosicao' element={<GolsPosicao/>} />
         <Route path='/cronometro' element={<Cronometro/>} />
+        <Route path='/calculadora' element={<Calculator/>} />
+        <Route path='/listarDono' element={<ListaDono/>} />
+        <Route path='/questionario' element={<Questionario/>} />
       </Routes>
       </BrowserRouter>
     </div>
