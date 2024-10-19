@@ -74,7 +74,7 @@ export default function SelectHealf(props) {
                 props.setRevelarSelectGrupo(false)
               break;
             case 'sexual':
-                props.setRevelarSelect1(false)
+                props.setRevelarSelect1(false)  
               break;
             default:
               return;

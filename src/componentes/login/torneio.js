@@ -152,6 +152,8 @@ export default function Torneio() {
         verificaPlacares()
     }, [])
 
+    
+
     useEffect(() => {
         async function autenticar(e) {
             await apiC.post("autenticacao/autenticar")
@@ -567,8 +569,20 @@ export default function Torneio() {
         buscarTimesSorteados()
     }
 
+    useEffect(() => {
 
-
+        async function limparP() {
+            await apiC.post("placar/limpar")
+                .then(response => {
+                })
+                .catch((error) => {
+                    alert('erro ao limpar placar')
+                });
+    
+    
+        }
+        limparP()
+}, [])
     // useEffect(() => {
 
     //     sortearTimes()
@@ -1661,49 +1675,49 @@ export default function Torneio() {
                 <div>Deletar todos os times das tabelas</div>
             </Button>
             {mostrarVencedores &&
-                <div><h1 className="campeao"> Raiden é Campeão do campeonato Noriano de 2024 </h1></div>
+                <div><h1 className="campeao"> Panasonic é Campeão do campeonato Coziano 2 de 2024 </h1></div>
             }
             {mostrarVencedores &&
                 <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>        
             }
              {mostrarVencedores &&
-                <h5 className="campeao2"> Raul </h5>       
+                <h5 className="campeao2"> Rodrigo </h5>       
             }
              {mostrarVencedores &&
-                <h5 className="campeao3"> Wilham </h5>       
+                <h5 className="campeao3"> Sabrina </h5>       
             }
             {mostrarVencedores &&
-                <h5 className="campeao4"> Mathias </h5>       
+                <h5 className="campeao4"> Homem de Ferro </h5>       
             }
             {mostrarVencedores &&
-                <h5 className="campeao5"> Mostarda </h5>       
+                <h5 className="campeao5"> Leonardo </h5>       
             }
              {mostrarVencedores &&
                 <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>        
             }
              {mostrarVencedores &&
-                <div><h5 className="campeao7"> Crystal </h5></div>        
+                <div><h5 className="campeao7"> Pente Rosa </h5></div>        
             }
              {mostrarVencedores &&
-                <div><h5 className="campeao8"> Thanos </h5></div>        
+                <div><h5 className="campeao8"> Cindy </h5></div>        
             }
              {mostrarVencedores &&
-                <div><h5 className="campeao9"> Pente Laranja </h5></div>        
+                <div><h5 className="campeao9"> Controle do DVD </h5></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao10"> Buzz </h5></div>        
+                <div><h5 className="campeao10"> Sundown </h5></div>        
             }
              {mostrarVencedores &&
                 <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao12"> 1º Wilham </h5></div>        
+                <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao13"> 2º Raul </h5></div>        
+                <div><h5 className="campeao13"> 2º Cindy </h5></div>        
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao14"> 3º Pente Cinza </h5></div>        
+                <div><h5 className="campeao14"> 3º Luiza </h5></div>        
             }
            
             <>

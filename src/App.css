@@ -13,6 +13,22 @@
   }
 }
 
+.meuteste{
+  background-color: white;
+  color: black;
+}
+
+.botaoTema{
+  margin-left: 1191px;
+  display: none;
+}
+
+.meuteste2{
+ 
+  background-color: black;
+  color: white;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -36,3 +52,97 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/* table{
+  border: 0!important;
+  border-collapse: separate!important;
+  border-spacing:0 0!important;
+}
+
+td{/* REMOVE A BORDA BRANCA DO CORPO DAS TABELAS 
+  border: 0!important;
+} */
+
+/* th{/* REMOVE A BORDA BRANCA DO CABECALHO DAS TABELAS 
+  border: 0!important;
+} */
+
+/* .react-bootstrap-table thead tr th:first-child {/* CLASSE PADRAO PARA ARREDONDAR CANTO SUPERIOR ESQUERDO DAS TABELAS 
+  border-top-left-radius: 0.4375em!important;
+}
+
+.react-bootstrap-table thead tr th:last-child {/* CLASSE/ PADRAO PARA ARREDONDAR CANTO SUPERIOR DIREITO DAS TABELAS 
+  border-top-right-radius: 0.4375em!important;
+} */
+
+/* .react-bootstrap-table tr:last-child td:first-child {/* CLASSE PADRAO PARA ARREDONDAR CANTO INFERIOR ESQUERDO DAS TABELAS 
+  border-bottom-left-radius: 0.4375em!important; 
+  border-style: solid!important;
+}
+
+.react-bootstrap-table tr:last-child td:last-child {/* CLASSE PADRAO PARA ARREDONDAR CANTO INFERIOR DIREITO DAS TABELAS 
+  border-bottom-right-radius: 0.4375em!important; 
+  border-style: solid!important;
+}
+
+.tabela-coluna-primeira-header{/* CLASSE PADRAO PARA A PRIMEIRA COLUNA DAS TABELAS 
+  margin-left: 0.625em!important;
+}
+
+.tabela-coluna-ultima-header .btn-toolbar{/* CLASSE PADRAO PARA A ULTIMA COLUNA DAS TABELAS 
+  display: flex!important;
+  justify-content: center!important;
+}
+
+.table{/* CLASSE PADRAO PARA FORMATAR AS DIMENSOES DAS TABELAS E ESPACAMENTO ENTRE ROWS 
+  border-collapse: collapse!important;
+  width: 45%!important;
+  margin-bottom: 0em!important;
+}
+
+.tabela tr:nth-child(2n+1) {
+  background-color: rgb(243, 243, 243) !important;
+}
+
+.react-bootstrap-table tr{/* REMOVE O ESPACO EM BRANCO QUE CERCA AS TABELAS 
+  white-space: nowrap!important;
+}
+
+.react-bootstrap-table td{/* CLASS PADRAO PARA FORMATAR O ESPACO INTERNO DAS ROWS DAS TABELAS 
+  padding-top: -0.875em !important;
+  padding-left: 0.625em !important;
+  vertical-align: middle !important;
+  text-align: initial !important;
+}
+
+.react-bootstrap-table{/* REMOVE O ESPACO EM BRANCO QUE CERCA AS TABELAS 
+    overflow: scroll;
+    height: 396px;
+    /* height: 99%!important; 
+}
+
+.modalRegr {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente 
+  z-index: 1000; /* Z-index alto para sobrepor outros elementos 
+}
+
+.modal-contentRegr {
+  background-color: white;
+  width: 200px;
+  padding: 20px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */

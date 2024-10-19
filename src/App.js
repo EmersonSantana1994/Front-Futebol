@@ -33,6 +33,7 @@ import Cronometro from './componentes/login/cronometro';
 import Calculator from './componentes/login/calculadora';
 import ListaDono from './componentes/login/listaDono';
 import Questionario from './componentes/login/heal.js/questionario';
+import Titulos from './componentes/login/titulos';
 
 
 
@@ -73,7 +74,7 @@ function App() {
         <Route path='/cronometro' element={<Cronometro/>} />
         <Route path='/calculadora' element={<Calculator/>} />
         <Route path='/listarDono' element={<ListaDono/>} />
-        <Route path='/questionario' element={<Questionario/>} />
+        <Route path='/titulos' element={<Titulos/>} />
       </Routes>
       </BrowserRouter>
     </div>

@@ -35,7 +35,7 @@
     border-inline-color: revert;
     position: absolute;
     margin-left: 743px;
-    margin-top: -212px;
+    margin-top: 212px;
     width: 58px;
 }
 
@@ -45,7 +45,7 @@
     border-inline-color: revert;
     position: absolute;
     margin-left: 614px;
-    margin-top: -212px;
+    margin-top: 212px;
     width: 133px;
 }
 
@@ -55,7 +55,7 @@
     border-inline-color: revert;
     position: absolute;
     margin-left: 918px;
-    margin-top: -212px;
+    margin-top: 212px;
     width: 134px;
     
 }
@@ -73,7 +73,7 @@
 .titulo{
     position: absolute;
     margin-left: 784px;
-    margin-top: -238px;
+    margin-top: 181px;
     font-style: italic;
 }
 
@@ -91,7 +91,7 @@
     border-inline-color: revert;
     position: absolute;
     margin-left: 862px;
-    margin-top: -212px;
+    margin-top: 212px;
     width: 58px;
 }
 

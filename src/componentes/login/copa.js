@@ -120,7 +120,7 @@ export default function SuperCopa() {
     const [data22, setData22] = useState('');
     const [data23, setData23] = useState('');
     const [data24, setData24] = useState('');
-    const [mostrarVencedores, setMostrarVencedores] = useState(false);
+    const [mostrarVencedores, setMostrarVencedores] = useState(true);
 
     let contador = 0
     let itensVar = []
@@ -1109,7 +1109,7 @@ export default function SuperCopa() {
             setItens(JSON.parse(JSON.stringify(itensVar)))
         }
     }
-    
+
 
     async function cadastraTimeSemifinais() {
         let enviarBanco = []
@@ -1256,7 +1256,7 @@ export default function SuperCopa() {
 
 
 
-{terceiro &&
+            {terceiro &&
                 <h1>Informe os times que disputaam o terceiro lugar em ordem de disputa</h1>
             }
             {terceiro &&
@@ -1319,49 +1319,49 @@ export default function SuperCopa() {
                 )}
             </Dropzone>
             {mostrarVencedores &&
-                <div><h3 className="copa"> Raiden é Campeão do campeonato Noriano de 2024 </h3></div>
+                <div><h3 className="copa"> Halor é Campeão da Copa Hainiken 2  de 2024 </h3></div>
             }
             {mostrarVencedores &&
                 <div><h3 className="copa1"> Abaixo os jogadores campeões </h3></div>
             }
             {mostrarVencedores &&
-                <h5 className="copa2"> Raul </h5>
+                <h5 className="copa2"> Sr Incrivel </h5>
             }
             {mostrarVencedores &&
-                <h5 className="copa3"> Wilham </h5>
+                <h5 className="copa3"> Pente Cinza </h5>
             }
             {mostrarVencedores &&
-                <h5 className="copa4"> Mathias </h5>
+                <h5 className="copa4"> Azeite </h5>
             }
             {mostrarVencedores &&
-                <h5 className="copa5"> Mostarda </h5>
+                <h5 className="copa5"> Crystal </h5>
             }
             {mostrarVencedores &&
                 <div><h3 className="copa6"> Abaixo os jogadores vices campeões </h3></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa7"> Crystal </h5></div>
+                <div><h5 className="copa7"> Telefone </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa8"> Thanos </h5></div>
+                <div><h5 className="copa8"> Renato </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa9"> Pente Laranja </h5></div>
+                <div><h5 className="copa9"> Buzz </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa10"> Buzz </h5></div>
+                <div><h5 className="copa10"> Rivelino </h5></div>
             }
             {mostrarVencedores &&
                 <div><h3 className="copa11"> Abaixo os melhores jogadores do campeonato </h3></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa12"> 1º Wilham </h5></div>
+                <div><h5 className="copa12"> 1º Azeite </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa13"> 2º Raul </h5></div>
+                <div><h5 className="copa13"> 2º Sr Incrivel </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="copa14"> 3º Pente Cinza </h5></div>
+                <div><h5 className="copa14"> 3º Rivelino </h5></div>
             }
 
             <h3 className='semifinal'>Semifinal</h3>
@@ -1661,7 +1661,7 @@ export default function SuperCopa() {
                                 placeholder="Time"
                             />
                             <label className="fonte-cor-1 campo-texto-cor-3 break-3"></label>
-                            <Button className="btn-filtro-arqui" onClick={(e) => { cadastrarTimes("12"); mostrarFinalistas();  mostrarTerceiro()}}>
+                            <Button className="btn-filtro-arqui" onClick={(e) => { cadastrarTimes("12"); mostrarFinalistas(); mostrarTerceiro() }}>
                                 <div>Enviar</div>
                             </Button>
                             <Button className="btn-filtro-arqui" onClick={(e) => setProrrogacao6(!prorrogacao6)}>
