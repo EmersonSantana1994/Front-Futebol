@@ -128,6 +128,12 @@ export default function Torneio() {
     const [mostrarCampeao, setMostrarCampeao] = useState(false);
     const [mostrarVencedores, setMostrarVencedores] = useState(false);
 
+    const [jogadorcampeao1, setJogadorcampeao1] = useState('');
+    const [jogadorcampeao2, setJogadorcampeao2] = useState('');
+    const [jogadorcampeao3, setJogadorcampeao3] = useState('');
+    const [jogadorcampeao4, setJogadorcampeao4] = useState('');
+    const [nomeTorneio, setNomeTorneio] = useState('');
+
     let totalItens = 0
     let contador = 0
     let contadorSorteado = 0
@@ -152,7 +158,7 @@ export default function Torneio() {
         verificaPlacares()
     }, [])
 
-    
+
 
     useEffect(() => {
         async function autenticar(e) {
@@ -578,11 +584,11 @@ export default function Torneio() {
                 .catch((error) => {
                     alert('erro ao limpar placar')
                 });
-    
-    
+
+
         }
         limparP()
-}, [])
+    }, [])
     // useEffect(() => {
 
     //     sortearTimes()
@@ -1599,6 +1605,29 @@ export default function Torneio() {
 
     }
 
+    async function capeoesTorneio (){
+        let enviarBanco = []
+        enviarBanco.push(jogadorcampeao1, jogadorcampeao2, jogadorcampeao3, jogadorcampeao4)
+
+        if(jogadorcampeao1 == "" || jogadorcampeao2 == "" || jogadorcampeao3 == "" || jogadorcampeao4 == "" || nomeTorneio == ""  ){
+            return alert('algum campo esta em branco')
+        }
+        setCarregando(true)
+        await apiC.post("titulo_ranking/inserir", {
+            "nome": enviarBanco,
+            "torneio": nomeTorneio
+        }).then(response => {
+            if (response.status === 200) {
+              alert('raking de titulos atualizado')
+            }
+        })
+            .catch((error) => {
+                console.log(error.response.data)
+                alert(error.response.data)
+                setCarregando(false)
+            });
+    }
+
     return (
         <>
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
@@ -1678,48 +1707,48 @@ export default function Torneio() {
                 <div><h1 className="campeao"> Panasonic é Campeão do campeonato Coziano 2 de 2024 </h1></div>
             }
             {mostrarVencedores &&
-                <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>        
-            }
-             {mostrarVencedores &&
-                <h5 className="campeao2"> Rodrigo </h5>       
-            }
-             {mostrarVencedores &&
-                <h5 className="campeao3"> Sabrina </h5>       
+                <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
             }
             {mostrarVencedores &&
-                <h5 className="campeao4"> Homem de Ferro </h5>       
+                <h5 className="campeao2"> Rodrigo </h5>
             }
             {mostrarVencedores &&
-                <h5 className="campeao5"> Leonardo </h5>       
-            }
-             {mostrarVencedores &&
-                <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>        
-            }
-             {mostrarVencedores &&
-                <div><h5 className="campeao7"> Pente Rosa </h5></div>        
-            }
-             {mostrarVencedores &&
-                <div><h5 className="campeao8"> Cindy </h5></div>        
-            }
-             {mostrarVencedores &&
-                <div><h5 className="campeao9"> Controle do DVD </h5></div>        
+                <h5 className="campeao3"> Sabrina </h5>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao10"> Sundown </h5></div>        
-            }
-             {mostrarVencedores &&
-                <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>        
+                <h5 className="campeao4"> Homem de Ferro </h5>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>        
+                <h5 className="campeao5"> Leonardo </h5>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao13"> 2º Cindy </h5></div>        
+                <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao14"> 3º Luiza </h5></div>        
+                <div><h5 className="campeao7"> Pente Rosa </h5></div>
             }
-           
+            {mostrarVencedores &&
+                <div><h5 className="campeao8"> Cindy </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao9"> Controle do DVD </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao10"> Sundown </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao13"> 2º Cindy </h5></div>
+            }
+            {mostrarVencedores &&
+                <div><h5 className="campeao14"> 3º Luiza </h5></div>
+            }
+
             <>
                 <div>
                     <h1> Primeiro turno</h1>
@@ -1980,6 +2009,35 @@ export default function Torneio() {
                         <div>Deletar placares desta rodada</div>
                     </Button>
                 </div>
+                <h3>Digite abaixo os jogadors campeoes e o nome do torneio disputado</h3>
+                <label>Jogador 1 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao1(e.target.value) }}
+                    value={jogadorcampeao1}
+                />
+                <label>Jogador 2 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao2(e.target.value) }}
+                    value={jogadorcampeao2}
+                />
+                <label>Jogador 3 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao3(e.target.value) }}
+                    value={jogadorcampeao3}
+                />
+                <label>Jogador 4 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao4(e.target.value) }}
+                    value={jogadorcampeao4}
+                />
+                <label>Torneio </label>
+                <Form.Control
+                    onChange={e => { setNomeTorneio(e.target.value)}}
+                    value={nomeTorneio}
+                />
+                <Button className="btn-filtro-arquivo" onClick={(e) => { capeoesTorneio() }}>
+                    <div>Enviar</div>
+                </Button>
 
                 <div className="espaco" ></div>
                 <div className="campos-texto-login">
