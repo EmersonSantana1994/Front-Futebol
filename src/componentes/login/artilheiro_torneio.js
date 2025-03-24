@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import  Cronometro  from '../login/cronometro';
 
 export default function ArtilheiroTorneio() {
-
+    const [nomeJogadorAssitenica, setNomeJogadorAssitenica] = useState('');
+    const [quantidadeAssitencia, setQuantidadeAssitencia] = useState(0);
     const [nomeJogador, setNomeJogador] = useState('');
     const [quantidadeGol, setQuantidadeGol] = useState(0);
     const [nomeJogadorAnterior, setNomeJogadorAnterior] = useState('');
@@ -118,6 +119,60 @@ export default function ArtilheiroTorneio() {
             });
 
     }
+
+    async function handleSalvarAssitencia() {
+        setCarregando(true)
+        setMensagem('salvando..')
+        await apiC.post("assitencia/inserir", {
+            "nome": nomeJogadorAssitenica,
+            "assitencia": quantidadeAssitencia
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    setMensagem('Novo nome inserido!')
+                }
+                setCarregando(false)
+            })
+            .catch((error) => {
+                setMensagem('erro ao salvar')
+                setCarregando(false)
+            });
+
+    }
+
+    const colunasAssi = [
+        {
+            dataField: 'nome',
+            headerClasses: 'nao-selecionavel',
+            sort: true,
+            text: <p>
+                Jogador
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            headerClasses: 'nao-selecionavel',
+            text: <p>
+               -           -
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            dataField: 'assintencias',
+            headerClasses: 'nao-selecionavel',
+            text: <p>
+                Assistências feitas
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+
+    ]
 
     async function atualizaNumeroGol(item) {
         let quantidadeGolNum = parseInt(quantidadeGol, 10)
@@ -464,7 +519,18 @@ export default function ArtilheiroTorneio() {
             <Button className="deletar-jogador" onClick={(e) => handleDeletar()}>
                 <div>Deletar jogadores selecionados</div>
             </Button>
-
+            <div>
+            <div>
+                <label>Nome do jogador que fez a Assitência</label>
+                <Form.Control className="label-artilheiro"
+                    onChange={e => { setNomeJogadorAssitenica(e.target.value) }}
+                    value={nomeJogadorAssitenica}
+                />
+            </div>
+            <Button className="btn-filtro-arquivo" onClick={(e) => handleSalvarAssitencia()}>
+                <div>Enviar Arquivo</div>
+            </Button>
+            </div>
             <div>
                 <BootstrapTable
                     hover={true}
@@ -479,6 +545,20 @@ export default function ArtilheiroTorneio() {
                 />
 
             </div>
+            ______________________________________
+            <div>
+                        <BootstrapTable
+                            hover={true}
+                            classes="tabela"
+                            condensed={true}
+                            keyField='id'
+                            data={itens}
+                            columns={colunasAssi}
+                            selectRow={ selecaoLinhas }
+                            bootstrap4={true}
+                            bordered={false}
+                        />
+                    </div>
             <label className="titulo">Placar do jogo</label>
             <Form.Control className="time-placar1"
                 value={time1}
