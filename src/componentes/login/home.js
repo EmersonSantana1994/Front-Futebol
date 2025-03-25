@@ -57,6 +57,10 @@ export default function Home() {
             navigate('/rankingJogadores');
         } else if (code == "9") {
             navigate('/ranking');
+        }else if (code == "10") {
+            navigate('/assistencia');
+        }else if (code == "11") {
+            navigate('/rankingTitulos');
         }
 
     }
@@ -113,6 +117,10 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("7")}>
                 <div>Artilheiro</div>
             </Button>
+            <h1>Assitências da temporada</h1>
+            <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("10")}>
+                <div>Assitencia</div>
+            </Button>
 
             <h1>Ranking Jogadores</h1>
 
@@ -125,7 +133,12 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("9")}>
                 <div>Ranking Clubes</div>
             </Button>
-            <h1>Cadastro</h1>
+            <h1>Ranking Titulos</h1>
+
+            <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("11")}>
+                <div>Ranking Titulos</div>
+            </Button>
+            <h1>Titulos</h1>
 
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("2")}>
                 <div>Cadastro</div>
@@ -151,7 +164,7 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/listarDono')}>
                 <div>Donos dos times</div>
             </Button>
-            
+
         </>
 
 

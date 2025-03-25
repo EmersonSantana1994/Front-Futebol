@@ -5,6 +5,7 @@ import MeuCampeonato from './componentes/login/MeuCampeonato';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UploadArquivos from './componentes/login/uploadArquivos';
 import Artilheiro from './componentes/login/artilheiro';
+import Assistencia from './componentes/login/assistencia';
 import RankingJogadores from './componentes/login/rankingJoradores';
 import Torneio from './componentes/login/torneio';
 import Transferencia from './componentes/login/transferencia';
@@ -34,6 +35,7 @@ import Calculator from './componentes/login/calculadora';
 import ListaDono from './componentes/login/listaDono';
 import Questionario from './componentes/login/heal.js/questionario';
 import Titulos from './componentes/login/titulos';
+import RankingTitulos from './componentes/login/rankingTitulos';
 
 
 
@@ -48,6 +50,7 @@ function App() {
         <Route path='/UploadArquivos' element={<UploadArquivos />} />
         <Route path='/ranking' element={<MeuCampeonato />} />
         <Route path='/artilheiro' element={<Artilheiro />} />
+        <Route path='/assistencia' element={<Assistencia />} />
         <Route path='/rankingJogadores' element={<RankingJogadores />} />
         <Route path='/torneio' element={<Torneio />} />
         <Route path='/transferencia' element={<Transferencia />} />
@@ -59,6 +62,7 @@ function App() {
         <Route path='/ligas' element={<Ligas />} />
         <Route path='/teste' element={<Test />} />
         <Route path='/upload' element={<Upload />} />
+        <Route path='/rankingTitulos' element={<RankingTitulos />} />
         <Route path='/cadstrousuario' element={<TelaCadastro />} />
         <Route path='/pontosTorneio' element={<PontosTorneio />} />
         <Route path='/tabelaGeral' element={<TabelaGeral />} />

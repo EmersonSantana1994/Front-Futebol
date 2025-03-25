@@ -23,7 +23,9 @@ export default function ArtilheiroTorneio() {
     const [mensagemTabela, setMensagemTabela] = useState('');
     const [itens, setItens] = useState([]);
     const [itens2, setItens2] = useState([]);
+    const [itensAss, setItensAss] = useState([]);
     const [somaGols, setSomaGols] = useState([]);
+    const [somaAssitencias, setSomaAssitencias] = useState([]);
     const navigate = useNavigate();
     let token = JSON.parse(localStorage.getItem("keyToken"))
     const [resultado, setResultado] = useState(false);
@@ -52,6 +54,10 @@ export default function ArtilheiroTorneio() {
 
     useEffect(() => {
         inserirData()
+    }, [])
+
+    useEffect(() => {
+        inserirDataAssistencia()
     }, [])
 
 
@@ -86,7 +92,7 @@ export default function ArtilheiroTorneio() {
             setItens2(JSON.parse(JSON.stringify(itensVar)))
         }
     }
-
+    
 
     async function inserirData() {
         let somaTotalGols = 0
@@ -120,12 +126,44 @@ export default function ArtilheiroTorneio() {
 
     }
 
+    async function inserirDataAssistencia() {
+        let somaTotalGols = 0
+        setMensagemTabela('Inserindo na tabela..')
+        await apiC.post("assistencia/buscar/torneio", {
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (contador === i) {
+                            let k = i
+                            for (let j = 0; j < response.data.length; j++) {
+                                itensVar[k] = response.data[j]
+                                k++
+                                somaTotalGols += parseInt(response.data[j].gols, 10)
+                            }
+                        }
+                        setSomaAssitencias(somaTotalGols)
+                        setItensAss(JSON.parse(JSON.stringify(itensVar)))
+
+                    }
+                }
+                setMensagemTabela('Feito! Tabela Atualizada')
+                setCarregando(false)
+            })
+            .catch((error) => {
+                setMensagemTabela('erro ao atualizar tabela')
+                alert('erro ao atualizar tabela')
+                setCarregando(false)
+            });
+
+    }
+
     async function handleSalvarAssitencia() {
         setCarregando(true)
         setMensagem('salvando..')
         await apiC.post("assitencia/inserir", {
             "nome": nomeJogadorAssitenica,
-            "assitencia": quantidadeAssitencia
+            "assitencia": 1
         })
             .then(response => {
                 if (response.status === 200) {
@@ -552,7 +590,7 @@ export default function ArtilheiroTorneio() {
                             classes="tabela"
                             condensed={true}
                             keyField='id'
-                            data={itens}
+                            data={itensAss}
                             columns={colunasAssi}
                             selectRow={ selecaoLinhas }
                             bootstrap4={true}
