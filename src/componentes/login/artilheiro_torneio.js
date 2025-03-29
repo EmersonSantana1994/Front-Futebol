@@ -137,13 +137,14 @@ export default function ArtilheiroTorneio() {
                         if (contador === i) {
                             let k = i
                             for (let j = 0; j < response.data.length; j++) {
-                                itensVar[k] = response.data[j]
+                                itensVar2[k] = response.data[j]
                                 k++
                                 somaTotalGols += parseInt(response.data[j].gols, 10)
                             }
                         }
                         setSomaAssitencias(somaTotalGols)
-                        setItensAss(JSON.parse(JSON.stringify(itensVar)))
+                        console.log("itensVar", itensVar2)
+                        setItensAss(JSON.parse(JSON.stringify(itensVar2)))
 
                     }
                 }
@@ -161,13 +162,14 @@ export default function ArtilheiroTorneio() {
     async function handleSalvarAssitencia() {
         setCarregando(true)
         setMensagem('salvando..')
-        await apiC.post("assitencia/inserir", {
+        await apiC.post("assistencia/inserir", {
             "nome": nomeJogadorAssitenica,
-            "assitencia": 1
+            "assistencia": 1
         })
             .then(response => {
                 if (response.status === 200) {
                     setMensagem('Novo nome inserido!')
+                    inserirDataAssistencia()
                 }
                 setCarregando(false)
             })
@@ -200,7 +202,7 @@ export default function ArtilheiroTorneio() {
             },
         },
         {
-            dataField: 'assintencias',
+            dataField: 'assistencias',
             headerClasses: 'nao-selecionavel',
             text: <p>
                 Assistências feitas
@@ -452,9 +454,13 @@ export default function ArtilheiroTorneio() {
         setNomeJogador(nome);
     }
 
+    function handleSelecionarAssitencia(nome) {
+        setNomeJogadorAssitenica(nome);
+    }
 
-    function handleDesselecionar() {
-        setNomeJogador('');
+
+    function handleDesselecionarAssistencia() {
+        setNomeJogadorAssitenica('');
     }
 
 
@@ -504,7 +510,40 @@ export default function ArtilheiroTorneio() {
         },
         bgColor: 'row-index-bigger-than-2101'
     };
-
+    const selecaoLinhasAssitencia = {
+        mode: 'radio',
+        onSelect: (row, isSelect, rowIndex, e) => {
+            if (isSelect) {
+                handleSelecionarAssitencia(row.nome)
+            } else {
+                handleDesselecionarAssistencia()
+            }
+        },
+        onSelectAll: (isSelect, rows, e) => {
+            if (isSelect) {
+                handleSelecionarTodos()
+            } else {
+                handleDesselecionarTodos()
+            }
+        },
+        selectionRenderer: ({ mode, ...rest }) => {
+            return (
+                <>
+                    <input type={mode} class="input-checkbox-simcard" {...rest} />
+                    <label class="label-checkbox-simcard"></label>
+                </>
+            )
+        },
+        selectionHeaderRenderer: ({ mode, ...rest }) => {
+            return (
+                <>
+                    <input type={mode} class="input-checkbox-header-simcard" {...rest} />
+                    <label class="label-checkbox-header-simcard"></label>
+                </>
+            )
+        },
+        bgColor: 'row-index-bigger-than-2101'
+    };
 
     return (
         <>
@@ -592,7 +631,7 @@ export default function ArtilheiroTorneio() {
                             keyField='id'
                             data={itensAss}
                             columns={colunasAssi}
-                            selectRow={ selecaoLinhas }
+                            selectRow={ selecaoLinhasAssitencia }
                             bootstrap4={true}
                             bordered={false}
                         />
@@ -654,7 +693,7 @@ export default function ArtilheiroTorneio() {
                 </div>
 
             }
-            <Cronometro/>
+            {/* <Cronometro/> */}
         </>
     )
 }

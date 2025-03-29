@@ -138,8 +138,7 @@ export default function Home() {
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("11")}>
                 <div>Ranking Titulos</div>
             </Button>
-            <h1>Titulos</h1>
-
+            <h1>Cadastro</h1>
             <Button className="btn-filtro-arquivo" onClick={(e) => redirecionar("2")}>
                 <div>Cadastro</div>
             </Button>

@@ -211,6 +211,26 @@ export default function TabelaGeral() {
                 return <p>{cell === null ? '-' : cell}</p>;
             },
         },
+        {
+            dataField: 'assistencias',
+            headerClasses: 'nao-selecionavel',
+            sort: true,
+            text: <p>
+                Assistencias
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+        {
+            sort: true,
+            text: <p>
+                -     -
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
 
         {
             dataField: 'posicao',

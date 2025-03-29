@@ -1688,7 +1688,7 @@ export default function Torneio() {
                 </div>
             }
 
-            {
+            {/* {
                 <BootstrapTable
                     hover={true}
                     classes="tabela"
@@ -1699,7 +1699,7 @@ export default function Torneio() {
                     bootstrap4={true}
                     bordered={false}
                 />
-            }
+            } */}
             <Button className="deletar-jogadorr" onClick={(e) => handleDeletar()}>
                 <div>Deletar todos os times das tabelas</div>
             </Button>
