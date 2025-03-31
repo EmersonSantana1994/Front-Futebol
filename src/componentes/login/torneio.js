@@ -126,7 +126,7 @@ export default function Torneio() {
     const [timesSorteadosArray4, setTimesSorteadosArray4] = useState('');
     const [campeao, setCampeao] = useState('');
     const [mostrarCampeao, setMostrarCampeao] = useState(false);
-    const [mostrarVencedores, setMostrarVencedores] = useState(false);
+    const [mostrarVencedores, setMostrarVencedores] = useState(true);
 
     const [jogadorcampeao1, setJogadorcampeao1] = useState('');
     const [jogadorcampeao2, setJogadorcampeao2] = useState('');
@@ -1704,37 +1704,37 @@ export default function Torneio() {
                 <div>Deletar todos os times das tabelas</div>
             </Button>
             {mostrarVencedores &&
-                <div><h1 className="campeao"> Panasonic é Campeão do campeonato Coziano 2 de 2024 </h1></div>
+                <div><h1 className="campeao"> Democration é Campeão do campeonato Division Soccer de 2025 </h1></div>
             }
             {mostrarVencedores &&
                 <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
             }
             {mostrarVencedores &&
-                <h5 className="campeao2"> Rodrigo </h5>
+                <h5 className="campeao2"> Taylor </h5>
             }
             {mostrarVencedores &&
-                <h5 className="campeao3"> Sabrina </h5>
+                <h5 className="campeao3"> Homem de Ferro </h5>
             }
             {mostrarVencedores &&
-                <h5 className="campeao4"> Homem de Ferro </h5>
+                <h5 className="campeao4"> Titan </h5>
             }
             {mostrarVencedores &&
-                <h5 className="campeao5"> Leonardo </h5>
+                <h5 className="campeao5"> Renan </h5>
             }
             {mostrarVencedores &&
                 <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao7"> Pente Rosa </h5></div>
+                <div><h5 className="campeao7"> Pente Preto </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao8"> Cindy </h5></div>
+                <div><h5 className="campeao8"> Wilham </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao9"> Controle do DVD </h5></div>
+                <div><h5 className="campeao9"> Luiz </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao10"> Sundown </h5></div>
+                <div><h5 className="campeao10"> Leonardo </h5></div>
             }
             {mostrarVencedores &&
                 <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
@@ -1743,10 +1743,10 @@ export default function Torneio() {
                 <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao13"> 2º Cindy </h5></div>
+                <div><h5 className="campeao13"> 2º Sabrina </h5></div>
             }
             {mostrarVencedores &&
-                <div><h5 className="campeao14"> 3º Luiza </h5></div>
+                <div><h5 className="campeao14"> 3º Luiz </h5></div>
             }
 
             <>

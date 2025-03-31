@@ -143,7 +143,7 @@ export default function RankingJogadores() {
         'Tati', 'Pente Azul', 'Matias', 'Azeite', 'Varicel', 'Titan', 'Eva', 'Hugo', 
         'Azuzinho', 'Rita', 'David', 'Azulão', 'Shampo', 'Orlof', 'Branquinho', 'Kevin', 
         'Crystal', 'Izakson', 'Sky', 'Gradiente', 'Escuro', 'Edson', 'Katchup', 'Luiza', 
-        'Luciano', 'Gael', 'Jack', 'Luis'].includes(nomeJogador)
+        'Luciano', 'Gael', 'Jack', 'Luiz'].includes(nomeJogador)
     }
 
     async function fazerLimpeza(e) {
