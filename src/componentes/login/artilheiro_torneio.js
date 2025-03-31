@@ -636,7 +636,8 @@ export default function ArtilheiroTorneio() {
                             bordered={false}
                         />
                     </div>
-            <label className="titulo">Placar do jogo</label>
+                    <div className="suba">
+                    <label className="titulo">Placar do jogo</label>
             <Form.Control className="time-placar1"
                 value={time1}
                 placeholder='time 1'
@@ -652,6 +653,8 @@ export default function ArtilheiroTorneio() {
             <Form.Control className="label-placar2"
                 value={placar2}
             />
+                    </div>
+            
 
             <Button className="limpar-placar" onClick={(e) => limpar()}>
                 <div>Limpar</div>
