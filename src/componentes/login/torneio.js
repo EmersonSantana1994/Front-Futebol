@@ -1760,11 +1760,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime1(e.target.value); setPlacar1(e.target.value) }}
                             value={mostrarPlacarSalvo1 ? placarSalvo1 : time1}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime2(e.target.value); setPlacar2(e.target.value) }}
                             value={mostrarPlacarSalvo2 ? placarSalvo2 : time2}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray2} </label>
                         <label className="label-data">Data</label>
@@ -1778,11 +1780,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime3(e.target.value); setPlacar3(e.target.value) }}
                             value={mostrarPlacarSalvo3 ? placarSalvo3 : time3}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime4(e.target.value); setPlacar4(e.target.value) }}
                             value={mostrarPlacarSalvo4 ? placarSalvo4 : time4}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray4} </label>
                         <label className="label-data">Data</label>
@@ -1802,11 +1806,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime5(e.target.value); setPlacar3(e.target.value) }}
                             value={mostrarPlacarSalvo5 ? placarSalvo5 : time5}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime6(e.target.value); setPlacar1(e.target.value) }}
                             value={mostrarPlacarSalvo6 ? placarSalvo6 : time6}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray1} </label>
                         <label className="label-data">Data</label>
@@ -1820,11 +1826,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime7(e.target.value); setPlacar2(e.target.value) }}
                             value={mostrarPlacarSalvo7 ? placarSalvo7 : time7}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime8(e.target.value); setPlacar4(e.target.value) }}
                             value={mostrarPlacarSalvo8 ? placarSalvo8 : time8}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray4} </label>
                         <label className="label-data">Data</label>
@@ -1844,11 +1852,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime9(e.target.value); setPlacar4(e.target.value) }}
                             value={mostrarPlacarSalvo9 ? placarSalvo9 : time9}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime10(e.target.value); setPlacar1(e.target.value) }}
                             value={mostrarPlacarSalvo10 ? placarSalvo10 : time10}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray1} </label>
                         <label className="label-data">Data</label>
@@ -1862,11 +1872,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime11(e.target.value); setPlacar2(e.target.value) }}
                             value={mostrarPlacarSalvo11 ? placarSalvo11 : time11}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime12(e.target.value); setPlacar3(e.target.value) }}
                             value={mostrarPlacarSalvo12 ? placarSalvo12 : time12}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray3} </label>
                         <label className="label-data">Data</label>
@@ -1887,11 +1899,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime13(e.target.value); setPlacar1(e.target.value) }}
                             value={mostrarPlacarSalvo13 ? placarSalvo13 : time13}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime14(e.target.value); setPlacar4(e.target.value) }}
                             value={mostrarPlacarSalvo14 ? placarSalvo14 : time14}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray4} </label>
                         <label className="label-data">Data</label>
@@ -1905,11 +1919,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime15(e.target.value); setPlacar3(e.target.value) }}
                             value={mostrarPlacarSalvo15 ? placarSalvo15 : time15}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime16(e.target.value); setPlacar2(e.target.value) }}
                             value={mostrarPlacarSalvo16 ? placarSalvo16 : time16}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray2} </label>
                         <label className="label-data">Data</label>
@@ -1929,11 +1945,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime17(e.target.value); setPlacar1(e.target.value) }}
                             value={mostrarPlacarSalvo17 ? placarSalvo17 : time17}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime18(e.target.value); setPlacar3(e.target.value) }}
                             value={mostrarPlacarSalvo18 ? placarSalvo18 : time18}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray3} </label>
                         <label className="label-data">Data</label>
@@ -1947,11 +1965,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime19(e.target.value); setPlacar4(e.target.value) }}
                             value={mostrarPlacarSalvo19 ? placarSalvo19 : time19}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime20(e.target.value); setPlacar2(e.target.value) }}
                             value={mostrarPlacarSalvo20 ? placarSalvo20 : time20}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray2} </label>
                         <label className="label-data">Data</label>
@@ -1971,11 +1991,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime21(e.target.value); setPlacar2(e.target.value) }}
                             value={mostrarPlacarSalvo21 ? placarSalvo21 : time21}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime22(e.target.value); setPlacar1(e.target.value) }}
                             value={mostrarPlacarSalvo22 ? placarSalvo22 : time22}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray1} </label>
                         <label className="label-data">Data</label>
@@ -1989,11 +2011,13 @@ export default function Torneio() {
                         <Form.Control
                             onChange={e => { setTime23(e.target.value); setPlacar4(e.target.value) }}
                             value={mostrarPlacarSalvo23 ? placarSalvo23 : time23}
+                            className='input-placar'
                         />
                         <label>X</label>
                         <Form.Control
                             onChange={e => { setTime24(e.target.value); setPlacar3(e.target.value) }}
                             value={mostrarPlacarSalvo24 ? placarSalvo24 : time24}
+                            className='input-placar'
                         />
                         <label>{timesSorteadosArray3} </label>
                         <label className="label-data">Data</label>

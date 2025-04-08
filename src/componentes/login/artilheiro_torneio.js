@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';/*eslint-disable*/
+import React, { useState, useEffect, useRef } from 'react';/*eslint-disable*/
 import '../../css/login/artilheiro.css';
 import { Button, Image, Form, InputGroup, FormControl, Col, Carousel, Alert } from 'react-bootstrap';
 import { apiC } from "../../conexoes/api";
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useNavigate } from 'react-router-dom';
-import  Cronometro  from '../login/cronometro';
+import Cronometro from '../login/cronometro';
 
 export default function ArtilheiroTorneio() {
     const [nomeJogadorAssitenica, setNomeJogadorAssitenica] = useState('');
@@ -31,6 +31,8 @@ export default function ArtilheiroTorneio() {
     const [resultado, setResultado] = useState(false);
     const [mostrarTime, setMostrarTime] = useState(false);
     const [buscando, setBuscando] = useState(false);
+    const botaoRef = useRef();
+    const botaoRef1 = useRef();
     let totalItens = 0
     let contador = 0
     let itensVar = []
@@ -92,7 +94,7 @@ export default function ArtilheiroTorneio() {
             setItens2(JSON.parse(JSON.stringify(itensVar)))
         }
     }
-    
+
 
     async function inserirData() {
         let somaTotalGols = 0
@@ -195,7 +197,7 @@ export default function ArtilheiroTorneio() {
         {
             headerClasses: 'nao-selecionavel',
             text: <p>
-               -           -
+                -           -
             </p>,
             formatter: (cell, row) => {
                 return <p>{cell === null ? '-' : cell}</p>;
@@ -374,6 +376,30 @@ export default function ArtilheiroTorneio() {
             },
         },
     ]
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                botaoRef.current?.click();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "+") {
+                e.preventDefault();
+                botaoRef1.current?.click();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
 
 
     async function salvarPlacar() {
@@ -589,76 +615,104 @@ export default function ArtilheiroTorneio() {
                     value={somaGols}
                 />
             </div>
-            <Button className="btn-filtro-arquivo" onClick={(e) => { handleSalvar(); salvarPlacar() }}>
-                <div>Enviar Arquivo</div>
+            <Button
+                className="btn-filtro-arquivo"
+                onClick={(e) => {
+                    handleSalvar();
+                    salvarPlacar();
+                }}
+                ref={botaoRef}
+            >
+                <div>Enviar gols</div>
             </Button>
 
             <Button className="deletar-jogador" onClick={(e) => handleDeletar()}>
                 <div>Deletar jogadores selecionados</div>
             </Button>
             <div>
-            <div>
-                <label>Nome do jogador que fez a Assitência</label>
-                <Form.Control className="label-artilheiro"
-                    onChange={e => { setNomeJogadorAssitenica(e.target.value) }}
-                    value={nomeJogadorAssitenica}
-                />
+                <div>
+                    <label>Nome do jogador que fez a Assitência</label>
+                    <Form.Control className="label-artilheiro"
+                        onChange={e => { setNomeJogadorAssitenica(e.target.value) }}
+                        value={nomeJogadorAssitenica}
+                    />
+                </div>
+                <Button className="btn-filtro-arquivo" onClick={(e) => handleSalvarAssitencia()} ref={botaoRef1}>
+                    <div>Enviar assitencia</div>
+                </Button>
             </div>
-            <Button className="btn-filtro-arquivo" onClick={(e) => handleSalvarAssitencia()}>
-                <div>Enviar Arquivo</div>
-            </Button>
-            </div>
-            <div>
-                <BootstrapTable
-                    hover={true}
-                    classes="tabela"
-                    condensed={true}
-                    keyField='id'
-                    data={itens}
-                    columns={colunas}
-                    selectRow={selecaoLinhas}
-                    bootstrap4={true}
-                    bordered={false}
-                />
+            <div className="container-flex">
+                <div className="tabela-container">
+                    <BootstrapTable
+                        hover={true}
+                        classes="tabela"
+                        condensed={true}
+                        keyField='id'
+                        data={itens}
+                        columns={colunas}
+                        selectRow={selecaoLinhas}
+                        bootstrap4={true}
+                        bordered={false}
+                    />
+                </div>
+                <div className="placar-container">
+                    <label className="titulo-placar">Placar do jogo</label>
+                    <div className="placar-box">
+                        <div className="time">
+                            <Form.Control
+                                className="input-time"
+                                value={time1}
+                                placeholder="Time 1"
+                            />
+                            <Form.Control
+                                className="input-placar"
+                                value={placar1}
+                                placeholder="0"
+                            />
+                        </div>
 
-            </div>
-            ______________________________________
-            <div>
-                        <BootstrapTable
-                            hover={true}
-                            classes="tabela"
-                            condensed={true}
-                            keyField='id'
-                            data={itensAss}
-                            columns={colunasAssi}
-                            selectRow={ selecaoLinhasAssitencia }
-                            bootstrap4={true}
-                            bordered={false}
-                        />
-                    </div>
-                    <div className="suba">
-                    <label className="titulo">Placar do jogo</label>
-            <Form.Control className="time-placar1"
-                value={time1}
-                placeholder='time 1'
-            />
-            <Form.Control className="label-placar1"
-                value={placar1}
-            />
-            <h1 className='posicaoX'>X</h1>
-            <Form.Control className="time-placar2"
-                value={time2}
-                placeholder='time 2'
-            />
-            <Form.Control className="label-placar2"
-                value={placar2}
-            />
-                    </div>
-            
+                        <div className="versus">X</div>
 
-            <Button className="limpar-placar" onClick={(e) => limpar()}>
+                        <div className="time">
+
+                            <Form.Control
+                                className="input-time"
+                                value={time2}
+                                placeholder="Time 2"
+                            />
+                            <Form.Control
+                                className="input-placar"
+                                value={placar2}
+                                placeholder="0"
+                            />
+                        </div>
+                        <Button className="limpar-placar" onClick={(e) => limpar()}>
                 <div>Limpar</div>
             </Button>
+                    </div>
+                </div>
+            </div>
+            ______________________________________
+            <div className="container-flex">
+                <div className="tabela-container">
+                    <BootstrapTable
+                        hover={true}
+                        classes="tabela"
+                        condensed={true}
+                        keyField="id"
+                        data={itensAss}
+                        columns={colunasAssi}
+                        selectRow={selecaoLinhasAssitencia}
+                        bootstrap4={true}
+                        bordered={false}
+                    />
+                </div>
+
+              
+            </div>
+
+
+          
 
             <h1 className='pesquisa'>Pesquise aqui o time</h1>
             <Form.Control

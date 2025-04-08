@@ -4,6 +4,6 @@
         "ipC": "18.230.192.37:3001/api/"
     },
     "m2": {
-        "ipC": "localhost:3000/api/"
+        "ipC": "localhost:3003/api/"
     }
   }
