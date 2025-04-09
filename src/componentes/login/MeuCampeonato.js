@@ -389,8 +389,10 @@ export default function MeuCampeonato() {
     }
 
     async function inserirNovoTime(nome, i, torneio) {
-        const verificar = verificaString(nome)
-        if (verificar) {
+       let verificarTime = await apiC.post("listar/buscarTime", {
+            "nome": nome,
+        })
+        if (verificarTime.data.length > 0) {
             if (torneio == "Liga") {
                 await apiC.post("ranking/inserir", {
                     "nome": nome,
@@ -442,12 +444,6 @@ export default function MeuCampeonato() {
 
     }
 
-    const verificaString = (tipoSolicitacao) => {
-        return ["Brastemp", "Halor", "Panasonic", "Raiden", "Penharol",
-            "Sacred", "Brécia", "Galaxy", "Ases", "Castelão",
-            "Democration", "Juventude", "LG", "Once Caldas", "Lanus", "LDU", "Lacta", "Element"].includes(tipoSolicitacao)
-    }
-
     const handleClickOutroBotao = (e) => {
         const importar = document.getElementById('importar-filtro-arquivo')
         importar.click();
@@ -495,13 +491,13 @@ export default function MeuCampeonato() {
                     setValorPriLigaR(itensVar2[r].pontos)
                 } else if (itensVar2[r].nome == 'Segundo lugar na liga') {
                     setValorSegLigaR(itensVar2[r].pontos)
-                } else if (itensVar2[r].nome == 'Tercero lugar na liga') {
+                } else if (itensVar2[r].nome == 'Terceiro lugar na liga') {
                     setValorTerLigaR(itensVar2[r].pontos)
                 } else if (itensVar2[r].nome == 'Primeiro lugar na Sub-Liga') {
                     setValorPriLugSubR(itensVar2[r].pontos)
                 } else if (itensVar2[r].nome == 'Segundo lugar na Sub-Liga') {
                     setValorSegLugSubR(itensVar2[r].pontos)
-                } else if (itensVar2[r].nome == 'Tercero lugar na Sub-Liga') {
+                } else if (itensVar2[r].nome == 'Terceiro lugar na Sub-Liga') {
                     setValorTerLugSubR(itensVar2[r].pontos)
                 } else if (itensVar2[r].nome == 'Primeiro lugar no Campeonato Mundial') {
                     setValorPriMundR(itensVar2[r].pontos)
