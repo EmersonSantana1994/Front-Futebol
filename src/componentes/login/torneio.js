@@ -126,13 +126,22 @@ export default function Torneio() {
     const [timesSorteadosArray4, setTimesSorteadosArray4] = useState('');
     const [campeao, setCampeao] = useState('');
     const [mostrarCampeao, setMostrarCampeao] = useState(false);
-    const [mostrarVencedores, setMostrarVencedores] = useState(true);
+    const [mostrarVencedores, setMostrarVencedores] = useState(false);
 
     const [jogadorcampeao1, setJogadorcampeao1] = useState('');
     const [jogadorcampeao2, setJogadorcampeao2] = useState('');
     const [jogadorcampeao3, setJogadorcampeao3] = useState('');
     const [jogadorcampeao4, setJogadorcampeao4] = useState('');
     const [nomeTorneio, setNomeTorneio] = useState('');
+    const [nomeTime, setNomeTime] = useState('');
+
+    const [jogadorvice1, setJogadorvice1] = useState('');
+    const [jogadorvice2, setJogadorvice2] = useState('');
+    const [jogadorvice3, setJogadorvice3] = useState('');
+    const [jogadorvice4, setJogadorvice4] = useState('');
+
+
+
 
     let totalItens = 0
     let contador = 0
@@ -160,19 +169,19 @@ export default function Torneio() {
 
 
 
-    useEffect(() => {
-        async function autenticar(e) {
-            await apiC.post("autenticacao/autenticar")
-                .then(response => {
-                })
-                .catch((error) => {
-                    if (error.response.data == 'não autenticado') {
-                        navigate('/')
-                    }
-                });
-        }
-        setTimeout(autenticar, 5000);
-    }, [])
+    // useEffect(() => {
+    //     async function autenticar(e) {
+    //         await apiC.post("autenticacao/autenticar")
+    //             .then(response => {
+    //             })
+    //             .catch((error) => {
+    //                 if (error.response.data == 'não autenticado') {
+    //                     navigate('/')
+    //                 }
+    //             });
+    //     }
+    //     setTimeout(autenticar, 5000);
+    // }, [])
 
     async function formatarData(data) {
         const formData = new Date(data)
@@ -320,7 +329,9 @@ export default function Torneio() {
                             }
                             setItens(JSON.parse(JSON.stringify(itensVar)))
                         }
+                        console.log("rrrrrr", itensVar)
                         buscarTimesSorteados()
+                        buscarCampeoes(JSON.parse(JSON.stringify(itensVar)))
                     }
 
                     else {
@@ -333,6 +344,40 @@ export default function Torneio() {
             .catch((error) => {
                 setCarregando(false)
             });
+    }
+
+    async function buscarCampeoes(i) {
+
+
+        if (i && i.length > 0) {
+            await apiC.post("torneio/bucarCampeoes", {
+                "primeiroLugar": i[0].nome,
+                "segundoLugar": i[1].nome
+            }).then(response => {
+                if (response.status === 200) {
+                    if (response.data.result.length > 0) {
+                        console.log(response.data.result[0][0].jogador)
+                        setJogadorcampeao1(response.data.result[0][0].jogador)
+                        setJogadorcampeao2(response.data.result[0][1].jogador)
+                        setJogadorcampeao3(response.data.result[0][2].jogador)
+                        setJogadorcampeao4(response.data.result[0][3].jogador)
+                        setJogadorvice1(response.data.result[1][0].jogador)
+                        setJogadorvice2(response.data.result[1][1].jogador)
+                        setJogadorvice3(response.data.result[1][2].jogador)
+                        setJogadorvice4(response.data.result[1][3].jogador)
+                        setNomeTorneio(response.data.result[1][0].liga)
+                        setNomeTime(response.data.result[0][0].time)
+                    }
+                }
+                setCarregando(false)
+            })
+                .catch((error) => {
+                    setCarregando(false)
+                });
+        }
+
+
+
     }
 
     async function anunciarCampeao() {
@@ -541,38 +586,35 @@ export default function Torneio() {
     }
 
     async function sortearTimes() {
-        let numeroSorteado = []
-        let sorteado1 = Math.floor(Math.random() * timesM.length)
-        let sorteado2 = Math.floor(Math.random() * timesM.length)
-        while (sorteado2 == sorteado1) {
-            sorteado2 = Math.floor(Math.random() * timesM.length)
-        }
-        let sorteado3 = Math.floor(Math.random() * timesM.length)
-        while (sorteado3 == sorteado2 || sorteado3 == sorteado1) {
-            sorteado3 = Math.floor(Math.random() * timesM.length)
-        }
-        let sorteado4 = Math.floor(Math.random() * timesM.length)
-        while (sorteado4 == sorteado1 || sorteado4 == sorteado2 || sorteado4 == sorteado3) {
-            sorteado4 = Math.floor(Math.random() * timesM.length)
-        }
-        numeroSorteado.push(sorteado1, sorteado2, sorteado3, sorteado4)
-        for (let i = 0; i < timesM.length; i++) {
+        try {
             setCarregando(true)
-            await apiC.put("torneio/atualizaTimeSorteado", {
-                "id": timesS[i],
-                "nome": timesM[numeroSorteado[i]]
-            }).then(response => {
-                if (response.status === 200) {
 
+            // Sorteia índices únicos
+            const indicesSorteados = []
+            while (indicesSorteados.length < timesS.length) {
+                const indice = Math.floor(Math.random() * timesM.length)
+                if (!indicesSorteados.includes(indice)) {
+                    indicesSorteados.push(indice)
                 }
-                setCarregando(false)
-            })
-                .catch((error) => {
-                    setCarregando(false)
-                    alert('Erro ao atualizar sorteio do time ', timesM[numeroSorteado[i]])
-                });
+            }
+
+            // Atualiza os times sorteados
+            for (let i = 0; i < timesS.length; i++) {
+                const payload = {
+                    id: timesS[i],
+                    nome: timesM[indicesSorteados[i]]
+                }
+
+                await apiC.put("torneio/atualizaTimeSorteado", payload)
+            }
+
+            buscarTimesSorteados()
+        } catch (error) {
+            alert('Erro ao atualizar sorteio dos times.')
+            console.error(error)
+        } finally {
+            setCarregando(false)
         }
-        buscarTimesSorteados()
     }
 
     useEffect(() => {
@@ -1605,28 +1647,6 @@ export default function Torneio() {
 
     }
 
-    async function capeoesTorneio (){
-        let enviarBanco = []
-        enviarBanco.push(jogadorcampeao1, jogadorcampeao2, jogadorcampeao3, jogadorcampeao4)
-
-        if(jogadorcampeao1 == "" || jogadorcampeao2 == "" || jogadorcampeao3 == "" || jogadorcampeao4 == "" || nomeTorneio == ""  ){
-            return alert('algum campo esta em branco')
-        }
-        setCarregando(true)
-        await apiC.post("titulo_ranking/inserir", {
-            "nome": enviarBanco,
-            "torneio": nomeTorneio
-        }).then(response => {
-            if (response.status === 200) {
-              alert('raking de titulos atualizado')
-            }
-        })
-            .catch((error) => {
-                console.log(error.response.data)
-                alert(error.response.data)
-                setCarregando(false)
-            });
-    }
 
     return (
         <>
@@ -1700,54 +1720,64 @@ export default function Torneio() {
                     bordered={false}
                 />
             } */}
+
             <Button className="deletar-jogadorr" onClick={(e) => handleDeletar()}>
                 <div>Deletar todos os times das tabelas</div>
             </Button>
-            {mostrarVencedores &&
-                <div><h1 className="campeao"> Democration é Campeão do campeonato Division Soccer de 2025 </h1></div>
+            {console.log("wwwwwwwwwwwww", mostrarCampeao)}
+
+            {mostrarCampeao &&
+                <div>
+                    <div><h3 className="campeao"> {nomeTime} é Campeão do campeonato {nomeTorneio} de 2025 </h3></div>
+                    <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
+                    <h5 className="campeao2"> {jogadorcampeao1} </h5>
+
+
+                    <h5 className="campeao3"> {jogadorcampeao2} </h5>
+
+
+                    <h5 className="campeao4"> {jogadorcampeao3} </h5>
+
+
+                    <h5 className="campeao5"> {jogadorcampeao4} </h5>
+
+
+                    <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>
+
+
+                    <div><h5 className="campeao7"> {jogadorvice1} </h5></div>
+
+
+                    <div><h5 className="campeao8"> {jogadorvice2} </h5></div>
+
+
+                    <div><h5 className="campeao9"> {jogadorvice3} </h5></div>
+
+
+                    <div><h5 className="campeao10"> {jogadorvice4} </h5></div>
+
+
+                    <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
+
+
+                    <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>
+
+
+                    <div><h5 className="campeao13"> 2º Sabrina </h5></div>
+
+
+                    <div><h5 className="campeao14"> 3º Luiz </h5></div>
+
+                </div>
+
             }
-            {mostrarVencedores &&
-                <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
-            }
-            {mostrarVencedores &&
-                <h5 className="campeao2"> Taylor </h5>
-            }
-            {mostrarVencedores &&
-                <h5 className="campeao3"> Homem de Ferro </h5>
-            }
-            {mostrarVencedores &&
-                <h5 className="campeao4"> Titan </h5>
-            }
-            {mostrarVencedores &&
-                <h5 className="campeao5"> Renan </h5>
-            }
-            {mostrarVencedores &&
-                <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao7"> Pente Preto </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao8"> Wilham </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao9"> Luiz </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao10"> Leonardo </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao13"> 2º Sabrina </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="campeao14"> 3º Luiz </h5></div>
-            }
+            <Button className="botao-deletar" onClick={(e) => {
+                setMostrarCampeao(!mostrarCampeao);
+            }}>
+                <div>Mostrar  campeoes</div>
+            </Button>
+
+
 
             <>
                 <div>
@@ -2033,35 +2063,6 @@ export default function Torneio() {
                         <div>Deletar placares desta rodada</div>
                     </Button>
                 </div>
-                <h3>Digite abaixo os jogadors campeoes e o nome do torneio disputado</h3>
-                <label>Jogador 1 </label>
-                <Form.Control
-                    onChange={e => { setJogadorcampeao1(e.target.value) }}
-                    value={jogadorcampeao1}
-                />
-                <label>Jogador 2 </label>
-                <Form.Control
-                    onChange={e => { setJogadorcampeao2(e.target.value) }}
-                    value={jogadorcampeao2}
-                />
-                <label>Jogador 3 </label>
-                <Form.Control
-                    onChange={e => { setJogadorcampeao3(e.target.value) }}
-                    value={jogadorcampeao3}
-                />
-                <label>Jogador 4 </label>
-                <Form.Control
-                    onChange={e => { setJogadorcampeao4(e.target.value) }}
-                    value={jogadorcampeao4}
-                />
-                <label>Torneio </label>
-                <Form.Control
-                    onChange={e => { setNomeTorneio(e.target.value)}}
-                    value={nomeTorneio}
-                />
-                <Button className="btn-filtro-arquivo" onClick={(e) => { capeoesTorneio() }}>
-                    <div>Enviar</div>
-                </Button>
 
                 <div className="espaco" ></div>
                 <div className="campos-texto-login">

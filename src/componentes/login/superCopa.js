@@ -122,6 +122,8 @@ export default function SuperCopa() {
     const [data24, setData24] = useState('');
     const [mostrarVencedores, setMostrarVencedores] = useState(true);
 
+    
+
     let contador = 0
     let itensVar = []
 
