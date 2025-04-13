@@ -1647,6 +1647,29 @@ export default function Torneio() {
 
     }
 
+    async function capeoesTorneio (){
+        let enviarBanco = []
+        enviarBanco.push(jogadorcampeao1, jogadorcampeao2, jogadorcampeao3, jogadorcampeao4)
+
+        if(jogadorcampeao1 == "" || jogadorcampeao2 == "" || jogadorcampeao3 == "" || jogadorcampeao4 == "" || nomeTorneio == ""  ){
+            return alert('algum campo esta em branco')
+        }
+        setCarregando(true)
+        await apiC.post("titulo_ranking/inserir", {
+            "nome": enviarBanco,
+            "torneio": nomeTorneio
+        }).then(response => {
+            if (response.status === 200) {
+              alert('raking de titulos atualizado')
+            }
+        })
+            .catch((error) => {
+                console.log(error.response.data)
+                alert(error.response.data)
+                setCarregando(false)
+            });
+    }
+
 
     return (
         <>
@@ -1760,13 +1783,13 @@ export default function Torneio() {
                     <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
 
 
-                    <div><h5 className="campeao12"> 1º Homem de Ferro </h5></div>
+                    <div><h5 className="campeao12"> 1º Luciano </h5></div>
 
 
-                    <div><h5 className="campeao13"> 2º Sabrina </h5></div>
+                    <div><h5 className="campeao13"> 2º Maçaneta </h5></div>
 
 
-                    <div><h5 className="campeao14"> 3º Luiz </h5></div>
+                    <div><h5 className="campeao14"> 3º Crystal </h5></div>
 
                 </div>
 
@@ -2063,7 +2086,35 @@ export default function Torneio() {
                         <div>Deletar placares desta rodada</div>
                     </Button>
                 </div>
-
+                <h3>Digite abaixo os jogadors campeoes e o nome do torneio disputado</h3>
+                <label>Jogador 1 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao1(e.target.value) }}
+                    value={jogadorcampeao1}
+                />
+                <label>Jogador 2 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao2(e.target.value) }}
+                    value={jogadorcampeao2}
+                />
+                <label>Jogador 3 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao3(e.target.value) }}
+                    value={jogadorcampeao3}
+                />
+                <label>Jogador 4 </label>
+                <Form.Control
+                    onChange={e => { setJogadorcampeao4(e.target.value) }}
+                    value={jogadorcampeao4}
+                />
+                <label>Torneio </label>
+                <Form.Control
+                    onChange={e => { setNomeTorneio(e.target.value)}}
+                    value={nomeTorneio}
+                />
+                <Button className="btn-filtro-arquivo" onClick={(e) => { capeoesTorneio() }}>
+                    <div>Enviar</div>
+                </Button>
                 <div className="espaco" ></div>
                 <div className="campos-texto-login">
 
