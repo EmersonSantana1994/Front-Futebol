@@ -119,8 +119,21 @@ export default function RankingJogadores() {
     
 
     async function inserirNovoTime(nome, i, torneio) {
-       const verificar = verificaString(nome)
-        if(verificar){
+        let verificar 
+        
+        await apiC.post("rankingJogadores/buscarJogador", {
+        "nome": nome,
+    })
+        .then(response => {
+            if (response.status === 200) {
+                
+                verificar = response.data.result
+            }
+        })
+        .catch((error) => {
+            alert("Erro ao buscar jogadro")
+        });
+        if(verificar.length > 0){
                 await apiC.post("rankingJogadores/inserir", {
                     "nome": nome,
                     "pontos": i == 0 ? valorPriLiga : i == 1 ? 
@@ -131,20 +144,7 @@ export default function RankingJogadores() {
             alert("Valor digitado não corresponde aos jogadores cadastrados")
         }
     }
-
-    const verificaString = (nomeJogador) => {
-        return ['Cris', 'Axe', 'Super Homem', 'Hulk', 'Filipe', 'Wilham', 'Taylor', 'Maçaneta', 
-        'Sundown', 'Theo', 'Buzz', 'Dony', 'Monstro', 'Controle da tv', 'Rivelino', 'Renan', 
-        'Pente Cinza', 'Perna Longa', 'Raul', 'Sensodyni', 'Sabrina', 'Jhonsons', 'Cindy', 
-        'Loriel', 'Ufe', 'Sr Incrivel', 'Lucas', 'Hammer', 'Livia', 'Rafael', 'Tiago', 
-        'Rodrigo', 'Pente Laranja', 'Rildo', 'Pente Rosa', 'Net', 'Cristian', 'Pepe', 'Cif', 
-        'Homem de Ferro', 'Vinicius', 'Lacan', 'Condicionador', 'Telefone', 'Rozinha', 
-        'Coringa', 'Michel', 'Mostarda', 'Thanos', 'Pantene', 'Leonardo', 'Pente Preto', 
-        'Tati', 'Pente Azul', 'Matias', 'Azeite', 'Varicel', 'Titan', 'Eva', 'Hugo', 
-        'Azuzinho', 'Rita', 'David', 'Azulão', 'Shampo', 'Orlof', 'Branquinho', 'Kevin', 
-        'Crystal', 'Izakson', 'Sky', 'Gradiente', 'Escuro', 'Edson', 'Katchup', 'Luiza', 
-        'Luciano', 'Gael', 'Jack', 'Luiz'].includes(nomeJogador)
-    }
+    
 
     async function fazerLimpeza(e) {
         setCarregando(true)
