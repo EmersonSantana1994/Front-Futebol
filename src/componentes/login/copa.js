@@ -41,6 +41,7 @@ export default function SuperCopa() {
     const [placar30, setPlacar30] = useState('');
     const [placar31, setPlacar31] = useState('');
     const [placar32, setPlacar32] = useState('');
+     const [mostrarCampeao, setMostrarCampeao] = useState(false);
     const [placarProrrogacao29, setPlacarProrrogacao29] = useState('');
     const [placarProrrogacao30, setPlacarProrrogacao30] = useState('');
     const [placarProrrogacao31, setPlacarProrrogacao31] = useState('');
@@ -124,6 +125,19 @@ export default function SuperCopa() {
 
     let contador = 0
     let itensVar = []
+    
+
+     const [jogadorcampeao1, setJogadorcampeao1] = useState('');
+        const [jogadorcampeao2, setJogadorcampeao2] = useState('');
+        const [jogadorcampeao3, setJogadorcampeao3] = useState('');
+        const [jogadorcampeao4, setJogadorcampeao4] = useState('');
+        const [nomeTorneio, setNomeTorneio] = useState('');
+        const [nomeTime, setNomeTime] = useState('');
+    
+        const [jogadorvice1, setJogadorvice1] = useState('');
+        const [jogadorvice2, setJogadorvice2] = useState('');
+        const [jogadorvice3, setJogadorvice3] = useState('');
+        const [jogadorvice4, setJogadorvice4] = useState('');
 
 
     let token = JSON.parse(localStorage.getItem("keyToken"))
@@ -385,12 +399,19 @@ export default function SuperCopa() {
                     if (response.data[47].placar != null) {
                         setPlacarProrrogacao44(response.data[47].placar)
                     }
+
                 })
                 .catch((error) => {
                 });
         }
         bucartodos_placar()
+
     }, [])
+
+    if (placar25) {
+        console.log("plaaaa", placar25)
+        jogadoresCampeoes()
+    }
 
 
     async function verificaSeTemTimeCadastrado() {
@@ -1217,6 +1238,77 @@ export default function SuperCopa() {
 
 
 
+
+
+
+
+    async function jogadoresCampeoes() {
+        let timeCampeao
+        let timeVice
+
+        let placar1 = Number(placar25);
+        let placar2 = Number(placar28);
+        let placar3 = Number(placar26);
+        let placar4 = Number(placar27);
+        let placar5 = Number(placarProrrogacao41);
+        let placar6 = Number(placarProrrogacao42);
+        let resulTime1 = placar1 + placar2
+        let resulTime2 = placar3 + placar4
+
+
+        if (typeof resulTime1 == 'number' && typeof resulTime2 == 'number') {
+            if (resulTime1 > resulTime2) {
+                timeCampeao = time1f
+                timeVice = time2f
+            } else if (resulTime2 > resulTime1) {
+                timeCampeao = time2f
+                timeVice = time1f
+            } else if (resulTime1 == resulTime2) {
+                if (typeof placar5 == 'number' && typeof placar6 == 'number') {
+                    if (placar5 > placar6) {
+                        timeCampeao = time1f
+                        timeVice = time2f
+                    } else if (placar6 > placar5) {
+                        timeCampeao = time2f
+                        timeVice = time1f
+                    }
+                }
+
+            }
+
+            console.log("timeCampeao", timeCampeao)
+            console.log("timeVice", timeVice)
+
+
+        }
+        await apiC.post("torneio/bucarCampeoes", {
+            "primeiroLugar": timeCampeao,
+            "segundoLugar": timeVice
+        }).then(response => {
+            if (response.status === 200) {
+                if (response.data.result.length > 0) {
+                    console.log(response.data.result[0][0].jogador)
+                    setJogadorcampeao1(response.data.result[0][0].jogador)
+                    setJogadorcampeao2(response.data.result[0][1].jogador)
+                    setJogadorcampeao3(response.data.result[0][2].jogador)
+                    setJogadorcampeao4(response.data.result[0][3].jogador)
+                    setJogadorvice1(response.data.result[1][0].jogador)
+                    setJogadorvice2(response.data.result[1][1].jogador)
+                    setJogadorvice3(response.data.result[1][2].jogador)
+                    setJogadorvice4(response.data.result[1][3].jogador)
+                    setNomeTorneio(response.data.result[1][0].liga)
+                    setNomeTime(response.data.result[0][0].time)
+                }
+            }
+       
+        })
+            .catch((error) => {
+          
+            });
+
+    }
+
+
     return (
         <>
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
@@ -1318,51 +1410,56 @@ export default function SuperCopa() {
                     </section>
                 )}
             </Dropzone>
-            {mostrarVencedores &&
-                <div><h3 className="copa"> Halor é Campeão da Copa Hainiken 2  de 2024 </h3></div>
-            }
-            {mostrarVencedores &&
-                <div><h3 className="copa1"> Abaixo os jogadores campeões </h3></div>
-            }
-            {mostrarVencedores &&
-                <h5 className="copa2"> Sr Incrivel </h5>
-            }
-            {mostrarVencedores &&
-                <h5 className="copa3"> Pente Cinza </h5>
-            }
-            {mostrarVencedores &&
-                <h5 className="copa4"> Azeite </h5>
-            }
-            {mostrarVencedores &&
-                <h5 className="copa5"> Crystal </h5>
-            }
-            {mostrarVencedores &&
-                <div><h3 className="copa6"> Abaixo os jogadores vices campeões </h3></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa7"> Telefone </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa8"> Renato </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa9"> Buzz </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa10"> Rivelino </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h3 className="copa11"> Abaixo os melhores jogadores do campeonato </h3></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa12"> 1º Azeite </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa13"> 2º Sr Incrivel </h5></div>
-            }
-            {mostrarVencedores &&
-                <div><h5 className="copa14"> 3º Rivelino </h5></div>
-            }
+            {mostrarCampeao &&
+                          <div className="camp">
+                              <div><h3 className="campeao"> {nomeTime} é Campeão da copa "" de 2025 </h3></div>
+                              <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
+                              <h5 className="campeao2"> {jogadorcampeao1} </h5>
+          
+          
+                              <h5 className="campeao3"> {jogadorcampeao2} </h5>
+          
+          
+                              <h5 className="campeao4"> {jogadorcampeao3} </h5>
+          
+          
+                              <h5 className="campeao5"> {jogadorcampeao4} </h5>
+          
+          
+                              <div><h3 className="campeao6"> Abaixo os jogadores vices campeões </h3></div>
+          
+          
+                              <div><h5 className="campeao7"> {jogadorvice1} </h5></div>
+          
+          
+                              <div><h5 className="campeao8"> {jogadorvice2} </h5></div>
+          
+          
+                              <div><h5 className="campeao9"> {jogadorvice3} </h5></div>
+          
+          
+                              <div><h5 className="campeao10"> {jogadorvice4} </h5></div>
+          
+          
+                              <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
+          
+          
+                              <div><h5 className="campeao12"> 1º Luciano </h5></div>
+          
+          
+                              <div><h5 className="campeao13"> 2º Maçaneta </h5></div>
+          
+          
+                              <div><h5 className="campeao14"> 3º Crystal </h5></div>
+          
+                          </div>
+          
+                      }
+                      <Button className="botao-deletar" onClick={(e) => {
+                          setMostrarCampeao(!mostrarCampeao);
+                      }}>
+                          <div>Mostrar  campeoes</div>
+                      </Button>
 
             <h3 className='semifinal'>Semifinal</h3>
 

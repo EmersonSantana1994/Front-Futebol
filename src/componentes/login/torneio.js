@@ -1747,7 +1747,7 @@ export default function Torneio() {
             <Button className="deletar-jogadorr" onClick={(e) => handleDeletar()}>
                 <div>Deletar todos os times das tabelas</div>
             </Button>
-            {console.log("wwwwwwwwwwwww", mostrarCampeao)}
+        
 
             {mostrarCampeao &&
                 <div>
