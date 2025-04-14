@@ -1,6 +1,6 @@
 // PROJETO PARA DESAFIO DE TESTE
 
-import React, { useState } from 'react';/*eslint-disable*/
+import React, { useState, useEffect, useRef  } from 'react';/*eslint-disable*/
 import '../../css/login/login.css';
 import { Button, Image, Form, InputGroup, FormControl, Col, Carousel } from 'react-bootstrap';
 import { apiC } from "../../conexoes/api";
@@ -27,6 +27,7 @@ export default function TelaLogin() {
     const [contMen, setContMen] = useState([]);
     const [contFem, setContFem] = useState([]);
     const [medIdade, setMedIdade] = useState([]);
+    const botaoRef = useRef();
 
     let totalItens = 0
     let contador = 0
@@ -34,6 +35,18 @@ export default function TelaLogin() {
     let contadorMale = 0
     let contadorFemale = 0
 
+    useEffect(() => {
+            const handleKeyDown = (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    botaoRef.current?.click();
+                }
+            };
+    
+            window.addEventListener("keydown", handleKeyDown);
+            return () => window.removeEventListener("keydown", handleKeyDown);
+        }, []);
+    
 
     const navigate = useNavigate();
     async function paraNavegar() {
@@ -120,7 +133,7 @@ export default function TelaLogin() {
                     </div>
 
                     <div className='senha'>
-                        <Button onClick={(e) => efetuarLogin()}>Entrar</Button>
+                        <Button onClick={(e) => efetuarLogin()} ref={botaoRef}>Entrar</Button>
                     </div>
                     <div className="espaco" ></div>
                     <div className="campos-texto-login">
