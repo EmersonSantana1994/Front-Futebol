@@ -1215,6 +1215,21 @@ export default function SuperCopa() {
 
     }
 
+       useEffect(() => {
+    
+            async function limparP() {
+                await apiC.post("placar/limpar")
+                    .then(response => {
+                    })
+                    .catch((error) => {
+                        alert('erro ao limpar placar')
+                    });
+    
+    
+            }
+            limparP()
+        }, [])
+
 
     async function mostrarFinalistas() {
         setFinais(true)

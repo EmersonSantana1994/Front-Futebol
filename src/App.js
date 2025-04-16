@@ -30,6 +30,10 @@ import GolsPais from './componentes/login/golsPais';
 import GolsLiga from './componentes/login/golsLigas';
 import GolsTime from './componentes/login/golsTime';
 import GolsPosicao from './componentes/login/golsPosicao';
+import AssistenciasPais from './componentes/login/assistenciasPais';
+import AssistenciasLiga from './componentes/login/assistenciasLigas';
+import AssistenciasTime from './componentes/login/assistenciasTime';
+import AssistenciasPosicao from './componentes/login/assistenciasPosicao';
 import Cronometro from './componentes/login/cronometro';
 import Calculator from './componentes/login/calculadora';
 import ListaDono from './componentes/login/listaDono';
@@ -75,6 +79,10 @@ function App() {
         <Route path='/golsLiga' element={<GolsLiga/>} />
         <Route path='/golsTime' element={<GolsTime/>} />
         <Route path='/golsPosicao' element={<GolsPosicao/>} />
+        <Route path='/assistenciasPais' element={<AssistenciasPais/>} />
+        <Route path='/assistenciasLiga' element={<AssistenciasLiga/>} />
+        <Route path='/assistenciasTime' element={<AssistenciasTime/>} />
+        <Route path='/assistenciasPosicao' element={<AssistenciasPosicao/>} />
         <Route path='/cronometro' element={<Cronometro/>} />
         <Route path='/calculadora' element={<Calculator/>} />
         <Route path='/listarDono' element={<ListaDono/>} />

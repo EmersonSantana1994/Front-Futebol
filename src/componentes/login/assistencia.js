@@ -295,6 +295,22 @@ for(let i = 0; i < dadosSelecionados.length; i++){
         <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                         <div>Home</div>
                     </Button>
+                     ----
+                                <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/assistenciasPais')}>
+                                    <div>Ranking assistencias por seleção</div>
+                                </Button>
+                                -----
+                                <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/assistenciasLiga')}>
+                                    <div>Ranking assistencias por ligas</div>
+                                </Button>
+                                -----
+                                <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/assistenciasTime')}>
+                                    <div>Ranking assistencias por time</div>
+                                </Button>
+                                ---
+                                <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/assistenciasPosicao')}>
+                                    <div>Ranking assistencias por posicao</div>
+                                </Button>
             {carregando &&
                 <h1>carregando..</h1>
             }
