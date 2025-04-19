@@ -1427,7 +1427,7 @@ export default function SuperCopa() {
             </Dropzone>
             {mostrarCampeao &&
                           <div className="camp">
-                              <div><h3 className="campeao"> {nomeTime} é Campeão da copa "" de 2025 </h3></div>
+                              <div><h3 className="campeao"> {nomeTime} é Campeão da Sub Liga de 2025 </h3></div>
                               <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
                               <h5 className="campeao2"> {jogadorcampeao1} </h5>
           
@@ -1459,13 +1459,13 @@ export default function SuperCopa() {
                               <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
           
           
-                              <div><h5 className="campeao12"> 1º Luciano </h5></div>
+                              <div><h5 className="campeao12"> 1º Done </h5></div>
           
           
-                              <div><h5 className="campeao13"> 2º Maçaneta </h5></div>
+                              <div><h5 className="campeao13"> 2º Pente Laranja </h5></div>
           
           
-                              <div><h5 className="campeao14"> 3º Crystal </h5></div>
+                              <div><h5 className="campeao14"> 3º Azuzinho </h5></div>
           
                           </div>
           

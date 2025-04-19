@@ -39,20 +39,20 @@ export default function ArtilheiroTorneio() {
     let itensVar2 = []
     let dadosSelecionados = []
 
-    useEffect(() => {
-        async function autenticar(e) {
-            await apiC.post("autenticacao/autenticar")
-                .then(response => {
-                    console.log("esta autenticado")
-                })
-                .catch((error) => {
-                    if (error.response.data === 'não autenticado') {
-                        navigate('/')
-                    }
-                });
-        }
-        setTimeout(autenticar, 5000);
-    }, [])
+    // useEffect(() => {
+    //     async function autenticar(e) {
+    //         await apiC.post("autenticacao/autenticar")
+    //             .then(response => {
+    //                 console.log("esta autenticado")
+    //             })
+    //             .catch((error) => {
+    //                 if (error.response.data === 'não autenticado') {
+    //                     navigate('/')
+    //                 }
+    //             });
+    //     }
+    //     setTimeout(autenticar, 5000);
+    // }, [])
 
     useEffect(() => {
         inserirData()
@@ -121,8 +121,14 @@ export default function ArtilheiroTorneio() {
                 setCarregando(false)
             })
             .catch((error) => {
-                setMensagemTabela('erro ao atualizar tabela')
-                alert('erro ao atualizar tabela')
+                setMensagemTabela('erro ao atualizar tabela', error)
+                console.log("erro ao atualizar tabela", error)
+                if(error.message == 'Network Error') {
+                    inserirData()
+                    setCarregando(false)
+                }else{
+                    alert('erro ao atualizar tabela')
+                }
                 setCarregando(false)
             });
 
@@ -145,7 +151,6 @@ export default function ArtilheiroTorneio() {
                             }
                         }
                         setSomaAssitencias(somaTotalGols)
-                        console.log("itensVar", itensVar2)
                         setItensAss(JSON.parse(JSON.stringify(itensVar2)))
 
                     }
@@ -155,6 +160,7 @@ export default function ArtilheiroTorneio() {
             })
             .catch((error) => {
                 setMensagemTabela('erro ao atualizar tabela')
+                console.log("erro ao atualizar tabela", error)
                 alert('erro ao atualizar tabela')
                 setCarregando(false)
             });
@@ -219,15 +225,11 @@ export default function ArtilheiroTorneio() {
     async function atualizaNumeroGol(item) {
         let quantidadeGolNum = parseInt(quantidadeGol, 10)
         setMensagem('atualizando..')
-
-        await apiC.put("artilheiro/atualiza", {
+        await apiC.post("artilheiro/atualiza", {
             "id": item[0].id,
             "nome": item[0].nome,
             "gols": item[0].gols + 1,
             "gols_torneio": 1,
-            headers: {
-                'x-access-token': token,
-            }
         })
             .then(response => {
                 if (response.status === 200) {
@@ -239,14 +241,15 @@ export default function ArtilheiroTorneio() {
                 setCarregando(false)
             })
             .catch((error) => {
-                setMensagem('erro ao atualizar')
+                setMensagem('erro ao atualizar', error)
+                console.log("erro ao atualizar",error )
                 alert('erro ao atualizar')
                 setCarregando(false)
             });
 
     }
 
-    async function inserirNovoJogador() {
+    async function  inserirNovoJogador() {
         let quantidadeGolNum = parseInt(quantidadeGol, 10)
         // const verificar = verificaString()
         // if(verificar){
@@ -343,21 +346,25 @@ export default function ArtilheiroTorneio() {
     async function handleSalvar() {
         setCarregando(true)
         setMensagem('salvando..')
-        await apiC.post("artilheiro/nome", {
+        await apiC.post("artilheiro/atualizarGols", {
             "nome": nomeJogador,
+            "gols": 1,
+            "gols_torneio": 1
         })
             .then(response => {
                 if (response.status === 200) {
-                    if (response.data.length > 0) {
-                        atualizaNumeroGol(response.data)
-                    } else {
-                        inserirNovoJogador()
-                    }
+                        setMensagem('atualizado!')
+                        setNomeJogadorAnterior(nomeJogador)
+                        setQuantidadeGolAnterior(1)
+                        inserirData()
                 }
                 setCarregando(false)
             })
             .catch((error) => {
-                setMensagem('erro ao salvar')
+                setMensagem('erro ao atualizar', error)
+                console.log("erro ao atualizar emeee",error )
+                
+                alert(error.response.data)
                 setCarregando(false)
             });
 
