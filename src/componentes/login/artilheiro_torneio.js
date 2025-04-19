@@ -63,6 +63,23 @@ export default function ArtilheiroTorneio() {
     }, [])
 
 
+    async function buscarTodos(params) {
+        apiC.post("placar/bucartodos")
+        .then(response => {
+            if (response.data[0].placar != null) {
+                setTime1(response.data[0].nome)
+                setPlacar1(response.data[0].placar)
+            }
+            if (response.data[1].placar != null && response.data[1].placar != undefined && response.data[1].placar != 'undefined')
+                setTime2(response.data[1].nome)
+            setPlacar2(response.data[1].placar)
+        })
+        .catch((error) => {
+            setMensagem('erro ao buscar placar')
+            setCarregando(false)
+        });
+    }
+
     useEffect(() => {
         apiC.post("placar/bucartodos")
             .then(response => {
@@ -161,7 +178,13 @@ export default function ArtilheiroTorneio() {
             .catch((error) => {
                 setMensagemTabela('erro ao atualizar tabela')
                 console.log("erro ao atualizar tabela", error)
-                alert('erro ao atualizar tabela')
+                if(error.message == 'Network Error') {
+                    inserirDataAssistencia()
+                    setCarregando(false)
+                }else{
+                    alert('erro ao atualizar tabela')
+                }
+                
                 setCarregando(false)
             });
 
@@ -429,8 +452,13 @@ export default function ArtilheiroTorneio() {
                             setPlacar2(response.data[1].placar)
                         })
                         .catch((error) => {
+                            if(error.message == 'Network Error') {
+                                buscarTodos()
+                                setCarregando(false)
+                            }else{
                             setMensagem('erro ao buscar placar')
                             setCarregando(false)
+                            }
                         });
 
                 }

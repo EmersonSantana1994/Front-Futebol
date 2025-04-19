@@ -309,6 +309,9 @@ export default function Torneio() {
 
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    verificaPlacares()
+                }
                 console.log("erro ao chamar os placlares", error)
             });
     }
@@ -342,6 +345,9 @@ export default function Torneio() {
                 setCarregando(false)
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    verificaSeTemTimeCadastrado()
+                }
                 setCarregando(false)
             });
     }
@@ -372,6 +378,9 @@ export default function Torneio() {
                 setCarregando(false)
             })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        buscarCampeoes(i)
+                    }
                     setCarregando(false)
                 });
         }
@@ -401,6 +410,9 @@ export default function Torneio() {
                 setCarregando(false)
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    anunciarCampeao()
+                }
                 setCarregando(false)
             });
     }
@@ -462,6 +474,9 @@ export default function Torneio() {
                 }
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    handleDeletar()
+                }
                 alert('erro ao deletar jogador da tabela de pontos corridos')
                 setCarregando(false)
             });
@@ -474,6 +489,9 @@ export default function Torneio() {
                 }
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    handleDeletar()
+                }
                 alert('erro ao deletar jogador da tabela de times sorteados')
                 setCarregando(false)
             });
@@ -553,6 +571,9 @@ export default function Torneio() {
                 setCarregando(false)
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    buscarTimesSorteados()
+                }
                 setCarregando(false)
             });
     }
@@ -581,6 +602,9 @@ export default function Torneio() {
                 setCarregando(false)
             })
             .catch((error) => {
+                if(error.message == 'Network Error') {
+                    AtualizaTabela()
+                }
                 setCarregando(false)
             });
     }
@@ -624,6 +648,9 @@ export default function Torneio() {
                 .then(response => {
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        limparP()
+                    }
                     alert('erro ao limpar placar')
                 });
 
@@ -655,6 +682,11 @@ export default function Torneio() {
         })
             .catch((error) => {
                 setCarregando(false)
+                if(error.message == 'Network Error') {
+                    atualizaTime(dados, pontos, saldo)
+                    console.log("voltou", error)
+                }
+                
                 alert('Erro ao atualizar pontos do time ', dados[0].nome)
             });
     }
@@ -675,6 +707,9 @@ export default function Torneio() {
         })
             .catch((error) => {
                 setCarregando(false)
+                if(error.message == 'Network Error') {
+                    atualizaTimePerdedor(dados, saldo)
+                }
                 alert('Erro ao atualizar pontos do time ', dados[0].nome)
             });
     }
@@ -1034,6 +1069,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time1)
                 });
         }
@@ -1055,6 +1093,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time2)
                 });
         }
@@ -1076,6 +1117,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time3)
                 });
         }
@@ -1097,6 +1141,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time4)
                 });
         }
@@ -1118,6 +1165,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time5)
                 });
         }
@@ -1139,6 +1189,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time6)
                 });
         }
@@ -1160,6 +1213,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time7)
                 });
         }
@@ -1181,6 +1237,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time8)
                 });
         }
@@ -1202,6 +1261,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time9)
                 });
         }
@@ -1223,6 +1285,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time10)
                 });
         }
@@ -1244,6 +1309,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time11)
                 });
         }
@@ -1261,6 +1329,9 @@ export default function Torneio() {
                             setMostrarPlacarSalvo12(true)
                         })
                         .catch((error) => {
+                            if(error.message == 'Network Error') {
+                                salvarPlacar()
+                            }
                             alert('erro ao trazer o placar ', time12)
                         });
                 })
@@ -1286,6 +1357,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time13)
                 });
         }
@@ -1307,6 +1381,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time14)
                 });
         }
@@ -1324,6 +1401,9 @@ export default function Torneio() {
                             setMostrarPlacarSalvo15(true)
                         })
                         .catch((error) => {
+                            if(error.message == 'Network Error') {
+                                salvarPlacar()
+                            }
                             alert('erro ao trazer o placar ', time15)
                         });
                 })
@@ -1349,6 +1429,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time16)
                 });
         }
@@ -1370,6 +1453,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time17)
                 });
         }
@@ -1391,6 +1477,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time18)
                 });
         }
@@ -1412,6 +1501,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time19)
                 });
         }
@@ -1433,6 +1525,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time20)
                 });
         }
@@ -1454,6 +1549,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time21)
                 });
         }
@@ -1475,6 +1573,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time22)
                 });
         }
@@ -1496,6 +1597,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time23)
                 });
         }
@@ -1517,6 +1621,9 @@ export default function Torneio() {
                         });
                 })
                 .catch((error) => {
+                    if(error.message == 'Network Error') {
+                        salvarPlacar()
+                    }
                     alert('erro ao salvar o placar ', time24)
                 });
         }
