@@ -64,6 +64,7 @@ export default function ArtilheiroTorneio() {
 
 
     async function buscarTodos(params) {
+        setCarregando(true)
         apiC.post("placar/bucartodos")
         .then(response => {
             if (response.data[0].placar != null) {
@@ -75,8 +76,15 @@ export default function ArtilheiroTorneio() {
             setPlacar2(response.data[1].placar)
         })
         .catch((error) => {
-            setMensagem('erro ao buscar placar')
-            setCarregando(false)
+            alert('erro ao buscar placar')
+            if(error.message == 'Network Error') {
+                buscarTodos()
+                setCarregando(false)
+            }else{
+                alert('erro ao buscar placar')
+                setCarregando(false)
+            }
+
         });
     }
 
@@ -92,8 +100,14 @@ export default function ArtilheiroTorneio() {
                 setPlacar2(response.data[1].placar)
             })
             .catch((error) => {
-                setMensagem('erro ao buscar placar')
-                setCarregando(false)
+                if(error.message == 'Network Error') {
+                    buscarTodos()
+                    setCarregando(false)
+                }else{
+                    alert('erro ao buscar placar')
+                    setCarregando(false)
+                }
+                
             });
     }, [])
 
@@ -457,7 +471,7 @@ export default function ArtilheiroTorneio() {
                                 buscarTodos()
                                 setCarregando(false)
                             }else{
-                            setMensagem('erro ao buscar placar')
+                            alert('erro ao buscar placar')
                             setCarregando(false)
                             }
                         });
