@@ -687,7 +687,7 @@ export default function Torneio() {
                     console.log("voltou", error)
                 }
                 
-                alert('Erro ao atualizar pontos do time ', dados[0].nome)
+                alert('Erro ao atualizar pontos do time funçao atualizaTime ', dados[0].nome)
             });
     }
 
@@ -710,7 +710,7 @@ export default function Torneio() {
                 if(error.message == 'Network Error') {
                     atualizaTimePerdedor(dados, saldo)
                 }
-                alert('Erro ao atualizar pontos do time ', dados[0].nome)
+                alert('Erro ao atualizar pontos do time função atualizaTimePerdedor', dados[0].nome)
             });
     }
 

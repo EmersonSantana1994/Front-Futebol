@@ -207,6 +207,7 @@ export default function ArtilheiroTorneio() {
             .catch((error) => {
                 setMensagem('erro ao salvar')
                 setCarregando(false)
+                alert(error.response.data)
             });
 
     }
