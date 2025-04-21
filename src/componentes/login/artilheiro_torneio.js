@@ -650,6 +650,10 @@ export default function ArtilheiroTorneio() {
             {
                 <h2>{nomeJogadorAnterior}</h2>
             }
+
+             {nomeJogadorAssitenica &&
+                <h2>assistencia feita por -{nomeJogadorAssitenica}</h2>
+            }
             {
                 <h2>{quantidadeGolAnterior}</h2>
             }
