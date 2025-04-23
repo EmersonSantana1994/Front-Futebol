@@ -6,7 +6,19 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { useNavigate } from 'react-router-dom';
 import Dropzone from "react-dropzone";
 
+
 export default function SuperCopa() {
+
+    function ImagemDinamica({ caminho }) {
+        console.log("caminho", caminho)
+        return   <img
+        src={`/${caminho}`}
+        alt="Imagem"
+        style={{ width: '157px', height: 'auto' }}
+      />;
+      }
+
+      const imagem = "utils/escudoTimes/Democration.png" 
 
     const [itens, setItens] = useState([]);
     const [placar1, setPlacar1] = useState('');
@@ -133,6 +145,7 @@ export default function SuperCopa() {
         const [jogadorcampeao4, setJogadorcampeao4] = useState('');
         const [nomeTorneio, setNomeTorneio] = useState('');
         const [nomeTime, setNomeTime] = useState('');
+        const [escudo, setEscudo] = useState('');
     
         const [jogadorvice1, setJogadorvice1] = useState('');
         const [jogadorvice2, setJogadorvice2] = useState('');
@@ -409,7 +422,6 @@ export default function SuperCopa() {
     }, [])
 
     if (placar25) {
-        console.log("plaaaa", placar25)
         jogadoresCampeoes()
     }
 
@@ -1291,9 +1303,6 @@ export default function SuperCopa() {
 
             }
 
-            console.log("timeCampeao", timeCampeao)
-            console.log("timeVice", timeVice)
-
 
         }
         await apiC.post("torneio/bucarCampeoes", {
@@ -1313,6 +1322,7 @@ export default function SuperCopa() {
                     setJogadorvice4(response.data.result[1][3].jogador)
                     setNomeTorneio(response.data.result[1][0].liga)
                     setNomeTime(response.data.result[0][0].time)
+                    setEscudo(response.data.result[0][0].escudo)
                 }
             }
        
@@ -1326,6 +1336,8 @@ export default function SuperCopa() {
 
     return (
         <>
+       
+        
             <Button className="btn-filtro-arquivo" onClick={(e) => navigate('/home')}>
                 <div>Home</div>
             </Button>
@@ -2239,8 +2251,19 @@ export default function SuperCopa() {
                             />
 
                         }
-                    </div>
+                       
+                       {mostrarCampeao &&
+                       <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                         <h1> O campeão é o {nomeTime}</h1>
+                         <ImagemDinamica caminho={escudo} />
+                       </div>
+                        
+                        }
 
+
+
+                    </div>
+                    
                 </div>
 
             </Form.Group>
