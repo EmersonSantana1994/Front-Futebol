@@ -8,6 +8,7 @@ import Cronometro from '../login/cronometro';
 
 export default function ArtilheiroTorneio() {
     const [nomeJogadorAssitenica, setNomeJogadorAssitenica] = useState('');
+    const [nomeJogadorAnteriorAssitenica, setNomeJogadorAnteriorAssitenica] = useState('');
     const [quantidadeAssitencia, setQuantidadeAssitencia] = useState(0);
     const [nomeJogador, setNomeJogador] = useState('');
     const [quantidadeGol, setQuantidadeGol] = useState(0);
@@ -68,20 +69,20 @@ export default function ArtilheiroTorneio() {
         apiC.post("placar/bucartodos")
         .then(response => {
             if (response.data[0].placar != null) {
-                setTime1(response.data[0].nome)
-                setPlacar1(response.data[0].placar)
+                setTime1(response?.data[0].nome)
+                setPlacar1(response?.data[0].placar)
             }
-            if (response.data[1].placar != null && response.data[1].placar != undefined && response.data[1].placar != 'undefined')
-                setTime2(response.data[1].nome)
-            setPlacar2(response.data[1].placar)
+            if (response?.data[1].placar != null && response?.data[1].placar != undefined && response?.data[1].placar != 'undefined')
+                setTime2(response?.data[1].nome)
+            setPlacar2(response?.data[1].placar)
         })
         .catch((error) => {
-            alert('erro ao buscar placar')
+            alert('erro ao buscar placar 1')
             if(error.message == 'Network Error') {
                 buscarTodos()
                 setCarregando(false)
             }else{
-                alert('erro ao buscar placar')
+                alert('erro ao buscar placar 2')
                 setCarregando(false)
             }
 
@@ -91,20 +92,20 @@ export default function ArtilheiroTorneio() {
     useEffect(() => {
         apiC.post("placar/bucartodos")
             .then(response => {
-                if (response.data[0].placar != null) {
-                    setTime1(response.data[0].nome)
-                    setPlacar1(response.data[0].placar)
+                if (response?.data[0]?.placar != null) {
+                    setTime1(response?.data[0]?.nome)
+                    setPlacar1(response?.data[0]?.placar)
                 }
-                if (response.data[1].placar != null && response.data[1].placar != undefined && response.data[1].placar != 'undefined')
-                    setTime2(response.data[1].nome)
-                setPlacar2(response.data[1].placar)
+                if (response?.data[1]?.placar != null && response?.data[1]?.placar != undefined && response?.data[1]?.placar != 'undefined')
+                    setTime2(response?.data[1]?.nome)
+                setPlacar2(response?.data[1]?.placar)
             })
             .catch((error) => {
                 if(error.message == 'Network Error') {
                     buscarTodos()
                     setCarregando(false)
                 }else{
-                    alert('erro ao buscar placar')
+                    alert('erro ao buscar placar 3')
                     setCarregando(false)
                 }
                 
@@ -213,6 +214,7 @@ export default function ArtilheiroTorneio() {
         })
             .then(response => {
                 if (response.status === 200) {
+                    setNomeJogadorAnteriorAssitenica(nomeJogadorAssitenica)
                     setMensagem('Novo nome inserido!')
                     inserirDataAssistencia()
                 }
@@ -260,59 +262,59 @@ export default function ArtilheiroTorneio() {
 
     ]
 
-    async function atualizaNumeroGol(item) {
-        let quantidadeGolNum = parseInt(quantidadeGol, 10)
-        setMensagem('atualizando..')
-        await apiC.post("artilheiro/atualiza", {
-            "id": item[0].id,
-            "nome": item[0].nome,
-            "gols": item[0].gols + 1,
-            "gols_torneio": 1,
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    setMensagem('atualizado!')
-                    setNomeJogadorAnterior(item[0].nome)
-                    setQuantidadeGolAnterior(1)
-                    inserirData()
-                }
-                setCarregando(false)
-            })
-            .catch((error) => {
-                setMensagem('erro ao atualizar', error)
-                console.log("erro ao atualizar",error )
-                alert('erro ao atualizar')
-                setCarregando(false)
-            });
+    // async function atualizaNumeroGol(item) {
+    //     let quantidadeGolNum = parseInt(quantidadeGol, 10)
+    //     setMensagem('atualizando..')
+    //     await apiC.post("artilheiro/atualiza", {
+    //         "id": item[0].id,
+    //         "nome": item[0].nome,
+    //         "gols": item[0].gols + 1,
+    //         "gols_torneio": 1,
+    //     })
+    //         .then(response => {
+    //             if (response.status === 200) {
+    //                 setMensagem('atualizado!')
+    //                 setNomeJogadorAnterior(item[0].nome)
+    //                 setQuantidadeGolAnterior(1)
+    //                 inserirData()
+    //             }
+    //             setCarregando(false)
+    //         })
+    //         .catch((error) => {
+    //             setMensagem('erro ao atualizar', error)
+    //             console.log("erro ao atualizar",error )
+    //             alert('erro ao atualizar')
+    //             setCarregando(false)
+    //         });
 
-    }
+    // }
 
-    async function  inserirNovoJogador() {
-        let quantidadeGolNum = parseInt(quantidadeGol, 10)
-        // const verificar = verificaString()
-        // if(verificar){
-        setMensagem('Inserindo novo nome..')
-        await apiC.post("artilheiro/inserir", {
-            "nome": nomeJogador,
-            "gols": 1,
-        }).then(response => {
-            if (response.status === 200) {
-                setMensagem('Novo nome inserido!')
-                setNomeJogadorAnterior(nomeJogador)
-                setQuantidadeGolAnterior(1)
-                inserirData()
-            }
-            setCarregando(false)
-        })
-            .catch((error) => {
-                setMensagem('erro ao inserir novo nome')
-                alert(error.response.data)
-                setCarregando(false)
-            });
-        // }else{
-        //     alert('Nome não cadastrado, por favor verifique')
-        // }
-    }
+    // async function  inserirNovoJogador() {
+    //     let quantidadeGolNum = parseInt(quantidadeGol, 10)
+    //     // const verificar = verificaString()
+    //     // if(verificar){
+    //     setMensagem('Inserindo novo nome..')
+    //     await apiC.post("artilheiro/inserir", {
+    //         "nome": nomeJogador,
+    //         "gols": 1,
+    //     }).then(response => {
+    //         if (response.status === 200) {
+    //             setMensagem('Novo nome inserido!')
+    //             setNomeJogadorAnterior(nomeJogador)
+    //             setQuantidadeGolAnterior(1)
+    //             inserirData()
+    //         }
+    //         setCarregando(false)
+    //     })
+    //         .catch((error) => {
+    //             setMensagem('erro ao inserir novo nome')
+    //             alert(error.response.data)
+    //             setCarregando(false)
+    //         });
+    //     // }else{
+    //     //     alert('Nome não cadastrado, por favor verifique')
+    //     // }
+    // }
 
     async function handleDeletar() {
         setMensagem('Deletando..')
@@ -458,20 +460,21 @@ export default function ArtilheiroTorneio() {
                 if (response.status === 200) {
                     apiC.post("placar/bucartodos")
                         .then(response => {
-                            if (response.data[0].placar != null) {
-                                setTime1(response.data[0].nome)
-                                setPlacar1(response.data[0].placar)
+                            if (response?.data[0]?.placar != null) {
+                                setTime1(response?.data[0]?.nome)
+                                setPlacar1(response?.data[0]?.placar)
                             }
-                            if (response.data[1].placar != null && response.data[1].placar != undefined && response.data[1].placar != 'undefined')
-                                setTime2(response.data[1].nome)
-                            setPlacar2(response.data[1].placar)
+                            if (response?.data[1]?.placar != null && response?.data[1]?.placar != undefined && response?.data[1]?.placar != 'undefined')
+                                setTime2(response?.data[1]?.nome)
+                            setPlacar2(response?.data[1]?.placar)
                         })
                         .catch((error) => {
                             if(error.message == 'Network Error') {
                                 buscarTodos()
                                 setCarregando(false)
                             }else{
-                            alert('erro ao buscar placar')
+                                console.log("sdfdsfsdfsd", error)
+                            alert('erro ao buscar placar 4')
                             setCarregando(false)
                             }
                         });
@@ -651,8 +654,8 @@ export default function ArtilheiroTorneio() {
                 <h2>{nomeJogadorAnterior}</h2>
             }
 
-             {nomeJogadorAssitenica &&
-                <h2>assistencia feita por -{nomeJogadorAssitenica}</h2>
+             {
+                <h2>{nomeJogadorAnteriorAssitenica}</h2>
             }
             {
                 <h2>{quantidadeGolAnterior}</h2>
@@ -695,7 +698,82 @@ export default function ArtilheiroTorneio() {
                     <div>Enviar assitencia</div>
                 </Button>
             </div>
+
+            <div className="container-geral">
+                <div className="tabela-container">
+                    <BootstrapTable
+                        hover={true}
+                        classes="tabela"
+                        condensed={true}
+                        keyField='id'
+                        data={itens}
+                        columns={colunas}
+                        selectRow={selecaoLinhas}
+                        bootstrap4={true}
+                        bordered={false}
+                    />
+           
+            </div>
+            <div className="tabela-container">
             <div className="container-flex">
+                <div className="tabela-container">
+                    <BootstrapTable
+                        hover={true}
+                        classes="tabela"
+                        condensed={true}
+                        keyField="id"
+                        data={itensAss}
+                        columns={colunasAssi}
+                        selectRow={selecaoLinhasAssitencia}
+                        bootstrap4={true}
+                        bordered={false}
+                    />
+                </div>
+
+              
+            </div>
+            </div>
+            <div className="tabela-container">
+            <div className="placar-container">
+                    <label className="titulo-placar">Placar do jogo</label>
+                    <div className="placar-box">
+                        <div className="time">
+                            <Form.Control
+                                className="input-time"
+                                value={time1}
+                                placeholder="Time 1"
+                            />
+                            <Form.Control
+                                className="input-placar"
+                                value={placar1}
+                                placeholder="0"
+                            />
+                        </div>
+
+                        <div className="versus">X</div>
+
+                        <div className="time">
+
+                            <Form.Control
+                                className="input-time"
+                                value={time2}
+                                placeholder="Time 2"
+                            />
+                            <Form.Control
+                                className="input-placar"
+                                value={placar2}
+                                placeholder="0"
+                            />
+                        </div>
+                        <Button className="limpar-placar" onClick={(e) => limpar()}>
+                <div>Limpar</div>
+            </Button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            {/* <div className="container-flex">
                 <div className="tabela-container">
                     <BootstrapTable
                         hover={true}
@@ -763,7 +841,7 @@ export default function ArtilheiroTorneio() {
                 </div>
 
               
-            </div>
+            </div> */}
 
 
           

@@ -160,3 +160,10 @@
     font-size: 30px;
     font-weight: bold;
   }
+
+  .container-geral {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    padding: 20px;
+  }
