@@ -32,6 +32,7 @@ export default function ArtilheiroTorneio() {
     const [resultado, setResultado] = useState(false);
     const [mostrarTime, setMostrarTime] = useState(false);
     const [buscando, setBuscando] = useState(false);
+    const [jogadorDeletado, setJogadorDeletado] = useState(false);
     const botaoRef = useRef();
     const botaoRef1 = useRef();
     let totalItens = 0
@@ -671,7 +672,25 @@ export default function ArtilheiroTorneio() {
                 <Form.Control className="label-quantgol"
                     value={somaGols}
                 />
+              
             </div>
+            
+            <div>
+            <label className="">Jogador a ser deletado</label>
+                <Form.Control className=""
+                    value={""}
+                />
+                <Button
+                className="btn-filtro-arquivo"
+                onClick={(e) => {
+                    handleSalvar();
+                    salvarPlacar();
+                }}
+            >
+                <div>enviar</div>
+            </Button>
+            </div>
+           
             <Button
                 className="btn-filtro-arquivo"
                 onClick={(e) => {
