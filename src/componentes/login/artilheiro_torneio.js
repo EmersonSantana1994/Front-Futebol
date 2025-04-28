@@ -32,7 +32,8 @@ export default function ArtilheiroTorneio() {
     const [resultado, setResultado] = useState(false);
     const [mostrarTime, setMostrarTime] = useState(false);
     const [buscando, setBuscando] = useState(false);
-    const [jogadorDeletado, setJogadorDeletado] = useState(false);
+    const [jogadorDeletadoGols, setJogadorDeletadoGols] = useState("");
+    const [jogadorDeletadoAssistencias, setJogadorDeletadoAssistencias] = useState("");
     const botaoRef = useRef();
     const botaoRef1 = useRef();
     let totalItens = 0
@@ -384,6 +385,48 @@ export default function ArtilheiroTorneio() {
             });
     }
 
+
+    async function handleDeletarJogadorGols() {
+        setCarregando(true)
+        setMensagem('salvando..')
+        await apiC.post("placar/limparEspecificoArtilheiro", {
+            "nome": jogadorDeletadoGols,
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Feito com sucesso")
+                    location.reload()
+                }
+                setCarregando(false)
+            })
+            .catch((error) => {
+                alert(error.response.data)
+                setCarregando(false)
+            });
+
+    }
+
+    async function handleDeletarJogadorAssistencias() {
+        setCarregando(true)
+        setMensagem('salvando..')
+        await apiC.post("placar/limparEspecificoAssistencia", {
+            "nome": jogadorDeletadoAssistencias,
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Feito com sucesso")
+                    location.reload()
+                }
+                setCarregando(false)
+            })
+            .catch((error) => {
+                alert(error.response.data)
+                setCarregando(false)
+            });
+
+    }
+
+
     async function handleSalvar() {
         setCarregando(true)
         setMensagem('salvando..')
@@ -674,23 +717,38 @@ export default function ArtilheiroTorneio() {
                 />
               
             </div>
-            
+
             <div>
-            <label className="">Jogador a ser deletado</label>
+            <label className="">Jogador a ser deletado gols</label>
                 <Form.Control className=""
-                    value={""}
+                onChange={e => { setJogadorDeletadoGols(e.target.value) }}
+                    value={jogadorDeletadoGols}
                 />
                 <Button
                 className="btn-filtro-arquivo"
                 onClick={(e) => {
-                    handleSalvar();
-                    salvarPlacar();
+                    handleDeletarJogadorGols();
                 }}
             >
                 <div>enviar</div>
             </Button>
             </div>
-           
+            <div>
+            <label className="">Jogador a ser deletado assitencia</label>
+                <Form.Control className=""
+                onChange={e => { setJogadorDeletadoAssistencias(e.target.value) }}
+                    value={jogadorDeletadoAssistencias}
+                />
+                <Button
+                className="btn-filtro-arquivo"
+                onClick={(e) => {
+                    handleDeletarJogadorAssistencias();
+                }}
+            >
+                <div>enviar</div>
+            </Button>
+            </div>
+            handleDeletarJogadorAssistencias
             <Button
                 className="btn-filtro-arquivo"
                 onClick={(e) => {
