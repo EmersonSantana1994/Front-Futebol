@@ -41,6 +41,7 @@ export default function ArtilheiroTorneio() {
     let itensVar = []
     let itensVar2 = []
     let dadosSelecionados = []
+    const [mostrarParaDeletar, setMostrarParaDeletar] = useState(false);
 
     // useEffect(() => {
     //     async function autenticar(e) {
@@ -69,26 +70,26 @@ export default function ArtilheiroTorneio() {
     async function buscarTodos(params) {
         setCarregando(true)
         apiC.post("placar/bucartodos")
-        .then(response => {
-            if (response.data[0].placar != null) {
-                setTime1(response?.data[0].nome)
-                setPlacar1(response?.data[0].placar)
-            }
-            if (response?.data[1].placar != null && response?.data[1].placar != undefined && response?.data[1].placar != 'undefined')
-                setTime2(response?.data[1].nome)
-            setPlacar2(response?.data[1].placar)
-        })
-        .catch((error) => {
-            alert('erro ao buscar placar 1')
-            if(error.message == 'Network Error') {
-                buscarTodos()
-                setCarregando(false)
-            }else{
-                alert('erro ao buscar placar 2')
-                setCarregando(false)
-            }
+            .then(response => {
+                if (response.data[0].placar != null) {
+                    setTime1(response?.data[0].nome)
+                    setPlacar1(response?.data[0].placar)
+                }
+                if (response?.data[1].placar != null && response?.data[1].placar != undefined && response?.data[1].placar != 'undefined')
+                    setTime2(response?.data[1].nome)
+                setPlacar2(response?.data[1].placar)
+            })
+            .catch((error) => {
+                alert('erro ao buscar placar 1')
+                if (error.message == 'Network Error') {
+                    buscarTodos()
+                    setCarregando(false)
+                } else {
+                    alert('erro ao buscar placar 2')
+                    setCarregando(false)
+                }
 
-        });
+            });
     }
 
     useEffect(() => {
@@ -103,14 +104,14 @@ export default function ArtilheiroTorneio() {
                 setPlacar2(response?.data[1]?.placar)
             })
             .catch((error) => {
-                if(error.message == 'Network Error') {
+                if (error.message == 'Network Error') {
                     buscarTodos()
                     setCarregando(false)
-                }else{
+                } else {
                     alert('erro ao buscar placar 3')
                     setCarregando(false)
                 }
-                
+
             });
     }, [])
 
@@ -157,10 +158,10 @@ export default function ArtilheiroTorneio() {
             .catch((error) => {
                 setMensagemTabela('erro ao atualizar tabela', error)
                 console.log("erro ao atualizar tabela", error)
-                if(error.message == 'Network Error') {
+                if (error.message == 'Network Error') {
                     inserirData()
                     setCarregando(false)
-                }else{
+                } else {
                     alert('erro ao atualizar tabela')
                 }
                 setCarregando(false)
@@ -195,13 +196,13 @@ export default function ArtilheiroTorneio() {
             .catch((error) => {
                 setMensagemTabela('erro ao atualizar tabela')
                 console.log("erro ao atualizar tabela", error)
-                if(error.message == 'Network Error') {
+                if (error.message == 'Network Error') {
                     inserirDataAssistencia()
                     setCarregando(false)
-                }else{
+                } else {
                     alert('erro ao atualizar tabela')
                 }
-                
+
                 setCarregando(false)
             });
 
@@ -437,17 +438,17 @@ export default function ArtilheiroTorneio() {
         })
             .then(response => {
                 if (response.status === 200) {
-                        setMensagem('atualizado!')
-                        setNomeJogadorAnterior(nomeJogador)
-                        setQuantidadeGolAnterior(1)
-                        inserirData()
+                    setMensagem('atualizado!')
+                    setNomeJogadorAnterior(nomeJogador)
+                    setQuantidadeGolAnterior(1)
+                    inserirData()
                 }
                 setCarregando(false)
             })
             .catch((error) => {
                 setMensagem('erro ao atualizar', error)
-                console.log("erro ao atualizar emeee",error )
-                
+                console.log("erro ao atualizar emeee", error)
+
                 alert(error.response.data)
                 setCarregando(false)
             });
@@ -513,13 +514,13 @@ export default function ArtilheiroTorneio() {
                             setPlacar2(response?.data[1]?.placar)
                         })
                         .catch((error) => {
-                            if(error.message == 'Network Error') {
+                            if (error.message == 'Network Error') {
                                 buscarTodos()
                                 setCarregando(false)
-                            }else{
+                            } else {
                                 console.log("sdfdsfsdfsd", error)
-                            alert('erro ao buscar placar 4')
-                            setCarregando(false)
+                                alert('erro ao buscar placar 4')
+                                setCarregando(false)
                             }
                         });
 
@@ -698,7 +699,7 @@ export default function ArtilheiroTorneio() {
                 <h2>{nomeJogadorAnterior}</h2>
             }
 
-             {
+            {
                 <h2>{nomeJogadorAnteriorAssitenica}</h2>
             }
             {
@@ -711,45 +712,7 @@ export default function ArtilheiroTorneio() {
                     onChange={e => { setNomeJogador(e.target.value) }}
                     value={nomeJogador}
                 />
-                <label className="label-quatidade">Quantidade total de gols marcados</label>
-                <Form.Control className="label-quantgol"
-                    value={somaGols}
-                />
-              
-            </div>
-
-            <div>
-            <label className="">Jogador a ser deletado gols</label>
-                <Form.Control className=""
-                onChange={e => { setJogadorDeletadoGols(e.target.value) }}
-                    value={jogadorDeletadoGols}
-                />
-                <Button
-                className="btn-filtro-arquivo"
-                onClick={(e) => {
-                    handleDeletarJogadorGols();
-                }}
-            >
-                <div>enviar</div>
-            </Button>
-            </div>
-            <div>
-            <label className="">Jogador a ser deletado assitencia</label>
-                <Form.Control className=""
-                onChange={e => { setJogadorDeletadoAssistencias(e.target.value) }}
-                    value={jogadorDeletadoAssistencias}
-                />
-                <Button
-                className="btn-filtro-arquivo"
-                onClick={(e) => {
-                    handleDeletarJogadorAssistencias();
-                }}
-            >
-                <div>enviar</div>
-            </Button>
-            </div>
-            handleDeletarJogadorAssistencias
-            <Button
+                  <Button
                 className="btn-filtro-arquivo"
                 onClick={(e) => {
                     handleSalvar();
@@ -759,6 +722,57 @@ export default function ArtilheiroTorneio() {
             >
                 <div>Enviar gols</div>
             </Button>
+                <label className="label-quatidade">Quantidade total de gols marcados</label>
+                <Form.Control className="label-quantgol"
+                    value={somaGols}
+                />
+
+            </div>
+            <Button
+                        className="btn-filtro-arquivo"
+                        onClick={(e) => {
+                            setMostrarParaDeletar(!mostrarParaDeletar);
+                        }}
+                    >
+                        <h4>Deletar um gol ou assistencia</h4>
+                    </Button>
+            {mostrarParaDeletar &&
+                <div>
+                    <label className="">Jogador a ser deletado gols</label>
+                    <Form.Control className=""
+                        onChange={e => { setJogadorDeletadoGols(e.target.value) }}
+                        value={jogadorDeletadoGols}
+                    />
+                    <Button
+                        className="btn-filtro-arquivo"
+                        onClick={(e) => {
+                            handleDeletarJogadorGols();
+                        }}
+                    >
+                        <div>enviar</div>
+                    </Button>
+                </div>
+            }
+
+            {mostrarParaDeletar &&
+                <div>
+                    <label className="">Jogador a ser deletado assitencia</label>
+                    <Form.Control className=""
+                        onChange={e => { setJogadorDeletadoAssistencias(e.target.value) }}
+                        value={jogadorDeletadoAssistencias}
+                    />
+                    <Button
+                        className="btn-filtro-arquivo"
+                        onClick={(e) => {
+                            handleDeletarJogadorAssistencias();
+                        }}
+                    >
+                        <div>enviar</div>
+                    </Button>
+                </div>
+            }
+
+          
 
             <Button className="deletar-jogador" onClick={(e) => handleDeletar()}>
                 <div>Deletar jogadores selecionados</div>
@@ -770,10 +784,11 @@ export default function ArtilheiroTorneio() {
                         onChange={e => { setNomeJogadorAssitenica(e.target.value) }}
                         value={nomeJogadorAssitenica}
                     />
-                </div>
-                <Button className="btn-filtro-arquivo" onClick={(e) => handleSalvarAssitencia()} ref={botaoRef1}>
+                      <Button className="btn-filtro-arquivo" onClick={(e) => handleSalvarAssitencia()} ref={botaoRef1}>
                     <div>Enviar assitencia</div>
                 </Button>
+                </div>
+              
             </div>
 
             <div className="container-geral">
@@ -789,65 +804,65 @@ export default function ArtilheiroTorneio() {
                         bootstrap4={true}
                         bordered={false}
                     />
-           
-            </div>
-            <div className="tabela-container">
-            <div className="container-flex">
-                <div className="tabela-container">
-                    <BootstrapTable
-                        hover={true}
-                        classes="tabela"
-                        condensed={true}
-                        keyField="id"
-                        data={itensAss}
-                        columns={colunasAssi}
-                        selectRow={selecaoLinhasAssitencia}
-                        bootstrap4={true}
-                        bordered={false}
-                    />
+
                 </div>
-
-              
-            </div>
-            </div>
-            <div className="tabela-container">
-            <div className="placar-container">
-                    <label className="titulo-placar">Placar do jogo</label>
-                    <div className="placar-box">
-                        <div className="time">
-                            <Form.Control
-                                className="input-time"
-                                value={time1}
-                                placeholder="Time 1"
-                            />
-                            <Form.Control
-                                className="input-placar"
-                                value={placar1}
-                                placeholder="0"
+                <div className="tabela-container">
+                    <div className="container-flex">
+                        <div className="tabela-container">
+                            <BootstrapTable
+                                hover={true}
+                                classes="tabela"
+                                condensed={true}
+                                keyField="id"
+                                data={itensAss}
+                                columns={colunasAssi}
+                                selectRow={selecaoLinhasAssitencia}
+                                bootstrap4={true}
+                                bordered={false}
                             />
                         </div>
 
-                        <div className="versus">X</div>
 
-                        <div className="time">
-
-                            <Form.Control
-                                className="input-time"
-                                value={time2}
-                                placeholder="Time 2"
-                            />
-                            <Form.Control
-                                className="input-placar"
-                                value={placar2}
-                                placeholder="0"
-                            />
-                        </div>
-                        <Button className="limpar-placar" onClick={(e) => limpar()}>
-                <div>Limpar</div>
-            </Button>
                     </div>
                 </div>
-            </div>
+                <div className="tabela-container">
+                    <div className="placar-container">
+                        <label className="titulo-placar">Placar do jogo</label>
+                        <div className="placar-box">
+                            <div className="time">
+                                <Form.Control
+                                    className="input-time"
+                                    value={time1}
+                                    placeholder="Time 1"
+                                />
+                                <Form.Control
+                                    className="input-placar"
+                                    value={placar1}
+                                    placeholder="0"
+                                />
+                            </div>
+
+                            <div className="versus">X</div>
+
+                            <div className="time">
+
+                                <Form.Control
+                                    className="input-time"
+                                    value={time2}
+                                    placeholder="Time 2"
+                                />
+                                <Form.Control
+                                    className="input-placar"
+                                    value={placar2}
+                                    placeholder="0"
+                                />
+                            </div>
+                            <Button className="limpar-placar" onClick={(e) => limpar()}>
+                                <div>Limpar</div>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* <div className="container-flex">
@@ -921,7 +936,7 @@ export default function ArtilheiroTorneio() {
             </div> */}
 
 
-          
+
 
             <h1 className='pesquisa'>Pesquise aqui o time</h1>
             <Form.Control
