@@ -233,6 +233,28 @@ export default function TabelaGeral() {
         },
 
         {
+            dataField: 'participacoesDeGols',
+            headerClasses: 'nao-selecionavel',
+            sort: true,
+            text: <p>
+                Participações de Gols
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+
+        {
+            sort: true,
+            text: <p>
+                -     -
+            </p>,
+            formatter: (cell, row) => {
+                return <p>{cell === null ? '-' : cell}</p>;
+            },
+        },
+
+        {
             dataField: 'posicao',
             headerClasses: 'nao-selecionavel',
             sort: true,
