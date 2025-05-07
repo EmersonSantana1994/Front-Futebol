@@ -8,6 +8,15 @@ import Dropzone from "react-dropzone";
 
 export default function SuperCopa() {
 
+    function ImagemDinamica({ caminho }) {
+        console.log("caminho", caminho)
+        return <img
+            src={`/${caminho}`}
+            alt="Imagem"
+            style={{ width: '157px', height: 'auto' }}
+        />;
+    }
+
     const [itens, setItens] = useState([]);
     const [placar1, setPlacar1] = useState('');
     const [placar2, setPlacar2] = useState('');
@@ -122,7 +131,19 @@ export default function SuperCopa() {
     const [data24, setData24] = useState('');
     const [mostrarVencedores, setMostrarVencedores] = useState(true);
 
-    
+    const [jogadorcampeao1, setJogadorcampeao1] = useState('');
+    const [jogadorcampeao2, setJogadorcampeao2] = useState('');
+    const [jogadorcampeao3, setJogadorcampeao3] = useState('');
+    const [jogadorcampeao4, setJogadorcampeao4] = useState('');
+    const [nomeTorneio, setNomeTorneio] = useState('');
+    const [nomeTime, setNomeTime] = useState('');
+    const [escudo, setEscudo] = useState('');
+    const [mostrarCampeao, setMostrarCampeao] = useState(false);
+
+    const [jogadorvice1, setJogadorvice1] = useState('');
+    const [jogadorvice2, setJogadorvice2] = useState('');
+    const [jogadorvice3, setJogadorvice3] = useState('');
+    const [jogadorvice4, setJogadorvice4] = useState('');
 
     let contador = 0
     let itensVar = []
@@ -154,11 +175,11 @@ export default function SuperCopa() {
                 .catch((error) => {
                     alert('erro ao limpar placar')
                 });
-    
-    
+
+
         }
         limparP()
-}, [])
+    }, [])
 
     useEffect(() => {
         verificaSeTemTimeCadastrado()
@@ -302,7 +323,7 @@ export default function SuperCopa() {
                     } if (response.data[27].placar != null) {
                         setPlacar28(response.data[27].placar)
                     }
-                  
+
                     if (response.data[42].placar != null) {
                         setPlacar29(response.data[42].placar)
                         const formData = new Date(response.data[42].data)
@@ -430,7 +451,73 @@ export default function SuperCopa() {
         bucartodos_placar()
     }, [])
 
+    if (placar25) {
+        jogadoresCampeoes()
+    }
 
+    async function jogadoresCampeoes() {
+        let timeCampeao
+        let timeVice
+
+        let placar1 = Number(placar25);
+        let placar2 = Number(placar28);
+        let placar3 = Number(placar26);
+        let placar4 = Number(placar27);
+        let placar5 = Number(placarProrrogacao41);
+        let placar6 = Number(placarProrrogacao42);
+        let resulTime1 = placar1 + placar2
+        let resulTime2 = placar3 + placar4
+
+
+        if (typeof resulTime1 == 'number' && typeof resulTime2 == 'number') {
+            if (resulTime1 > resulTime2) {
+                timeCampeao = time1f
+                timeVice = time2f
+            } else if (resulTime2 > resulTime1) {
+                timeCampeao = time2f
+                timeVice = time1f
+            } else if (resulTime1 == resulTime2) {
+                if (typeof placar5 == 'number' && typeof placar6 == 'number') {
+                    if (placar5 > placar6) {
+                        timeCampeao = time1f
+                        timeVice = time2f
+                    } else if (placar6 > placar5) {
+                        timeCampeao = time2f
+                        timeVice = time1f
+                    }
+                }
+
+            }
+
+
+        }
+        await apiC.post("torneio/bucarCampeoes", {
+            "primeiroLugar": timeCampeao,
+            "segundoLugar": timeVice
+        }).then(response => {
+            if (response.status === 200) {
+                if (response.data.result.length > 0) {
+                    console.log(response.data.result[0][0].jogador)
+                    setJogadorcampeao1(response.data.result[0][0].jogador)
+                    setJogadorcampeao2(response.data.result[0][1].jogador)
+                    setJogadorcampeao3(response.data.result[0][2].jogador)
+                    setJogadorcampeao4(response.data.result[0][3].jogador)
+                    setJogadorvice1(response.data.result[1][0].jogador)
+                    setJogadorvice2(response.data.result[1][1].jogador)
+                    setJogadorvice3(response.data.result[1][2].jogador)
+                    setJogadorvice4(response.data.result[1][3].jogador)
+                    setNomeTorneio(response.data.result[1][0].liga)
+                    setNomeTime(response.data.result[0][0].time)
+                    setEscudo(response.data.result[0][0].escudo)
+                }
+            }
+
+        })
+            .catch((error) => {
+
+            });
+
+    }
 
 
     async function verificaSeTemTimeCadastrado() {
@@ -464,7 +551,7 @@ export default function SuperCopa() {
                         }
                         if (response.data[13].nome != null) {
                             setTime2f(response.data[13].nome)
-                        } 
+                        }
                         console.log("jjjjjjjj", response.data)
                         if (response.data[15].nome != null) {
                             setTime1t(response.data[15].nome)
@@ -1410,7 +1497,14 @@ export default function SuperCopa() {
                 </Button>
             }
 
+            <Button className="botao-deletar" onClick={(e) => {
+                setMostrarCampeao(!mostrarCampeao);
+            }}>
+                <div>Mostrar  campeoes</div>
+            </Button>
+
             <Dropzone onDrop={acceptedFiles => handleLerArquivo(acceptedFiles[0])}>
+
                 {({ getRootProps, getInputProps }) => (
                     <section>
                         <div {...getRootProps()}>
@@ -1547,51 +1641,66 @@ export default function SuperCopa() {
                                 // onChange={e => validarNumero("campo-texto-valor-minimo", e.target.value)}
                                 placeholder="Time"
                             />
-                            {mostrarVencedores &&
-                                <div><h3 className="copa"> Castelão é Campeão da Super Copa 2 de 2024 </h3></div>
+
+                            {mostrarCampeao &&
+                                <div><h3 className="copa"> {nomeTime} é Campeão da Super Copa de 2025 </h3></div>
                             }
-                            {mostrarVencedores &&
+                            {mostrarCampeao &&
                                 <div><h3 className="copa1"> Abaixo os jogadores campeões </h3></div>
                             }
-                            {mostrarVencedores &&
-                                <h5 className="copa2"> Pente Preto </h5>
+                            {mostrarCampeao &&
+                                <h5 className="copa2"> {jogadorcampeao1} </h5>
                             }
-                            {mostrarVencedores &&
-                                <h5 className="copa3"> Wilham </h5>
+                            {mostrarCampeao &&
+                                <h5 className="copa3"> {jogadorcampeao2} </h5>
                             }
-                            {mostrarVencedores &&
-                                <h5 className="copa4"> Luis </h5>
+                            {mostrarCampeao &&
+                                <h5 className="copa4"> {jogadorcampeao3} </h5>
                             }
-                            {mostrarVencedores &&
-                                <h5 className="copa5"> Luiza </h5>
+                            {mostrarCampeao &&
+                                <h5 className="copa5"> {jogadorcampeao4} </h5>
                             }
-                            {mostrarVencedores &&
+                            {mostrarCampeao &&
                                 <div><h3 className="copa6"> Abaixo os jogadores vices campeões </h3></div>
                             }
-                            {mostrarVencedores &&
-                                <div><h5 className="copa7"> Rodrigo </h5></div>
+                            {mostrarCampeao &&
+                                <div><h5 className="copa7"> {jogadorvice1} </h5></div>
                             }
-                            {mostrarVencedores &&
-                                <div><h5 className="copa8"> Homem de Ferro </h5></div>
+                            {mostrarCampeao &&
+                                <div><h5 className="copa8"> {jogadorvice2} </h5></div>
                             }
-                            {mostrarVencedores &&
-                                <div><h5 className="copa9"> Cindy </h5></div>
+                            {mostrarCampeao &&
+                                <div><h5 className="copa9"> {jogadorvice3} </h5></div>
                             }
-                            {mostrarVencedores &&
-                                <div><h5 className="copa10"> Rafael </h5></div>
+                            {mostrarCampeao &&
+                                <div><h5 className="copa10"> {jogadorvice4} </h5></div>
                             }
-                            {mostrarVencedores &&
+                            {mostrarCampeao &&
                                 <div><h3 className="copa11"> Abaixo os melhores jogadores do campeonato </h3></div>
                             }
-                            {mostrarVencedores &&
+                            {mostrarCampeao &&
                                 <div><h5 className="copa12"> 1º Wilham </h5></div>
                             }
-                            {mostrarVencedores &&
+                            {mostrarCampeao &&
                                 <div><h5 className="copa13"> 2º Homem de Ferro </h5></div>
                             }
-                            {mostrarVencedores &&
-                                <div><h5 className="copa14"> 3º Luis </h5></div>
+                            {mostrarCampeao &&
+                                <div><h5 className="copa14"> 3º Luis </h5>
+
+
+
+
+                                </div>
+
                             }
+                            {mostrarCampeao &&
+                                <div className="pedestal">
+                                    <h1 className='ecampeao'> O campeão é o {nomeTime}</h1>
+                                    <ImagemDinamica caminho={escudo} />
+                                </div>
+                            }
+
+
                         </div>
 
                         {prorrogacao &&
@@ -2616,9 +2725,9 @@ export default function SuperCopa() {
                         }
                     </div>
                 </div>
-                </Form.Group>
+            </Form.Group>
 
-                <h3 className='final'>3º Lugar</h3>
+            <h3 className='final'>3º Lugar</h3>
             <Form.Group>
                 <div className="filtros-texto-linha-margin">
                     <div className="col-sm">
