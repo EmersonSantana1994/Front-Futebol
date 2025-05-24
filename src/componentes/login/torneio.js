@@ -94,7 +94,7 @@ export default function Torneio() {
     const [dataPlacar10, setDataPlacar10] = useState('');
     const [dataPlacar11, setDataPlacar11] = useState('');
     const [dataPlacar12, setDataPlacar12] = useState('');
-
+    const [escudo, setEscudo] = useState('');
 
     const [numero1, setNumero1] = useState(0);
     const [numero2, setNumero2] = useState(0);
@@ -373,6 +373,7 @@ export default function Torneio() {
                         setJogadorvice4(response.data.result[1][3].jogador)
                         setNomeTorneio(response.data.result[1][0].liga)
                         setNomeTime(response.data.result[0][0].time)
+                        setEscudo(response.data.result[0][0].escudo)
                     }
                 }
                 setCarregando(false)
@@ -1777,6 +1778,15 @@ export default function Torneio() {
             });
     }
 
+    function ImagemDinamica({ caminho }) {
+        console.log("caminho", caminho)
+        return   <img
+        src={`/${caminho}`}
+        alt="Imagem"
+        style={{ width: '157px', height: 'auto' }}
+      />;
+      }
+
 
     return (
         <>
@@ -1858,7 +1868,8 @@ export default function Torneio() {
 
             {mostrarCampeao &&
                 <div>
-                    <div><h3 className="campeao"> {nomeTime} é Campeão do campeonato {nomeTorneio} de 2025 </h3></div>
+                    <div><h3 className="campeao"> {nomeTime} é Campeão do campeonato {nomeTorneio} 2 de 2025 </h3></div>
+                         
                     <div><h3 className="campeao1"> Abaixo os jogadores campeões </h3></div>
                     <h5 className="campeao2"> {jogadorcampeao1} </h5>
 
@@ -1890,17 +1901,18 @@ export default function Torneio() {
                     <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
 
 
-                    <div><h5 className="campeao12"> 1º Luciano </h5></div>
+                    <div><h5 className="campeao12"> 1º Pente Rosa </h5></div>
 
 
-                    <div><h5 className="campeao13"> 2º Maçaneta </h5></div>
+                    <div><h5 className="campeao13"> 2º Cindy </h5></div>
 
 
-                    <div><h5 className="campeao14"> 3º Crystal </h5></div>
-
+                    <div><h5 className="campeao14"> 3º Tiago </h5></div>
+                   
                 </div>
 
             }
+            
             <Button className="botao-deletar" onClick={(e) => {
                 setMostrarCampeao(!mostrarCampeao);
             }}>
@@ -1915,6 +1927,7 @@ export default function Torneio() {
                     <Button className="btn-filtro-arquivo" onClick={(e) => sortearTimes()}>
                         <div>Sotear times</div>
                     </Button>
+                    
                     <div>
                         <label>{timesSorteadosArray1}</label>
                         <Form.Control
@@ -1980,6 +1993,13 @@ export default function Torneio() {
                             className="label-data-label"
                             value={dataPlacar3}
                         />
+                        {mostrarCampeao &&
+                       <div style={{ position: 'fixed', marginLeft: '803px' }}>
+                         <h1 style={{  marginLeft: '-100px' }}> O campeão é o {nomeTime}</h1>
+                         <ImagemDinamica caminho={escudo} />
+                       </div>
+                        
+                        }
                     </div>
                     <div>
                         <label>{timesSorteadosArray2} </label>

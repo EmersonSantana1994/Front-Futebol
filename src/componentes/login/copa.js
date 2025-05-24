@@ -1471,13 +1471,13 @@ export default function SuperCopa() {
                               <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
           
           
-                              <div><h5 className="campeao12"> 1º Luciano </h5></div>
+                              <div><h5 className="campeao12"> 1º Raul </h5></div>
           
           
-                              <div><h5 className="campeao13"> 2º Titan </h5></div>
+                              <div><h5 className="campeao13"> 2º Pepe </h5></div>
           
           
-                              <div><h5 className="campeao14"> 3º Maçaneta </h5></div>
+                              <div><h5 className="campeao14"> 3º Sr Incrível </h5></div>
           
                           </div>
           
