@@ -1901,13 +1901,13 @@ export default function Torneio() {
                     <div><h3 className="campeao11"> Abaixo os melhores jogadores do campeonato </h3></div>
 
 
-                    <div><h5 className="campeao12"> 1º Pente Rosa </h5></div>
+                    <div><h5 className="campeao12"> 1º Varicel  </h5></div>
 
 
-                    <div><h5 className="campeao13"> 2º Cindy </h5></div>
+                    <div><h5 className="campeao13"> 2º Tati </h5></div>
 
 
-                    <div><h5 className="campeao14"> 3º Tiago </h5></div>
+                    <div><h5 className="campeao14"> 3º Rozinha </h5></div>
                    
                 </div>
 
